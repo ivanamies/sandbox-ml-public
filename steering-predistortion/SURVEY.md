@@ -7,10 +7,11 @@
 > in the EE sense. The answer appears to be a conditional yes. Too bad too many years have passed
 > and I can no longer fully judge its work, but here it is. — ivanamies
 
-**TL;DR.** Steering fails like a satellite amplifier: past a measurable knee the vector arrives at
-full size pointing the wrong way — rotation precedes compression, for 100% of directions tested, on
-every model tested. Measure the distortion curve once per feature, invert it upstream: cosine
-0.83→0.93 at 64×. Cacheable, because the channel is ~96% memoryless.
+**TL;DR.** Steering fails like a satellite amplifier: past a knee the vector arrives full-size, pointing
+wrong — rotation precedes compression, 100% of directions, every model tested. Measure the curve
+once per feature, invert it upstream: cosine 0.83→0.93 at 64×. Caches: ~96% memoryless.
+
+*(278 characters.)*
 
 ## Notation, units, and the cast
 

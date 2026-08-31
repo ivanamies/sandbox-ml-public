@@ -7,11 +7,11 @@
 > in the EE sense. The answer appears to be a conditional yes. Too bad too many years have passed
 > and I can no longer fully judge its work, but here it is. — ivanamies
 
-**TL;DR.** A 213k-parameter head bolted onto a frozen LM — no fine-tune, no gradients into the
-model — makes activation and KV-cache integrity a calibrated runtime check: swapped, replayed, or
-transplanted state caught at 0.96–0.98 where Mahalanobis sits at chance, windowed false-alarm rate
-0.000 at 8-token windows, flat from 124M to 6.9B parameters, ≤1% overhead on a server GPU. It
-authenticates the state; it does not judge the computation.
+**TL;DR.** A 213k-param head on a frozen LM — no fine-tune, no LM gradients — makes activation and KV-cache
+integrity a calibrated check: swaps, replays, transplants at 0.96–0.98; Mahalanobis: chance; FPR
+0.000 at W=8; flat 124M→6.9B; ≤1% overhead. Authenticates state, not computation.
+
+*(275 characters.)*
 
 ## Notation, units, and the cast
 
