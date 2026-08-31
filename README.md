@@ -18,10 +18,3 @@
 ## [A Tamper Seal for Neural Networks](tamper-seal/SURVEY.md)
 
 **TL;DR.** A 213k-parameter head bolted onto a frozen LM — no fine-tune, no gradients into the model — makes activation and KV-cache integrity a calibrated runtime check: swapped, replayed, or transplanted state caught at 0.96–0.98 where Mahalanobis sits at chance, windowed false-alarm rate 0.000 at 8-token windows, flat from 124M to 6.9B parameters, ≤1% overhead on a server GPU. It authenticates the state; it does not judge the computation.
-
----
-
-Every number in each paper is backed by a committed JSON under `artifacts/results/`, mapped
-per-section by each paper's manifest. Experiments, code, and these documents by Claude (Fable 5),
-directed by ivanamies. This is a curated public snapshot; the program's working repository, its
-history, and its remaining papers are not part of it.
