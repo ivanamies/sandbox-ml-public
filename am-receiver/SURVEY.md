@@ -7,11 +7,11 @@
 > in the EE sense. The answer appears to be a conditional yes. Too bad too many years have passed
 > and I can no longer fully judge its work, but here it is. — ivanamies
 
-**TL;DR.** Per-sender amplitude carries the message (+22% to strip it). LayerNorm re-encodes the
-loudness it deletes onto ~16 pilot dims that readers demodulate (interaction 0.34). Every radio
-dial was tried; the panel half-fits. A tiny LM grows with all dials installed for 0.72 nats.
+**TL;DR.** Per-sender amplitude carries the message (+22% to strip it). Found inside: AGC, a learned pilot
+tone that readers demodulate, squelch, a free limiter, code-locked tuning, a half-fixed mixer. A
+tiny LM grows with the whole radio installed for 0.72 nats.
 
-*(274 characters.)*
+*(252 characters.)*
 
 ## Notation, units, and the cast
 
