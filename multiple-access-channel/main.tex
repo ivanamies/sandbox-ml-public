@@ -11,10 +11,10 @@
 \begin{quote}\textbf{A human disclaimer.} The AI has produced stunning achievements in applied mathematics. I found myself between jobs for a weekend, so I decided to join the AI research train before I became busy again. I directed Claude Fable to work on an old idea of mine from the pre-transformer days, whether DNNs are some form of communication channel, in the EE sense. The answer appears to be a conditional yes. Too bad too many years have passed and I can no longer fully judge its work, but here it is. --- ivanamies\end{quote}
 
 \textbf{TL;DR.} We took "the residual stream is a multiple-access channel" literally. Heads run deliberate CDMA
-(serial archs only). LayerNorm is blind AGC --- hold it still and ablation damage grows 2--8$\times$; "self-
-repair" is half gain compensation, half real redundancy. Steering has a duty cycle.
+(serial archs only). LayerNorm is blind AGC --- hold it still and ablation damage grows 2--8$\times$; the
+Hydra effect is half gain compensation, half real redundancy. Steering has a duty cycle.
 
-\emph{(277 characters.)}
+\emph{(280 characters.)}
 
 \section{Notation, units, and the cast}
 
@@ -88,7 +88,7 @@ Heavy tails and rotation-before-compression replicate across the 5-model/3-famil
 \textbf{Images.} 
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p1_f0_datasheet.png}\end{center}
 \texttt{p1\_f0\_datasheet} --- reused across papers via the figure map in \texttt{ecc\_repr/figs\_dist.py} (L44); regenerate with
-\texttt{multiple-access-channel/build.sh} or \texttt{scripts/build.sh figs}. Figure CSVs land in \texttt{artifacts/figdata/}.
+\texttt{paper1/build.sh} or \texttt{scripts/build.sh figs}. Figure CSVs land in \texttt{artifacts/figdata/}.
 
 \textbf{Plainly.} Before arguing about how 150 writers share one wire, we measured the wire: who writes
 it, how noisy it is, and how hard you can push before it stops responding proportionally --- like
@@ -127,7 +127,7 @@ disjoint 100-feature draws, taps 3/6/9.
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p1_f1_interference.png}\end{center}
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p1_f6_despreading.png}\end{center}
 \texttt{p1\_f1\_interference} --- reused via the figure map in \texttt{figs\_dist.py} (L44); \texttt{p1\_f6\_despreading} ---
-\texttt{ecc\_repr/figs\_papers.py::p1\_f6\_despreading} (L208). Regenerate: \texttt{multiple-access-channel/build.sh}.
+\texttt{ecc\_repr/figs\_papers.py::p1\_f6\_despreading} (L208). Regenerate: \texttt{paper1/build.sh}.
 
 \textbf{Plainly.} The stations chose overlapping frequencies on purpose --- far more overlap than chance ---
 and yet each broadcast stays individually readable, the way CDMA phones share one band by using
@@ -189,7 +189,7 @@ where imposing schemes is affordable.
 
 \textbf{Images.} 
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p1_f2_l2.png}\end{center}
-\texttt{p1\_f2\_l2} --- reused via the figure map in \texttt{figs\_dist.py} (L45). Regenerate: \texttt{multiple-access-channel/build.sh}.
+\texttt{p1\_f2\_l2} --- reused via the figure map in \texttt{figs\_dist.py} (L45). Regenerate: \texttt{paper1/build.sh}.
 
 \textbf{Plainly.} We built networks where the stations were forced to share politely --- separate lanes,
 or assigned spreading codes. It barely cost anything, it measurably reduced crosstalk, and it made
@@ -227,7 +227,7 @@ methods warning: synthetic probes understate real-channel variability by an orde
 \textbf{Images.} 
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p1_f4_diversity.png}\end{center}
 Fading panels inside \texttt{ecc\_repr/figs\_papers.py::p1\_f4\_diversity} (L226). Regenerate:
-\texttt{multiple-access-channel/build.sh}, or directly \texttt{.venv/bin/python -m ecc\_repr.figs\_papers p1\_f4}.
+\texttt{paper1/build.sh}, or directly \texttt{.venv/bin/python -m ecc\_repr.figs\_papers p1\_f4}.
 
 \textbf{Plainly.} A message sent from an early layer to a late one sometimes arrives loud and sometimes
 arrives buried, depending on what else the text is doing --- like a car radio cutting out under a
@@ -277,7 +277,7 @@ damage link is graded in serial models and flat (\textasciitilde{}1.3$\times$) i
 \textbf{Images.} 
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p1_f7_agc.png}\end{center}
 Knockout/diversity panels: \texttt{figs\_papers.py::p1\_f4\_diversity} (L226); the AGC decomposition and gain
-law: \texttt{figs\_papers.py::p1\_f7\_agc}. Regenerate: \texttt{multiple-access-channel/build.sh}.
+law: \texttt{figs\_papers.py::p1\_f7\_agc}. Regenerate: \texttt{paper1/build.sh}.
 
 \textbf{Plainly.} Cut one of the network's six backup cables and almost nothing seems to break. Half of
 that "toughness" is real redundancy --- you truly need to cut all six. The other half is an illusion
@@ -325,7 +325,7 @@ dictionary --- a well-posed open problem, not a quirk.
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p1_f5_receivers.png}\end{center}
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p1_f8_crb.png}\end{center}
 \texttt{figs\_papers.py::p1\_f5\_receivers} (L291) and \texttt{figs\_papers.py::p1\_f8\_crb}; regenerate
-\texttt{multiple-access-channel/build.sh} or \texttt{.venv/bin/python -m ecc\_repr.figs\_papers p1\_f5 p1\_f8}.
+\texttt{paper1/build.sh} or \texttt{.venv/bin/python -m ecc\_repr.figs\_papers p1\_f5 p1\_f8}.
 
 \textbf{Plainly.} In a room where dozens of people might be talking, working out how loudly any \emph{given}
 person speaks is easy --- our simple filter does it at 93--100\% of the physical limit, so no
@@ -341,7 +341,7 @@ because who's talking depends on context the room's audio alone doesn't contain.
 groups datasheet/overlap/steering/healing.
 
 \textbf{Result.} Replicates (5 models, 3 families, corpus size held identical): heavy tails; and rotation-before-compression --- an injected direction's \emph{angle} degrades before its
-\emph{magnitude} does, the companion paper's mechanism (\texttt{steering-predistortion/SURVEY.md}). Model-specific, restated as such: "MLPs lead at every depth," "the
+\emph{magnitude} does, the companion paper's mechanism (\texttt{paper2/SURVEY.md}). Model-specific, restated as such: "MLPs lead at every depth," "the
 writer gap grows with depth." Raw data: \texttt{artifacts/results/generalize\_e3.json}.
 
 \textbf{Images.} None --- the replication lists above are the result.
@@ -361,7 +361,7 @@ Kept out of the main text by editorial policy; kept in the paper because the kil
 \item \textbf{"Entrenchment."} Coherence-direction curvature indistinguishable from an equal-norm random direction (1.07 $\pm$ 0.21), against an LM-gradient direction 85,000$\times$ stiffer. Ordinary stiffness; withdrawn. (GPT-2, 3 seeds; \texttt{macl\_l3\_curvature.json}.)
 \item \textbf{The serial-wiring mechanism ("same-layer MLP consumers").} Failed its own concentration test: excess overlap concentrates in the same-layer MLP read subspace by 1.9--5.9$\times$ in \emph{both} wirings, highest in a parallel model. Correlation, not mechanism. (\texttt{generalize\_e3.json}.)
 \item \textbf{"The learned code resists joint linear detection."} Forbidden by the registered two-sided control: LMMSE's residual sits \emph{above} the dictionary's 11--21\% unexplained-variance floor --- the solve fights unmodelled signal; dictionary coverage is indicted, not the code. (\texttt{macl\_l5\_receivers.json}.)
-\item \textbf{"LayerNorm destroys absolute amplitude"} (a working assumption of this program, corrected by its own follow-up measurement): pre-LN per-token scale is recoverable from the post-LN stream at R$^{2}$ 0.91--0.99 --- LN re-encodes what it divides out. (\texttt{pilot\_exists.json}; measured in the program's follow-up work, which is not part of this snapshot.)
+\item \textbf{"LayerNorm destroys absolute amplitude"} (a working assumption of this program, corrected by its own follow-up measurement): pre-LN per-token scale is recoverable from the post-LN stream at R$^{2}$ 0.91--0.99 --- LN re-encodes what it divides out. (\texttt{pilot\_exists.json}, measured in this repository's follow-up program --- \texttt{RESULTS\_level\_plan.md}.)
 \end{itemize}
 \section{References}
 
@@ -386,7 +386,7 @@ Kept out of the main text by editorial policy; kept in the paper because the kil
 
 \begin{itemize}\setlength\itemsep{1pt}
 \item \textbf{Provenance.} Experiments, code, and this document were produced by Claude (Fable 5), directed by ivanamies, who set the framing, the failure criteria ("kill bars" --- thresholds committed in advance at which a claim is declared dead), and the editorial policy. Predictions and kill bars were registered --- committed to git in \texttt{plans\_*.md} --- before the corresponding results existed; the git history is the proof of ordering.
-\item \textbf{This file is the paper.} \texttt{main.tex} and \texttt{main.pdf} are generated from it by \texttt{scripts/md2tex.py} (run by \texttt{multiple-access-channel/build.sh}); the double-column LaTeX layout is retired. Both the markdown and the generated tex are machine-checked against manifests (the manifests) by \texttt{tests/test\_paper\_manifests.py}: every number with a decimal point must appear in a committed result JSON assigned to its section, or carry an allowlisted reason.
+\item \textbf{This file is the paper.} \texttt{main.tex} and \texttt{main.pdf} are generated from it by \texttt{scripts/md2tex.py} (run by \texttt{paper1/build.sh}); the double-column LaTeX layout is retired. Both the markdown and the generated tex are machine-checked against manifests (\texttt{survey\_manifest.json}, \texttt{paper1\_manifest.json}) by \texttt{tests/test\_paper\_manifests.py}: every number with a decimal point must appear in a committed result JSON assigned to its section, or carry an allowlisted reason.
 \item \textbf{Code references.} \texttt{module.py::function} (LNN) pointers are for readers of the repository; line numbers are as of this commit. \texttt{MAP.md} (regenerate: \texttt{python -m ecc\_repr.provenance}) is the authoritative section $\to$ JSON $\to$ module index. Reproduction: \texttt{REPRODUCE.md}.
 \item \textbf{Figures.} \texttt{survey\_figs/*.png} (\textasciitilde{}1 MB) are committed so this page renders on GitHub --- a documented exception to the repository's never-commit-rendered-artifacts rule; the sources of truth are the regenerating scripts and the CSVs in \texttt{artifacts/figdata/}.
 \item \textbf{The repository name.} \texttt{ecc\_repr} names the program's first arc --- error-correcting codes on learned representations. This paper is the second arc and inherits the name; nothing in it is about error correction.

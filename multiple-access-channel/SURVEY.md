@@ -8,10 +8,10 @@
 > and I can no longer fully judge its work, but here it is. — ivanamies
 
 **TL;DR.** We took "the residual stream is a multiple-access channel" literally. Heads run deliberate CDMA
-(serial archs only). LayerNorm is blind AGC — hold it still and ablation damage grows 2–8×; "self-
-repair" is half gain compensation, half real redundancy. Steering has a duty cycle.
+(serial archs only). LayerNorm is blind AGC — hold it still and ablation damage grows 2–8×; the
+Hydra effect is half gain compensation, half real redundancy. Steering has a duty cycle.
 
-*(277 characters.)*
+*(280 characters.)*
 
 ## Notation, units, and the cast
 
