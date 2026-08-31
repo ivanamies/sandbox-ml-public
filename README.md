@@ -24,3 +24,9 @@
 **TL;DR.** A 213k-param head on a frozen LM — no fine-tune, no LM gradients — makes activation and KV-cache integrity a calibrated check: swaps, replays, transplants at 0.96–0.98; Mahalanobis: chance; FPR 0.000 at W=8; flat 124M→6.9B; ≤1% overhead. Authenticates state, not computation.
 
 *(275 characters.)*
+
+## [A Portrait of the Language Model as an AM Receiver](am-receiver/SURVEY.md)
+
+**TL;DR.** Per-sender amplitude carries the message (+22% to strip it). LayerNorm re-encodes the loudness it deletes onto ~16 pilot dims that readers demodulate (interaction 0.34). Every radio dial was tried; the panel half-fits. A tiny LM grows with all dials installed for 0.72 nats.
+
+*(274 characters.)*

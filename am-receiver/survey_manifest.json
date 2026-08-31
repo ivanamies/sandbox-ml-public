@@ -1,0 +1,104 @@
+{
+ "allowlists": [
+  "am-receiver/survey_allowlist.json"
+ ],
+ "unchecked_sections": [
+  "preamble",
+  "References",
+  "0. Background and prior work"
+ ],
+ "sections": {
+  "Notation, units, and the cast": [],
+  "1. What this paper establishes": [],
+  "2. The portrait, in one table": [
+   "artifacts/results/tpc_retrofit.json",
+   "artifacts/results/tpc_census.json",
+   "artifacts/results/macl_l4_agc.json",
+   "artifacts/results/pilot_exists.json",
+   "artifacts/results/pilot_demod.json",
+   "artifacts/results/pilot_retrofit.json",
+   "artifacts/results/macl_l4pre_fading_natural.json",
+   "artifacts/results/wire_datasheet.json",
+   "artifacts/results/macl_l1_whitened.json",
+   "artifacts/results/generalize_e3.json",
+   "artifacts/results/agc_law.json",
+   "artifacts/results/crb_receiver.json",
+   "artifacts/results/macl_l15_despreading.json",
+   "artifacts/results/bonsai_score.json"
+  ],
+  "4. Amplitude is signal: the transmitter has no power knob": [
+   "artifacts/results/tpc_retrofit.json",
+   "artifacts/results/tpc_census.json",
+   "artifacts/results/macl_l4_agc.json"
+  ],
+  "5. The pilot exists, and training builds it": [
+   "artifacts/results/pilot_exists.json",
+   "artifacts/results/pilot_retrofit.json"
+  ],
+  "6. Readers demodulate against the pilot": [
+   "artifacts/results/pilot_demod.json"
+  ],
+  "7. The dial panel, graded": [
+   "artifacts/results/dial_limiter.json",
+   "artifacts/results/dial_squelch.json",
+   "artifacts/results/dial_tuning.json",
+   "artifacts/results/dial_bandwidth.json"
+  ],
+  "8. The mixer: born fixed, trained away, purchasable back": [
+   "artifacts/results/dial_lo.json",
+   "artifacts/results/bonsai_score.json"
+  ],
+  "9. Growing the radio: the full-dial model": [
+   "artifacts/results/bonsai_score.json"
+  ],
+  "10. Outliers are ballast: a causal account": [
+   "artifacts/results/bonsai_score.json"
+  ],
+  "11. The panel as a toolbox: what each dial is good for": [
+   "artifacts/results/dial_limiter.json",
+   "artifacts/results/dial_squelch.json",
+   "artifacts/results/dial_bandwidth.json",
+   "artifacts/results/dial_tuning.json",
+   "artifacts/results/agc_law.json",
+   "artifacts/results/bonsai_score.json"
+  ],
+  "12. Predictions graded": [
+   "artifacts/results/tpc_retrofit.json",
+   "artifacts/results/tpc_census.json",
+   "artifacts/results/pilot_exists.json",
+   "artifacts/results/pilot_retrofit.json",
+   "artifacts/results/pilot_demod.json",
+   "artifacts/results/dial_limiter.json",
+   "artifacts/results/dial_squelch.json",
+   "artifacts/results/dial_tuning.json",
+   "artifacts/results/dial_bandwidth.json",
+   "artifacts/results/dial_lo.json",
+   "artifacts/results/bonsai_score.json",
+   "artifacts/results/agc_law.json",
+   "artifacts/results/macl_l4_agc.json"
+  ],
+  "13. Limitations": [],
+  "Appendix A \u2014 fired kills, refusals, and reversed predictions": [
+   "artifacts/results/bonsai_score.json",
+   "artifacts/results/tpc_retrofit.json",
+   "artifacts/results/tpc_census.json",
+   "artifacts/results/pilot_retrofit.json",
+   "artifacts/results/dial_bandwidth.json",
+   "artifacts/results/dial_limiter.json",
+   "artifacts/results/dial_squelch.json"
+  ],
+  "Appendix B \u2014 operational notes": [],
+  "3. The receiver has AGC, and half of \"self-repair\" is it": [
+   "artifacts/results/macl_l4_agc.json",
+   "artifacts/results/agc_law.json"
+  ],
+  "Appendix C \u2014 the channel census, restated for standalone reading": [
+   "artifacts/results/macl_l4pre_fading_natural.json",
+   "artifacts/results/wire_datasheet.json",
+   "artifacts/results/macl_l1_whitened.json",
+   "artifacts/results/generalize_e3.json",
+   "artifacts/results/crb_receiver.json",
+   "artifacts/results/macl_l15_despreading.json"
+  ]
+ }
+}

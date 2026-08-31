@@ -1,0 +1,496 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1.05in]{geometry}
+\usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,booktabs,graphicx,parskip}
+\usepackage[hidelinks]{hyperref}
+\setcounter{secnumdepth}{0}
+\graphicspath{{.}{figs/}}
+\begin{document}
+\begin{center}{\LARGE\bfseries A Portrait of the Language Model as an AM Receiver}\end{center}
+
+\begin{quote}\textbf{A human disclaimer.} The AI has produced stunning achievements in applied mathematics. I found myself between jobs for a weekend, so I decided to join the AI research train before I became busy again. I directed Claude Fable to work on an old idea of mine from the pre-transformer days, whether DNNs are some form of communication channel, in the EE sense. The answer appears to be a conditional yes. Too bad too many years have passed and I can no longer fully judge its work, but here it is. --- ivanamies\end{quote}
+
+\textbf{TL;DR.} Per-sender amplitude carries the message (+22\% to strip it). LayerNorm re-encodes the
+loudness it deletes onto \textasciitilde{}16 pilot dims that readers demodulate (interaction 0.34). Every radio
+dial was tried; the panel half-fits. A tiny LM grows with all dials installed for 0.72 nats.
+
+\emph{(274 characters.)}
+
+\section{Notation, units, and the cast}
+
+\begin{itemize}\setlength\itemsep{1pt}
+\item \textbf{The stream / wire / channel} --- the residual stream, one object. \textbf{Tap N} = the stream read after block N (GPT-2-small: 12 blocks; taps 3/6/9). \textbf{Writers} (senders): the attention heads and MLPs adding into it; \textbf{readers} consume it through a LayerNorm.
+\item \textbf{AGC} --- automatic gain control: LayerNorm's per-token division by the stream's own scale. \textbf{The pilot} --- a small set of dimensions carrying the stream's scale \emph{through} LayerNorm: any direction with stable pre-LN amplitude c re-emerges post-LN at c/$\sigma$(t). \textbf{TPC} --- transmit power control: standardizing each writer's per-token output norm. \textbf{LO} --- local oscillator: a \emph{content-independent} fixed map; here, the fixed-linear part of inter-layer transport.
+\item \textbf{Costs} are in nats of validation cross-entropy on held-out text; a model "pays X nats" means its loss is X above the matched baseline. Injections respect the linearity budget of [1].
+\item \textbf{Seeds:} frozen-model measurements --- independent probe redraws; from-scratch training (§9--8) --- training seeds, matched token budgets. Three seeds throughout.
+\item \textbf{Outlier / massive dims:} dimensions with far-above-median mean magnitude, the known extreme activations of [5]. \textbf{A} --- the amplification LayerNorm applies to ablation survivors, measured as the ratio of per-token normalization denominators between a clean and an ablated forward.
+\end{itemize}
+\section{0. Background and prior work}
+
+This program's channel paper [1] measured the residual stream as a multiple-access channel; along
+the way it found that roughly half of ablation "self-repair" [3, 4] is LayerNorm [2] acting as
+gain control --- a result restated in full in §3, because this paper is written to stand alone.
+The question here is the literal follow-up: if the receiver has AGC, where is the rest of the
+radio? Channel-census rows reused in §2's table (fading, linearity, overlap, the estimation bound,
+despreading) carry one-line methods there and full restatements in Appendix C. Amplitude-coded information at the per-writer level connects to superposition
+[6]; the pilot dimensions this paper identifies are the massive activations / outlier dimensions
+known to quantization and serving practice [5], here given a functional account; attention sinks
+[5c] are the parked receivers of the tuning census. The engineering alternatives to trained
+normalization --- removing it with careful scaling --- are the normalizer-free line [7]; this paper's
+training-time experiments instead \emph{add} designed radio components to a standard recipe and measure
+what the optimizer does with them. Models and corpora: GPT-2 [8a], Pythia [8b], TinyStories [8c].
+
+\section{1. What this paper establishes}
+
+\begin{center}\small\begin{tabular}{ll}
+\toprule
+claim & where \\
+\midrule
+\parbox[t]{0.46\linewidth}{Amplitude variation is signal, at the per-writer level: the transmitter has no power knob} & §4 \\
+\parbox[t]{0.46\linewidth}{LayerNorm does not destroy the scale it divides out --- it re-encodes it, and training concentrates it onto a learned pilot} & §5 \\
+\parbox[t]{0.46\linewidth}{Readers demodulate against that pilot: two-thirds of its functional value is amplitude demodulation} & §6 \\
+\parbox[t]{0.46\linewidth}{The full dial panel, graded: a limiter is free, squelch is real but interference-limited, tuning is parked-or-code-locked, and the mixer is half a fixed translator --- fully fixed at initialization} & §7, §8 \\
+\parbox[t]{0.46\linewidth}{The fixed translator can be kept through training at a measured price: 1.27 nats alone, 0.72 nats with companion wires --- the wires are strongly sub-additive} & §8, §9 \\
+\parbox[t]{0.46\linewidth}{A tiny LM grows with every dial installed by construction, for 0.72 nats; passive wires are not adopted; stressing the stream causally grows outlier ballast} & §9, §10 \\
+\bottomrule
+\end{tabular}\end{center}
+
+\section{2. The portrait, in one table}
+
+Each row: the AM-system feature, the measurement, the number, the backing JSON (all JSONs are in
+this repository). Rows marked [1] originate in the program's channel census and are restated in
+Appendix C so this paper stands alone.
+
+\begin{center}\small\begin{tabular}{llll}
+\toprule
+AM-system feature & measurement & number & JSON \\
+\midrule
+The message rides the amplitude envelope & strip write-norm variation $\to$ task collapses & NLL +22.3\%; heads-only +11.0\% vs MLPs-only +3.9\% & tpc\_retrofit \\
+Transmitter power varies \emph{with} the message & trained writers hold amplitude open & write-norm CV 0.38--0.66 vs 0.10--0.16 at init & tpc\_census \\
+Receiver AGC rides the level [1] & \parbox[t]{0.23\linewidth}{LN masks ablation damage; nothing left once amplitude is pinned} & masking 2--8$\times$; 3.92 $\to$ 0.93 under TPC & macl\_l4\_agc, tpc\_retrofit \\
+Carrier/pilot gives absolute scale & post-LN probe recovers pre-LN $\sigma$; training concentrates it & R$^{2}$ 0.91--0.99; top-16 dims 0.79--0.83 vs 0.04--0.19 random & pilot\_exists \\
+\textbf{The variation is read: demodulation} & \parbox[t]{0.23\linewidth}{shuffle the pilot dims; the TPC interaction rules out sink plumbing} & +194\% NLL; interaction 0.341 $\pm$ 0.004 & pilot\_demod \\
+The band is licensed and full & injected reference tone absorbed, not free & gain 0.05--0.07 by mid-depth; NLL +1.3--1.4\% & pilot\_retrofit \\
+Fading channel [1] & natural-context path gains & 33--41\% of contexts $\ge$3 dB down, 12--23\% $\ge$10 dB & macl\_l4pre\_fading\_natural \\
+Transmitter linearity / IM spec [1] & two-tone intermodulation budget & IM <0.1 to 3$\times$ (taps 3/6), 10$\times$ (tap 9); 0.41 at 100$\times$ & wire\_datasheet \\
+Crowded band, many stations [1] & deliberate overlap above null at 32:1 overload & \parbox[t]{0.23\linewidth}{whitened overlap 1.3--33$\times$; serial 3.14--4.12 vs parallel 0.64--1.59} & macl\_l1\_whitened, generalize\_e3 \\
+Co-phased transmitters [1] & ablation drops $\sigma$ harder than power-additive & 2.6--3.4$\times$ the independence prediction & agc\_law \\
+Receiver at the noise limit [1] & whitened matched filter vs Cramér--Rao & 93--100\% of the bound & crb\_receiver \\
+Dynamic range / peak limiting [1] & heavy-tailed level spikes & 34\% of tokens beyond the $\chi$$^{2}$ 99th percentile (init: 1--4\%) & wire\_datasheet \\
+Spread + despread [1] & per-feature SNR vs recovery & --28 to --30 dB $\to$ AUROC 0.993--0.995 & macl\_l15\_despreading \\
+\textbf{The radio can be grown} & a tiny LM trained with every dial installed & 0.72 nats; wires sub-additive & bonsai\_score \\
+\bottomrule
+\end{tabular}\end{center}
+
+Two places the analogy is loose, stated so nobody over-reads it. \textbf{No carrier wave}: nothing
+oscillates; "AM" means amplitude-coded, and since symbol identity rides \emph{direction} while intensity
+rides amplitude, the modulation is polar/QAM-shaped, not pure AM. \textbf{Broadcast vs multiple access}:
+AM radio is one station per frequency; this is 156 simultaneous senders on one wire.
+
+The defensible sentence, every clause carrying a number, a control, and a JSON: **the residual
+stream is an amplitude-modulated multiple-access channel with receiver-side AGC, a learned pilot,
+and readers that demodulate against it --- and a small model can be grown with the whole radio
+installed.** The chain that got here: Hydra confound $\to$ AGC measured $\to$ the gain law $\to$
+amplitude-is-signal $\to$ SGD opens the amplitude channel $\to$ the pilot exists $\to$ the pilot is used $\to$
+the radio is grown.
+
+\textbf{Plainly.} This table is the paper. Each row is one thing a radio engineer would demand of an
+"it's a radio" claim, the experiment that checked it, and where the raw numbers live.
+
+\section{3. The receiver has AGC, and half of "self-repair" is it}
+
+\textbf{Claim.} Restated here in full so this paper stands alone (first reported in this program's
+channel paper [1]; same JSONs). LayerNorm is automatic gain control: ablate a branch, the stream's
+per-token scale drops, every downstream LayerNorm divides by the smaller denominator, and the
+survivors are amplified. Measured by re-running ablations with every denominator frozen to its
+unablated per-token value: non-dominant branch damage grows 2--8$\times$ (per-seed medians 2.0/2.1/6.1) ---
+roughly half the celebrated ablation "self-repair" is receiver-side gain compensation, not
+redundancy. The masking follows a gain law only loosely: measured amplification exceeds the
+independence prediction (1--f)\textasciicircum{}(--1/2) by a consistent 2.6--3.4$\times$ because senders anti-cancel, and in
+serial-residual models the masking ratio tracks measured amplification (Spearman 0.79) while
+parallel models pin near 1.3 and decouple (--0.04).
+
+\textbf{Method.}
+\begin{itemize}\setlength\itemsep{1pt}
+\item Frozen-denominator re-ablation on mechanically-located induction heads: \texttt{ecc\_repr/agc.py::agc\_census}, hook \texttt{agc.py::LNFreeze}.
+\item The gain law --- per-LN $\sigma$ ratios paired with an independent writer-decomposition estimate of each branch's variance share: \texttt{ecc\_repr/agc\_law.py::agc\_law}.
+\end{itemize}
+\textbf{Controls.} \emph{Positive:} a synthetic unit test --- deleting a 50\%-variance independent component
+must amplify survivors by $\sqrt{}$2, and does; the all-branches ablation verifies full-damage detection.
+\emph{Negative:} a frozen \emph{clean} forward reproduces the clean score to 3$\times$10$^{-7}$; LayerNorms upstream of
+the write show amplification exactly 1; and the random-init rerun shows the damage-surface \emph{fit}
+is unrelated to the gain mechanism (the sum-shaped fit persists frozen, 0.996 vs 0.046). \emph{Loading:}
+mean-ablation, not zero-ablation; gain and damage measured on identical batches, per-token paired.
+
+\textbf{Result.} As claimed; the dominant branch is the exception (0.684 live vs 0.544 frozen). The
+usable residue is a two-forward-pass diagnostic: run one clean and one ablated forward, read A
+from the $\sigma$ ratios, and know --- with no damage evaluation --- which single-ablation numbers understate
+damage, with \textasciitilde{}1.3$\times$ as the observed floor even where masking is flat. Raw data:
+\texttt{artifacts/results/macl\_l4\_agc.json}, \texttt{agc\_law.json}.
+
+\textbf{Scale \& generality.} GPT-2 (+ random-init control) for the decomposition, 3 seeds; the law on
+GPT-2 + Pythia-70m/160m, 54 branch-rows. The gain law generalizes across wiring; the damage link
+is architectural.
+
+\textbf{Images.} None committed yet (honest gap).
+
+\textbf{Plainly.} Cut a cable inside the network and the damage looks small --- partly because an
+automatic volume control turns the survivors up before anyone measures. Hold that knob still and
+the same cut costs two to eight times more. This is the observation the whole radio investigation
+grew from: if the receiver has gain control, what else from the radio is in there?
+
+\section{4. Amplitude is signal: the transmitter has no power knob}
+
+\textbf{Claim.} Standardizing every writer's per-token output norm at inference --- mechanically
+successful (per-LN $\sigma$ coefficient of variation collapses 1.5647 $\to$ 0.1007) --- costs \textbf{+22.3\%}
+validation NLL. Heads-only regulation costs +11.0\% against MLPs-only +3.9\%: head amplitudes are
+the information-dense ones. And SGD \emph{opens} this channel: trained writers' per-token norm CV is
+0.38--0.66 against a random-init 0.10--0.16 --- training moves away from constant power, on every
+model and corpus tested. With writer amplitudes pinned, the frozen-LN damage-masking ratio of [1]
+collapses from 3.92 to 0.93: the AGC exists to ride exactly this informational variation.
+
+\textbf{Method.}
+\begin{itemize}\setlength\itemsep{1pt}
+\item Per-writer deviation-norm standardization with a $\beta$ knob, heads and MLPs separately and jointly: \texttt{ecc\_repr/tpc.py::TPC}, driver \texttt{tpc.py::a2}.
+\item The writer-norm census, trained vs random-init, two corpora: \texttt{tpc.py::a1} with \texttt{generalize.py::GenWriterTap}.
+\end{itemize}
+\textbf{Controls.} \emph{Positive:} the regulation demonstrably lands ($\sigma$ CV collapses 16$\times$), so the cost is
+not an inert manipulation's. \emph{Negative:} random-init models for the census; $\beta$=0 is verified to be
+the identity (\texttt{tests/test\_level\_plan.py}). \emph{Loading:} identical evaluation tokens across
+conditions; calibration and evaluation disjoint.
+
+\textbf{Result.} As claimed. Raw data: \texttt{artifacts/results/tpc\_retrofit.json}, \texttt{tpc\_census.json}.
+
+\textbf{Scale \& generality.} Retrofit: GPT-2, 3 seeds. Census: GPT-2 + Pythia-70m/160m, trained vs
+random-init, TinyStories and WikiText. Scope note, so this is not quoted against the companion
+paper's "the wire is FM": that claim is about the token's \emph{total} norm (which carries almost
+nothing); this one is about \emph{per-sender} envelopes (which carry a fifth of the task). The stream is
+amplitude-modulated per sender and level-normalized in aggregate.
+
+\textbf{Images.} None committed yet (honest gap); the numbers are in the JSONs above.
+
+\textbf{Plainly.} We tried to give the transmitter a power regulator, like a radio station holding
+constant wattage. The model got dramatically worse --- because the "wattage" wobble was never
+sloppiness, it was the broadcast. An AM transmitter has no power knob separate from the message;
+neither does this system, and its own training actively widens the amplitude swing.
+
+\section{5. The pilot exists, and training builds it}
+
+\textbf{Claim.} The pre-LN per-token scale is recoverable from the post-LN stream at R$^{2}$ 0.91--0.99 on
+every trained model tested --- LayerNorm re-encodes what it divides out. Training's contribution is
+\emph{concentration}: about 16 dimensions carry most of the recovery (top-16 R$^{2}$ 0.79--0.83 at shallow
+taps, against 0.04--0.19 for random-16), while a random-init model holds the same information
+diffusely (top-16 $\approx$ random-16). The carriers are the familiar massive/outlier dimensions [5],
+functioning as a pilot tone.
+
+\textbf{Method.}
+\begin{itemize}\setlength\itemsep{1pt}
+\item Ridge probe on the actual reading LayerNorm's output predicting log $\sigma$ of its input, held out; localization via top-|mean| dims vs random dims: \texttt{ecc\_repr/pilot.py::b1}.
+\end{itemize}
+\textbf{Controls.} \emph{Positive:} the mechanism is guaranteed for a constant direction (c/$\sigma$(t) algebra), so
+the probe must fire --- total R$^{2}$ validates the probe. \emph{Negative:} shuffled-pairing null ($\approx$0);
+random-init model --- which carries the information but \emph{unlocalized}, isolating what training adds.
+\emph{Loading:} same tokens; held-out splits; per-model reading LNs at matched depth fractions.
+
+\textbf{Result.} As claimed; on parallel-residual models the pilot delocalizes with depth (top-16 falls
+to 0.09--0.23 deep) while total recovery stays $\ge$0.98. A retrofit attempt --- injecting an artificial
+pilot on a spare direction at inference --- fails on every registered criterion (Appendix A): the
+niche is occupied. Raw data: \texttt{artifacts/results/pilot\_exists.json}, \texttt{pilot\_retrofit.json}.
+
+\textbf{Scale \& generality.} GPT-2 (+ random-init control), Pythia-70m/160m; 3 seeds.
+
+\textbf{Images.} None committed yet (honest gap).
+
+\textbf{Plainly.} The normalizer deletes the loudness of every token --- but anything held at constant
+strength comes out the other side carrying exactly the deleted number, inverted. Trained networks
+exploit this: they build a handful of always-loud dimensions that broadcast "how loud was this
+token really." Those mysterious huge activations that make quantization painful? That's the
+station's pilot tone.
+
+\section{6. Readers demodulate against the pilot}
+
+\textbf{Claim.} The pilot is used, not vestigial. Token-shuffling the 16 pilot dims at every LayerNorm
+output costs +194\% NLL --- 18$\times$ a random-16 control (+10.6\%) and 5$\times$ a next-tier-16 control (+39.5\%);
+freezing them to their means costs +139\%, so the \emph{pairing} with $\sigma$(t) is what is read. The
+discriminating measurement is an interaction: with amplitude information already stripped by §4's
+TPC, destroying the pilot adds only \textbf{0.341 $\pm$ 0.004} of its standalone cost. Two-thirds of the
+pilot's functional value is amplitude demodulation; one-third is amplitude-independent and
+unattributed (sink mechanics are the candidate).
+
+\textbf{Method.}
+\begin{itemize}\setlength\itemsep{1pt}
+\item Dim-set interventions (shuffle/freeze) on LN outputs with variance-share reporting; the TPC $\times$ pilot-shuffle interaction; a $\sigma$-probe collapse check: \texttt{ecc\_repr/pilot.py::demod}, \texttt{pilot.py::LNDimEdit}.
+\end{itemize}
+\textbf{Controls.} \emph{Positive:} the mechanical check --- the $\sigma$-probe on the pilot dims collapses 0.807 $\to$
+--0.003 under the shuffle, confirming the intervention severs the channel §5 identified.
+\emph{Negative:} random-16 and next-tier-16 dim sets; the honesty row that the sets are not
+variance-matched (pilot dims carry 21.4\% of LN-output variance vs 3.4\%/1.6\%) is stated, and is why
+the interaction --- not the raw deltas --- is the discriminator: attention-sink plumbing would not care
+whether amplitude information exists, predicting a ratio near 1. \emph{Loading:} same evaluation
+tokens; marginals preserved under shuffle.
+
+\textbf{Result.} As claimed, with seed-to-seed stability of 0.004 on the interaction. Raw data:
+\texttt{artifacts/results/pilot\_demod.json}.
+
+\textbf{Scale \& generality.} GPT-2 only (the parallel models' depth-delocalized pilot makes a dim-set
+intervention undertreat them --- stated limitation), 3 seeds.
+
+\textbf{Images.} None committed yet (honest gap).
+
+\textbf{Plainly.} Is the pilot tone actually listened to? Scramble just those 16 dimensions and the
+model falls apart --- but the decisive test is subtler: first delete the amplitude information the
+pilot would help decode, \emph{then} scramble the pilot. It barely matters anymore. Two-thirds of the
+pilot's job was decoding amplitudes; that's a receiver demodulating against its reference, caught
+in the act.
+
+\section{7. The dial panel, graded}
+
+\textbf{Claim.} Taking the metaphor dial-by-dial, with a registered prediction and a refusal criterion
+per dial: a \textbf{limiter} (clip the stream's whitened radius at its clean 99th percentile, sparing
+the carrier token) is installable for \textbf{+0.01\%} --- free --- and even clipping at the median costs
+only 2.4--3.9\%: the aggregate radius tail is slack. A \textbf{squelch} exists (shift every MLP threshold;
+minimum exactly at the trained setting) but its asymmetry is the reverse of broadcast radio's:
+admitting false firing costs +88--100\% at half a std while dropping weak signals costs +23--25\% ---
+the signature of an interference-limited receiver, i.e. CDMA, not broadcast AM. The \textbf{tuning}
+census finds no station dial: 49--50\% of heads are parked on the carrier token (median attention
+mass 0.49--0.50), \textasciitilde{}1\% are content-tuned once the sink is excluded and content whitened, 35\% scan,
+and induction heads are relation-locked --- correlator receivers. A \textbf{bandwidth} dial is refused
+outright (Appendix A). The panel verdict: not broadcast AM --- an amplitude-modulated CDMA receiver
+bank, which is the same modulation [1] found geometrically.
+
+\textbf{Method.}
+\begin{itemize}\setlength\itemsep{1pt}
+\item Limiter (per-tap Mahalanobis-radius clip, position 0 exempt; plus an attack demo): \texttt{ecc\_repr/dials.py::limiter}. Squelch (per-neuron-$\sigma$ bias shifts): \texttt{dials.py::squelch}. Tuning census (positional peakedness, sink-excluded whitened content resultants, parked mass): \texttt{dials.py::tuning}. Bandwidth (reader SVD truncation): \texttt{dials.py::bandwidth}.
+\end{itemize}
+\textbf{Controls.} \emph{Positive:} each dial's throw demonstrably engages (firing rates move under squelch;
+clipped fraction matches the quantile). \emph{Negative:} the limiter's clean-cost reference; the squelch
+$\delta$=0 point; unwhitened content-tuning shown to be an anisotropy artifact (94\% $\to$ 1\% after
+whitening --- [1]'s own lesson re-applied). \emph{Loading:} identical tokens per sweep; thresholds in
+per-neuron $\sigma$ units; radius quantiles from disjoint calibration data.
+
+\textbf{Result.} As claimed. The limiter's registered \emph{defensive} payoff failed --- an 8$\times$-amplitude
+injection lives inside the clean radius envelope and its output KL is untouched (0.0141 $\to$ 0.0143)
+--- so the limiter is free but not a tamper defense (Appendix A). Raw data:
+\texttt{artifacts/results/dial\_limiter.json}, \texttt{dial\_squelch.json}, \texttt{dial\_tuning.json},
+\texttt{dial\_bandwidth.json}.
+
+\textbf{Scale \& generality.} GPT-2, 3 seeds per dial.
+
+\textbf{Images.} None committed yet (honest gap).
+
+\textbf{Plainly.} We went down the front panel of a real radio and asked, dial by dial: does this
+network have one? Volume-limiter: yes, and it's free. Squelch: yes, but tuned like a crowded
+party-line, where letting in babble is far worse than missing a whisper. Station dial: mostly
+absent --- half the receivers just sit parked on the carrier, and the famous induction heads lock
+onto \emph{patterns}, like code-division receivers, not frequencies. The panel that emerges isn't a
+kitchen AM set; it's a cell-tower receiver bank.
+
+\section{8. The mixer: born fixed, trained away, purchasable back}
+
+\textbf{Claim.} A local oscillator is content-independent by definition, so the designated break-point
+test asks whether one fixed linear map carries inter-layer transport. At random initialization it
+essentially does: held-out R$^{2}$ 0.855--0.885 for a single fixed map on the transport increment.
+Training tears half of it down: trained R$^{2}$ 0.470--0.546. \textbf{And it can be bought back}: adding a
+per-block penalty holding transport near a learned content-independent map keeps R$^{2}$ at 0.83--0.94
+through training, at a measured price of \textbf{1.27 nats} on the tiny testbed --- a main result of this
+paper, not a footnote: content-dependent mixing is worth that much to a d=256 model, which is the
+quantitative form of the superposition-load account (everything shares the wire, so transport must
+route by content). The registered \emph{cheap-preservation} criterion ($\le$0.15 nats) did fire, and is
+reported as such; the price itself is the finding, and §9 shows companion wires cut it nearly in
+half.
+
+\textbf{Method.}
+\begin{itemize}\setlength\itemsep{1pt}
+\item The break-point test (fixed ridge map on increments, $\lambda$ selected on a validation split; shuffled-pairing null; random-init control): \texttt{ecc\_repr/dials.py::lo}.
+\item The purchase (per-block penalty toward learned fixed maps M\_l, from-scratch training): \texttt{ecc\_repr/bonsai.py} condition \texttt{lo\_keep}.
+\end{itemize}
+\textbf{Controls.} \emph{Positive:} the random-init model --- the LO must be visible where it must exist, and
+is (0.86--0.88). \emph{Negative:} shuffled-pairing nulls (--0.5 to --0.6). \emph{Loading:} $\lambda$ chosen on a
+train-internal validation split; matched token budgets for the training arm; the same fixed-map
+statistic scores baseline and lo\_keep models.
+
+\textbf{Result.} As claimed; the tiny from-scratch baseline lands at R$^{2}$ $\approx$ 0.51 --- the same \textasciitilde{}0.5 boundary
+as trained GPT-2, a third independent replication of the half-dismantled LO. Raw data:
+\texttt{artifacts/results/dial\_lo.json}, \texttt{bonsai\_score.json}.
+
+\textbf{Scale \& generality.} Break-point: GPT-2, 3 seeds. Purchase: the §9 tiny-LM testbed (d=256, 25M
+tokens), 3 seeds. Registered follow-up prediction, unrun: the price should fall with width as
+superposition thins.
+
+\textbf{Images.} None committed yet (honest gap).
+
+\textbf{Plainly.} A radio's mixer shifts signals with one fixed reference oscillator --- it doesn't care
+what the program is. A freshly-initialized transformer moves information between layers in almost
+exactly that fixed way. Training then rewires half of that fixed plumbing into content-dependent
+routing --- and if you forbid the rewiring, the model obliges, keeps the fixed plumbing, and hands
+you the bill: about 1.3 nats. That bill \emph{is} the measurement: it's what content-routing is worth.
+
+\section{9. Growing the radio: the full-dial model}
+
+\textbf{Claim.} A tiny LM can be grown with every dial installed by construction --- pinned pilot
+dimension, explicit per-block volume gains, preserved LO --- for \textbf{0.72 nats} (val 2.4946 $\to$ 3.2183).
+The wires are strongly sub-additive: the sum of single-wire costs is 1.30 nats (pilot 2.5223,
+volume 2.4919, lo\_keep 3.7655, each vs 2.4946), so installing them together discounts the total by
+0.57 nats, \textasciitilde{}190$\times$ seed noise. Attribution per wire: the pilot is cheap and mechanically perfect
+(designated-dim $\sigma$-recovery R$^{2}$ 0.95--0.99); the volume gains are free; the LO wire is the cost
+center; and part of the discount is a softer LO hold in company (R$^{2}$ 0.62/0.71 vs 0.87/0.68 alone).
+
+\textbf{Method.}
+\begin{itemize}\setlength\itemsep{1pt}
+\item One trainer, one recipe (6 layers, d=256, 25M TinyStories tokens), conditions as flags: \texttt{ecc\_repr/bonsai.py::BonsaiGPT}, scoring battery \texttt{bonsai.py::score} ($\sigma$-probe adoption, pilot shuffle, outlier census, fixed-map R$^{2}$, dial throws).
+\end{itemize}
+\textbf{Controls.} \emph{Positive:} every wire's mechanism verified in-model (pilot dim carries $\sigma$ by
+construction; LO R$^{2}$ moves; gains train). \emph{Negative --- the wrong-target control:} \texttt{pilot\_noise}
+reserves the same dimension and writes fresh noise into it --- same capacity tax, no usable
+reference; it costs \emph{more} than the real pilot (2.5342 vs 2.5223, disjoint seed ranges).
+\emph{Loading:} matched token budgets, matched recipe, 3 training seeds per condition, identical
+scoring battery.
+
+\textbf{Result.} As claimed --- with the honest failures up front: the designed pilot is \textbf{unread} at
+this scale (shuffling it costs +0.00\% in every condition; adoption failed; the emergent diffuse
+broadcast suffices), and the trained volume knob adds no adjustability ($\pm$3 dB throws hurt as much
+as on baseline, +33\% vs +34\%). Raw data: \texttt{artifacts/results/bonsai\_score.json}.
+
+\textbf{Scale \& generality.} One testbed (d=256, 25M tokens); adoption in particular may be a scale
+effect --- GPT-2's demodulated pilot emerged from \textasciitilde{}4 orders of magnitude more data.
+
+\textbf{Images.} None committed yet (honest gap).
+
+\textbf{Plainly.} We grew a small language model like a bonsai tree with wires already on the trunk: a
+built-in pilot tone, explicit volume screws, and the fixed mixer plumbing held in place. The tree
+grows, at a known price --- and cheaper with all wires than the sum of each alone. Two humbling
+findings ride along: the tree politely grows \emph{around} the free pilot without ever using it, and
+the volume screws, though free to install, still can't be turned. You can install legibility;
+getting it \emph{used} is a different problem.
+
+\section{10. Outliers are ballast: a causal account}
+
+\textbf{Claim.} Massive-activation dimensions respond causally to stream stress. Baseline tiny models
+grow 0--6 outlier dims at the mid layer; write per-boundary noise into one reserved dimension and
+they grow 9--15; constrain transport to fixed maps and they grow 20--27; the full-dial model, 21--27.
+Three different stressors, one response: when the stream's per-token scale is jittered or its
+routing is constrained, the model builds more large stable dimensions to dominate the normalizer's
+denominator. Together with §5 (the same dimensions carry the pilot in trained LMs), this gives the
+outlier phenomenon [5] a functional account: gain-stabilization infrastructure.
+
+\textbf{Method.}
+\begin{itemize}\setlength\itemsep{1pt}
+\item Outlier census across §9's conditions (dims exceeding 5$\times$ the median post-LN mean magnitude): \texttt{ecc\_repr/bonsai.py::\_massive}.
+\end{itemize}
+\textbf{Controls.} \emph{Positive/negative/loading:} inherited from §9's matched-budget design; the
+prediction this inverts (that a pilot would \emph{suppress} outliers) is recorded in Appendix A.
+
+\textbf{Result.} As claimed. Raw data: \texttt{artifacts/results/bonsai\_score.json}.
+
+\textbf{Scale \& generality.} The tiny testbed, 3 seeds per condition; directionally consistent across
+all three stressors, which is what the claim rests on.
+
+\textbf{Images.} None committed yet (honest gap).
+
+\textbf{Plainly.} Ships carry ballast to stay level in rough water. These networks appear to do the
+same: shake the water --- noisy scale, constrained plumbing --- and they grow more of those huge
+stabilizing dimensions. Calm water, less ballast. The infamous outlier activations aren't a bug;
+they're the keel.
+
+\section{11. The panel as a toolbox: what each dial is good for}
+
+The bar this paper was held to: predictions and interventions that can be actually used. Dial by
+dial, post-measurement:
+
+\begin{itemize}\setlength\itemsep{1pt}
+\item \textbf{AGC (LayerNorm).} Use: the two-forward-pass diagnostic of [1] --- read A from $\sigma$ ratios and know which single-ablation results understate damage (\textasciitilde{}1.3$\times$ observed floor). Consolidation path: coherent AGC via the pilot, tested in §9.
+\item \textbf{Pilot (\textasciitilde{}16 outlier dims).} Use now: a \emph{named, checkable} set whose precision matters --- a selection rule and a mechanism for the mixed-precision practice of [5]; and a free runtime $\sigma$-consistency monitor (the probe of §5 is two matrix multiplies). Consolidation: reserve one dim (§9) --- installable for 0.028 nats, not yet adopted at small scale.
+\item \textbf{TX power knob.} Cannot exist --- power \emph{is} the modulation (§4). The +22.3\% is the metaphor asserting itself, not breaking. Use: don't build amplitude regularizers into training; the channel is load-bearing.
+\item \textbf{Volume.} Consolidated and tested: one explicit gain per layer installs for free (--0.003 nats) and still cannot be turned ($\pm$3 dB throws hurt like baseline). Use: the negative result --- in-stream level is computation; the real volume knobs are temperature and injection amplitude, outside the wire.
+\item \textbf{Squelch.} Exists; sits exactly at its trained optimum; asymmetry reversed (hiss $\gg$ dropout) --- the receiver is interference-limited. Use: a one-sweep diagnostic of interference-limitation for any model.
+\item \textbf{Selectivity / IF bandwidth.} Refused --- readers are rank-critical (Appendix A). Use: the negative result --- do not prune reader rank expecting interference rejection.
+\item \textbf{Tuning dial.} No content dial: half the receivers are parked on the carrier, induction heads are code-locked correlators. Use: parked-mass and relation-locking as cheap head-classification features.
+\item \textbf{Limiter.} Installable free at the clean q99 radius (+0.01\%), carrier exempt. Use: a zero-cost robustness clamp on the stream's dynamic range --- with the measured caveat that it is not a tamper defense (in-envelope attacks pass; that job belongs to the seal of the program's integrity paper).
+\item \textbf{Mixer / LO.} Half-fixed after training, fully fixed at birth, and purchasable: hold it through training for 1.27 nats alone, 0.72 with companion wires (§§8--8). Use: legible-transport models at a known price; registered prediction that the price falls with width.
+\item \textbf{AFC (drift tracking).} Honest gap: nothing tracks drift; readers re-zero per token. Flagged, no experiment.
+\item \textbf{Pre-emphasis / predistortion.} Already an artifact: the companion steering paper [9] measures the distortion curve and ships the pre-warp.
+\item \textbf{Antenna / impedance matching.} A flagged direction (layer-boundary statistics as impedance discontinuities), proposed elsewhere in the program, unrun.
+\end{itemize}
+\section{12. Predictions graded}
+
+Registered before their runs, per the program's standing rule. \textbf{Confirmed:} amplitude-is-signal
+(the $\ge$10\% branch fired at +22.3\%); the pilot exists and training localizes it; readers demodulate
+(kill at interaction $\ge$0.7 never threatened; 0.341 lands in the registered "partial" band); the LO
+break-point behaved exactly as designated (born \textasciitilde{}0.87, trained \textasciitilde{}0.5); LO preservation works
+mechanically. \textbf{Fired kills and reversals, kept loudly (Appendix A):} cheap LO preservation
+($\le$0.15 nats) is dead --- the price is 1.27; TPC-as-regulation is dead --- amplitude is the message;
+the retrofit pilot is dead --- the niche is occupied; the bandwidth dial is refused; the squelch
+asymmetry reversed; pilot adoption failed; outlier \emph{suppression} failed and inverted into §10.
+
+\section{13. Limitations}
+
+Most single-model results are GPT-2-small; the demodulation interaction is GPT-2-only; the
+training-time results are one d=256 testbed at 25M tokens, and adoption in particular may simply
+need scale. Costs are validation-NLL nats on TinyStories --- no downstream capability evaluation.
+The sub-additivity is measured but not localized (the accretion ladder is registered, unrun). The
+metaphor is scored, not assumed: where it fails --- no bandwidth dial, reversed squelch asymmetry,
+no usable in-stream volume knob, a half-snapped mixer --- the failures are reported at the same
+volume as the fits, and the honest composite is an amplitude-modulated CDMA receiver bank, not a
+kitchen radio.
+
+\bigskip\hrule\bigskip
+
+\section{Appendix A --- fired kills, refusals, and reversed predictions}
+
+\begin{itemize}\setlength\itemsep{1pt}
+\item \textbf{Cheap LO preservation ($\le$0.15 nats): killed.} The wire works (§8) at 1.27 nats alone, 0.72 in company --- reported as the price of content-dependent mixing, which is the result; the \emph{cheap} version is dead. (\texttt{bonsai\_score.json}.)
+\item \textbf{TPC as sender-side regulation: killed by its own two-sided test.} The registered sloppiness-vs-signal fork landed on signal at +22.3\% (§4); regulating writer amplitude in training would fight the channel SGD deliberately opens (census CV 4--8$\times$ random-init). (\texttt{tpc\_retrofit.json}, \texttt{tpc\_census.json}.)
+\item \textbf{The retrofit pilot: killed on all three registered criteria.} An artificial pilot injected at the embedding is absorbed to gain 0.05--0.07 by mid-depth, costs 1.3--1.4\% NLL, and predicts nothing about path fading (median r = 0.11). Consistent with §5: the niche is occupied. (\texttt{pilot\_retrofit.json}.)
+\item \textbf{The bandwidth dial: refused.} Truncating reader input matrices to 2/3 rank already costs +47--49\%, and injected-interference sensitivity \emph{rises} under truncation --- readers are rank-critical matched filters; selectivity is not implemented as subspace width. (\texttt{dial\_bandwidth.json}.)
+\item \textbf{The limiter as tamper defense: refuted.} Clipping is free (§7) but an 8$\times$-amplitude injection hides inside the clean radius envelope (output KL 0.0141 $\to$ 0.0143). The dial is a dial, not a shield. (\texttt{dial\_limiter.json}.)
+\item \textbf{Squelch asymmetry: reversed.} Broadcast intuition said dropping weak signals hurts more than admitting hiss; measured, hiss costs \textasciitilde{}4$\times$ more --- the interference-limited signature that feeds the panel verdict. (\texttt{dial\_squelch.json}.)
+\item \textbf{Pilot adoption (P1) and outlier suppression (P2): failed.} The designed pilot is unread at 25M tokens in every condition; and the pilot does not reduce outlier formation --- instead §10's inversion: stressors grow it. (\texttt{bonsai\_score.json}.)
+\item \textbf{Volume as a turnable dial: failed in spirit.} The registered criterion (<2$\times$ baseline throw damage) is met trivially at 0.97$\times$; the knob adds no adjustability. In-stream level is computation; the real volume knobs are temperature and injection amplitude, outside the wire. (\texttt{bonsai\_score.json}.)
+\end{itemize}
+\section{Appendix C --- the channel census, restated for standalone reading}
+
+One-paragraph restatements of the [1]-marked rows of §2, with their controls; full treatments and
+identical JSONs live with this repository's channel paper.
+
+\begin{itemize}\setlength\itemsep{1pt}
+\item \textbf{Fading.} Inject a unit dictionary direction at quarter depth, read its surviving projection at three-quarter depth, per natural-text context, after dividing out per-position means (without that conditioning, positional structure masquerades as fading --- the registered trap). 33--41\% of contexts sit $\ge$3 dB below the median path gain and 12--23\% sit $\ge$10 dB down; fades persist $\approx$1 token. Negative control: the same heads probed on synthetic inputs show 0.8--1.2\% deep fades. (\texttt{macl\_l4pre\_fading\_natural.json}.)
+\item \textbf{Linearity budget.} Two dictionary directions injected singly and jointly, response read three blocks downstream; intermodulation --- response at mixed components that only nonlinearity creates --- stays below 0.1 up to 3$\times$ typical feature amplitude (taps 3/6) and 10$\times$ (tap 9), and must and does saturate at 100$\times$ (0.41). Every injection in this paper respects the budget. (\texttt{wire\_datasheet.json}.)
+\item \textbf{Deliberate overlap.} Head write-subspace overlap measured after whitening by the stream's own covariance (unwhitened, anisotropy manufactures coordination), against a random-init null: 1.3--33$\times$ above null on GPT-2; across an 8-model roster the split is the residual wiring --- serial 3.14--4.12, parallel 0.64--1.59, no overlap between groups. (\texttt{macl\_l1\_whitened.json}, \texttt{generalize\_e3.json}.)
+\item \textbf{The estimation bound.} For an amplitude planted on a unit direction against the measured stream covariance, the Cramér--Rao bound is 1/(u$^{T}$$\Sigma$$^{-1}$u); the whitened matched filter empirically reaches 93--100\% of it, so the covariance genuinely describes token-level noise. Negative control: the unwhitened correlator at 0.12--0.17. (\texttt{crb\_receiver.json}.)
+\item \textbf{Despreading.} A single feature rides at --28 to --30 dB per-feature SNR yet is recovered at AUROC 0.993--0.995 by correlating along its full direction --- the stream is a spread code, and the processing gain is why small readers work. Controls: planted ground truth; shuffled labels at 0.5. (\texttt{macl\_l15\_despreading.json}.)
+\item \textbf{Heavy tails.} 34\% of tokens exceed the 99th-percentile $\chi$$^{2}$ reference for their Mahalanobis radius (random-init: 1--4\%). (\texttt{wire\_datasheet.json}.)
+\end{itemize}
+\section{Appendix B --- operational notes}
+
+\begin{itemize}\setlength\itemsep{1pt}
+\item \textbf{Provenance.} Experiments, code, and this document by Claude (Fable 5), directed by ivanamies, who set the framing, the failure criteria ("kill bars"), and the editorial policy. Every experiment here was registered --- predictions and kill bars committed in the program's plan files before results --- in the program's working repository.
+\item \textbf{This file is the paper.} \texttt{main.tex} and \texttt{main.pdf} are generated from it by \texttt{scripts/md2tex.py} (run by \texttt{paper6/build.sh}); both are machine-checked against the manifests by \texttt{tests/test\_paper\_manifests.py}.
+\item \textbf{Code references.} \texttt{module.py::function} pointers are for repository readers; \texttt{MAP.md} is the section $\to$ JSON $\to$ module index; \texttt{REPRODUCE.md} covers reproduction.
+\item \textbf{Figures.} None committed yet --- every "Images" line above says so; the numbers live in the named JSONs and this is the paper's largest presentational gap.
+\item \textbf{The repository name.} \texttt{ecc\_repr} names the program's first arc (error-correcting codes on learned representations); this paper is a later arc and inherits the name.
+\item \textbf{Standalone policy.} Everything this paper relies on is restated within it (§3, Appendix C) or cited as ordinary prior work; no companion paper is required reading.
+\item \textbf{Section template.} Claim; prior-work anchors; method bullets with code; positive/negative/ loading controls ("not applicable" and "missing (acknowledged)" allowed); result with raw data; scale \& generality; images; a plain-language passage. Fired kills and reversals in Appendix A.
+\end{itemize}
+\section{References}
+
+[1] \emph{Serial Residual Streams Are a Multiple-Access Channel.} Companion paper, this repository
+(\texttt{paper1/SURVEY.md}). Supplies the channel datasheet, the linearity budget, the AGC decomposition
+and gain law, and the despreading measurement.
+[2] Ba, Kiros, Hinton. \emph{Layer Normalization.} 2016. Pre-LN placement: Xiong et al., *On Layer
+Normalization in the Transformer Architecture.* 2020.
+[3] McGrath, Rahtz, Kramár, Mikulik, Legg. *The Hydra Effect: Emergent Self-Repair in Language
+Model Computations.* arXiv:2307.15771, 2023.
+[4] Rushing, Nanda. \emph{Explorations of Self-Repair in Language Models.} ICML 2024, arXiv:2402.15390.
+[5] Dettmers, Lewis, Belkada, Zettlemoyer. \emph{LLM.int8().} 2022. (b) Sun, Chen, Kolter, Liu.
+\emph{Massive Activations in Large Language Models.} COLM 2024. (c) Xiao et al. *Efficient Streaming
+Language Models with Attention Sinks.* 2023.
+[6] Elhage, Hume, Olsson, et al. \emph{Toy Models of Superposition.} Anthropic, 2022.
+[7] Zhang, Dauphin, Ma. \emph{Fixup Initialization.} ICLR 2019. Bachlechner et al. \emph{ReZero.} 2020.
+Brock, De, Smith, Simonyan. \emph{High-Performance Large-Scale Image Recognition Without Normalization.}
+ICML 2021.
+[9] \emph{Improving Steering Vectors with Predistortion.} Companion paper, this repository
+(\texttt{paper2/SURVEY.md}).
+[8] (a) Radford et al. \emph{Language Models are Unsupervised Multitask Learners} (GPT-2). 2019.
+(b) Biderman et al. \emph{Pythia.} 2023. (c) Eldan, Li. \emph{TinyStories.} 2023.
+
+\end{document}

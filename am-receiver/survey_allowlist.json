@@ -1,0 +1,26 @@
+[
+ {
+  "number": 0.72,
+  "reason": "derived val-loss delta: full 3.2183 - baseline 2.4946"
+ },
+ {
+  "number": 1.27,
+  "reason": "derived val-loss delta: lo_keep 3.7655 - baseline 2.4946"
+ },
+ {
+  "number": 1.3,
+  "reason": "derived sum of single-wire deltas"
+ },
+ {
+  "number": 0.57,
+  "reason": "derived sub-additivity: sum 1.30 - full 0.72"
+ },
+ {
+  "number": 0.97,
+  "reason": "derived throw-damage ratio vs baseline"
+ },
+ {
+  "number": 0.15,
+  "reason": "registered kill-bar constant (plans_level_plan.md)"
+ }
+]
