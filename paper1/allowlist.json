@@ -1,0 +1,42 @@
+[
+ {
+  "number": "768",
+  "reason": "d_model of GPT-2 small: architecture constant"
+ },
+ {
+  "number": "3000",
+  "reason": "lambda for the registered low-LR L3 pass: hyperparameter"
+ },
+ {
+  "number": "1500",
+  "reason": "optimizer steps, low-LR L3 pass: hyperparameter"
+ },
+ {
+  "number": "2500",
+  "reason": "optimizer steps, compliant L3 pass and its control: hyperparameter"
+ },
+ {
+  "number": "85",
+  "reason": "85,000x, the LM-gradient/random curvature ratio rounded to two figures; macl_l3_curvature.json stores 85241"
+ },
+ {
+  "number": "000",
+  "reason": "the thousands group of 85,000 (LaTeX thin-space grouping splits the token)"
+ },
+ {
+  "number": "1.07",
+  "reason": "penalty/random curvature ratio, macl_l3_curvature.json agg.penalty_over_random_hvp"
+ },
+ {
+  "number": "0.21",
+  "reason": "its seed standard deviation, same JSON"
+ },
+ {
+  "number": "0.66",
+  "reason": "penalty z-score vs random, macl_l3_curvature.json agg.penalty_z_vs_random"
+ },
+ {
+  "number": "1.6",
+  "reason": "its seed standard deviation, same JSON"
+ }
+]

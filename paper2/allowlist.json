@@ -1,0 +1,18 @@
+[
+ {
+  "number": ".036",
+  "reason": "median memory gain, printed to 3dp; dpd_memory_test.json stores 0.03631 (memory_gain_median)"
+ },
+ {
+  "number": "0.036",
+  "reason": "same value in the abstract"
+ },
+ {
+  "number": "400",
+  "reason": "PCA component rank bound (components 200-400): a design constant of the direction-family sweep"
+ },
+ {
+  "number": 0.036,
+  "reason": "\u00b1spread across 12 features at 64\u00d7 (survey \u00a74 table)"
+ }
+]

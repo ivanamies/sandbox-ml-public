@@ -1,0 +1,46 @@
+{
+ "allowlists": [
+  "paper2/allowlist.json",
+  "paper2/survey_allowlist.json"
+ ],
+ "unchecked_sections": [
+  "preamble",
+  "References",
+  "0. Background and prior work"
+ ],
+ "sections": {
+  "Notation, units, and the cast": [],
+  "1. What this paper establishes": [],
+  "2. The budget this paper consumes": [
+   "artifacts/results/wire_datasheet.json"
+  ],
+  "3. The mechanism: rotation precedes compression": [
+   "artifacts/results/dpd_datasheet.json"
+  ],
+  "4. The fix: a memoryless predistorter": [
+   "artifacts/results/dpd_memoryless.json"
+  ],
+  "5. Why it caches: the memory gate stays shut": [
+   "artifacts/results/dpd_memory_test.json"
+  ],
+  "6. The wire is FM": [
+   "artifacts/results/census_amfm.json",
+   "artifacts/results/census_amfm_dirs.json"
+  ],
+  "7. Generalization": [
+   "artifacts/results/dpd_datasheet.json",
+   "artifacts/results/generalize_e3.json"
+  ],
+  "8. Predictions graded": [
+   "artifacts/results/dpd_datasheet.json",
+   "artifacts/results/dpd_memory_test.json",
+   "artifacts/results/census_amfm.json"
+  ],
+  "Appendix A \u2014 refuted predictions and corrected records": [
+   "artifacts/results/census_amfm.json",
+   "artifacts/results/census_amfm_dirs.json",
+   "artifacts/results/dpd_memoryless.json"
+  ],
+  "Appendix B \u2014 operational notes": []
+ }
+}

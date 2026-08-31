@@ -1,0 +1,6 @@
+[
+ {
+  "number": 0.036,
+  "reason": "\u00b1spread across 12 features at 64\u00d7 (Table, \u00a74); per-feature arrays exceed MAX_LIST and are excluded from JSON backing values"
+ }
+]

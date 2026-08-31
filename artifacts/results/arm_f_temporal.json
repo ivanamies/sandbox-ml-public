@@ -1,0 +1,116 @@
+{
+ "per_seed": {
+  "0": {
+   "argmax_exact": 0.4020000100135803,
+   "argmax_within2": 0.4320000112056732,
+   "argmax_median_dist": 11.0,
+   "first_above_thr_exact": 0.2980000078678131,
+   "first_above_thr_within2": 0.32499998807907104,
+   "syndrome_at_tstar_minus_clean": 16.177000045776367,
+   "syndrome_after_tstar_minus_clean": 0.0,
+   "auroc_single_token": 0.9750455000000001
+  },
+  "1": {
+   "argmax_exact": 0.38999998569488525,
+   "argmax_within2": 0.40799999237060547,
+   "argmax_median_dist": 11.0,
+   "first_above_thr_exact": 0.27300000190734863,
+   "first_above_thr_within2": 0.2849999964237213,
+   "syndrome_at_tstar_minus_clean": 15.932000160217285,
+   "syndrome_after_tstar_minus_clean": 0.0,
+   "auroc_single_token": 0.9725195
+  },
+  "2": {
+   "argmax_exact": 0.4059999883174896,
+   "argmax_within2": 0.42800000309944153,
+   "argmax_median_dist": 10.0,
+   "first_above_thr_exact": 0.28999999165534973,
+   "first_above_thr_within2": 0.30300000309944153,
+   "syndrome_at_tstar_minus_clean": 16.131000518798828,
+   "syndrome_after_tstar_minus_clean": 0.0,
+   "auroc_single_token": 0.9755195
+  }
+ },
+ "agg": {
+  "argmax_exact": {
+   "mean": 0.39933332800865173,
+   "std": 0.006798696721548631,
+   "n": 3,
+   "vals": [
+    0.4020000100135803,
+    0.38999998569488525,
+    0.4059999883174896
+   ]
+  },
+  "argmax_within2": {
+   "mean": 0.42266666889190674,
+   "std": 0.01049868456356469,
+   "n": 3,
+   "vals": [
+    0.4320000112056732,
+    0.40799999237060547,
+    0.42800000309944153
+   ]
+  },
+  "argmax_median_dist": {
+   "mean": 10.666666666666666,
+   "std": 0.4714045207910317,
+   "n": 3,
+   "vals": [
+    11.0,
+    11.0,
+    10.0
+   ]
+  },
+  "first_above_thr_exact": {
+   "mean": 0.28700000047683716,
+   "std": 0.010424331627149366,
+   "n": 3,
+   "vals": [
+    0.2980000078678131,
+    0.27300000190734863,
+    0.28999999165534973
+   ]
+  },
+  "first_above_thr_within2": {
+   "mean": 0.30433332920074463,
+   "std": 0.016357121832733374,
+   "n": 3,
+   "vals": [
+    0.32499998807907104,
+    0.2849999964237213,
+    0.30300000309944153
+   ]
+  },
+  "syndrome_at_tstar_minus_clean": {
+   "mean": 16.080000241597492,
+   "std": 0.10632342854689664,
+   "n": 3,
+   "vals": [
+    16.177000045776367,
+    15.932000160217285,
+    16.131000518798828
+   ]
+  },
+  "syndrome_after_tstar_minus_clean": {
+   "mean": 0.0,
+   "std": 0.0,
+   "n": 3,
+   "vals": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "auroc_single_token": {
+   "mean": 0.9743615,
+   "std": 0.0013167869987207748,
+   "n": 3,
+   "vals": [
+    0.9750455000000001,
+    0.9725195,
+    0.9755195
+   ]
+  }
+ }
+}

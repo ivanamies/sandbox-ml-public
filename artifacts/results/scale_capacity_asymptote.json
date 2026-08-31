@@ -1,0 +1,119 @@
+{
+ "note": "C3: is the clean floor a property of the stream or of the reader? Matched 0.45M-token corpus at every rung (the 6.9b corpus), mid-depth tap, 3 seeds.",
+ "rungs": {
+  "gpt2": {
+   "params": 124000000.0,
+   "n_train_tokens": 449792,
+   "floor_by_hidden": {
+    "256": 17.943018595377605,
+    "1024": 16.254201253255207,
+    "4096": 15.431811650594076
+   },
+   "floor_std_by_hidden": {
+    "256": 0.2514654089631078,
+    "1024": 0.22961005527337344,
+    "4096": 0.23069889970070667
+   },
+   "bits_per_capacity_doubling": 0.6278017361958824,
+   "floor_h4096": 15.431811650594076
+  },
+  "pythia-160m": {
+   "params": 162000000.0,
+   "n_train_tokens": 449792,
+   "floor_by_hidden": {
+    "256": 19.375269571940105,
+    "1024": 17.864987055460613,
+    "4096": 16.298832575480144
+   },
+   "floor_std_by_hidden": {
+    "256": 0.009058731582994622,
+    "1024": 0.03423967569274484,
+    "4096": 0.04194054743374469
+   },
+   "bits_per_capacity_doubling": 0.7691092491149908,
+   "floor_h4096": 16.298832575480144
+  },
+  "pythia-410m": {
+   "params": 405000000.0,
+   "n_train_tokens": 449792,
+   "floor_by_hidden": {
+    "256": 19.107041041056316,
+    "1024": 17.540386199951172,
+    "4096": 15.988869984944662
+   },
+   "floor_std_by_hidden": {
+    "256": 0.029684555190605626,
+    "1024": 0.05384596062317937,
+    "4096": 0.0395443250964691
+   },
+   "bits_per_capacity_doubling": 0.7795427640279134,
+   "floor_h4096": 15.988869984944662
+  },
+  "pythia-1.4b": {
+   "params": 1400000000.0,
+   "n_train_tokens": 449792,
+   "floor_by_hidden": {
+    "256": 17.664875666300457,
+    "1024": 16.159217834472656,
+    "4096": 15.337918281555176
+   },
+   "floor_std_by_hidden": {
+    "256": 0.03527730008668171,
+    "1024": 0.040874827631652545,
+    "4096": 0.041190826075715135
+   },
+   "bits_per_capacity_doubling": 0.5817393461863211,
+   "floor_h4096": 15.337918281555176
+  },
+  "pythia-2.8b": {
+   "params": 2800000000.0,
+   "n_train_tokens": 449792,
+   "floor_by_hidden": {
+    "256": 17.41494878133138,
+    "1024": 16.01601505279541,
+    "4096": 15.486538887023926
+   },
+   "floor_std_by_hidden": {
+    "256": 0.029435224761480187,
+    "1024": 0.03089123751786041,
+    "4096": 0.01675588895017589
+   },
+   "bits_per_capacity_doubling": 0.48210247357686387,
+   "floor_h4096": 15.486538887023926
+  },
+  "pythia-6.9b": {
+   "params": 6900000000.0,
+   "n_train_tokens": 449792,
+   "floor_by_hidden": {
+    "256": 17.6058406829834,
+    "1024": 16.51134999593099,
+    "4096": 16.006075223286945
+   },
+   "floor_std_by_hidden": {
+    "256": 0.05621103663005139,
+    "1024": 0.1072102447548305,
+    "4096": 0.12664692143501324
+   },
+   "bits_per_capacity_doubling": 0.3999413649241136,
+   "floor_h4096": 16.006075223286945
+  }
+ },
+ "verdict": {
+  "largest_reader_floor_range": [
+   15.337918281555176,
+   16.298832575480144
+  ],
+  "largest_reader_floor_vs_scale_spearman": 0.08571428571428573,
+  "bits_per_capacity_doubling": {
+   "gpt2": 0.628,
+   "pythia-160m": 0.769,
+   "pythia-410m": 0.78,
+   "pythia-1.4b": 0.582,
+   "pythia-2.8b": 0.482,
+   "pythia-6.9b": 0.4
+  },
+  "slope_vs_scale_spearman": -0.7714285714285715,
+  "extrapolation_note": "a 3-point saturating fit is not trustworthy (2 of 6 rungs return non-physical asymptotes); the largest-reader floor is reported as the proxy and the capacity slope as the trend",
+  "reading": "At the largest reader (hidden 4096, matched 0.45M-token corpus) the floor is 15.3-16.3 bits at every scale with no monotone trend (Spearman +0.09), and the sensitivity to reader capacity FALLS with model size (0.63->0.40 bits per doubling, Spearman -0.77). The flat-floor claim is therefore not an artifact of a capacity-bound reader: larger models need less reader capacity, not more."
+ }
+}

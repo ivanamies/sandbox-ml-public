@@ -1,0 +1,29 @@
+{
+ "ignore_mac": {
+  "targeted_success": 0.984499990940094,
+  "misclassify": 0.9959999918937683,
+  "on_target_info_bits": 0.4970000088214874,
+  "mac_zero_frac": 0.0,
+  "mac_mean_weight": 29.591999053955078,
+  "clean_mac_mean_weight": 15.080900192260742,
+  "auroc_mac": 0.9305944
+ },
+ "key_public": {
+  "targeted_success": 0.7839999794960022,
+  "misclassify": 0.8884999752044678,
+  "on_target_info_bits": 0.0364999994635582,
+  "mac_zero_frac": 0.0,
+  "mac_mean_weight": 17.362499237060547,
+  "clean_mac_mean_weight": 15.080900192260742,
+  "auroc_mac": 0.594242425
+ },
+ "key_secret_wrong_key": {
+  "targeted_success": 0.5920000076293945,
+  "misclassify": 0.7365000247955322,
+  "on_target_info_bits": 0.017000000923871994,
+  "mac_zero_frac": 0.0,
+  "mac_mean_weight": 32.050498962402344,
+  "clean_mac_mean_weight": 15.080900192260742,
+  "auroc_mac": 0.971739025
+ }
+}

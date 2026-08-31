@@ -1,0 +1,72 @@
+{
+ "paper": "1",
+ "allowlist": "allowlist.json",
+ "sections": {
+  "1. What this paper establishes": [],
+  "2. The channel datasheet": [
+   "artifacts/results/wire_datasheet.json",
+   "artifacts/results/macl_l1_geometry.json"
+  ],
+  "3. The senders coordinate": [
+   "artifacts/results/generalize_e3.json",
+   "artifacts/results/macl_l15_despreading.json",
+   "artifacts/results/macl_l1_functional.json",
+   "artifacts/results/macl_l1_geometry.json",
+   "artifacts/results/macl_l1_whitened.json"
+  ],
+  "4. The claim is architectural": [
+   "artifacts/results/generalize_e3.json"
+  ],
+  "5. Designed sharing is cheap and buys nothing": [
+   "artifacts/results/macl_l2_agg.json",
+   "artifacts/results/macl_l2_agg.json",
+   "artifacts/results/macl_l2_baseline_s0.json",
+   "artifacts/results/macl_l2_baseline_s1.json",
+   "artifacts/results/macl_l2_baseline_s2.json",
+   "artifacts/results/macl_l2_cdma_s0.json",
+   "artifacts/results/macl_l2_cdma_s1.json",
+   "artifacts/results/macl_l2_cdma_s2.json",
+   "artifacts/results/macl_l2_fdma_s0.json",
+   "artifacts/results/macl_l2_fdma_s1.json",
+   "artifacts/results/macl_l2_fdma_s2.json",
+   "artifacts/results/macl_l2_soft_fdma_s0.json",
+   "artifacts/results/macl_l2_soft_fdma_s1.json",
+   "artifacts/results/macl_l2_soft_fdma_s2.json"
+  ],
+  "6. Paths fade": [
+   "artifacts/results/macl_l4pre_fading.json",
+   "artifacts/results/macl_l4pre_fading_natural.json",
+   "artifacts/results/macl_l4pre_directions.json"
+  ],
+  "8. Receivers: the hard part is choosing, not measuring": [
+   "artifacts/results/filters_sic.json",
+   "artifacts/results/macl_l5_receivers.json",
+   "artifacts/results/macl_l5_receivers_parallel.json",
+   "artifacts/results/sae_arch_sweep.json",
+   "artifacts/results/wire_datasheet.json",
+   "artifacts/results/crb_receiver.json",
+   "artifacts/results/crb_receiver.json"
+  ],
+  "9. What replicates": [
+   "artifacts/results/generalize_e3.json"
+  ],
+  "Appendix A \u2014 retracted and negative claims, and what killed them": [
+   "artifacts/results/macl_l4_diversity.json",
+   "artifacts/results/generalize_e3.json",
+   "artifacts/results/macl_l4_agc.json",
+   "artifacts/results/macl_l3_curvature.json",
+   "artifacts/results/macl_l5_receivers.json",
+   "artifacts/results/wire_datasheet.json"
+  ],
+  "0. Background and prior work": [],
+  "References": [],
+  "7. The channel absorbs damage \u2014 and half the absorption is the receiver's gain control": [
+   "artifacts/results/macl_l4_diversity.json",
+   "artifacts/results/macl_l4_agc.json",
+   "artifacts/results/agc_law.json",
+   "artifacts/results/macl_l4pre_fading_natural.json"
+  ],
+  "Notation, units, and the cast": [],
+  "Appendix B \u2014 operational notes": []
+ }
+}

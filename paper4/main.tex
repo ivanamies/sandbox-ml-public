@@ -1,0 +1,785 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[numbers]{natbib}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{microtype}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black}
+\graphicspath{{figs/}}
+\setlength{\bibsep}{2pt}
+
+\title{A Tamper Seal for Neural Networks:\\ \large a post-trained MAC head for activation and KV-cache integrity in frozen language models}
+\author{Ivan Amies\\ \small \texttt{ivanamies@gmail.com}}
+\date{(split from the combined report; a companion paper publishes after this one)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% Simplified Technical English style: short active sentences, one idea per sentence.
+We attach a small head to a frozen language model and train only the head.
+The head predicts a random keyed hash of the token prefix from one activation vector.
+The number of wrong bits is a syndrome.
+A tampered activation gives a high syndrome.
+On frozen GPT-2 the head detects a swapped residual vector with AUROC 0.964 to 0.978 at every layer tried.
+Its false-positive rate at 95\% recall is 0.09 to 0.14 per token.
+The head has 213 thousand parameters.
+It costs 1.0\% of the forward pass at 124M parameters and 0.14\% at 6.9B on a GPU.
+The clean floor is 15 to 17 wrong bits of 64.
+The floor does not move from GPT-2 to Pythia 6.9B at matched depth.
+Swap detection stays at AUROC 0.96 to 0.97 across that ladder.
+The floor of a model trained with the head from scratch is 15 bits.
+Cooperation buys nothing for detection.
+The head finds the layer and the token of the intervention exactly.
+The same head detects transplanted, replayed, and moved KV-cache entries with AUROC 0.95 to 0.97.
+Averaged over 8 tokens the head gives zero false alarms at 95\% recall on swaps, transplants and replays.
+Mahalanobis distance finds noise and steering that the head does not; the head finds swaps that Mahalanobis does not.
+Fusing the two into one score is worse than keeping two instruments.
+A two-sided statistic catches an attacker who drives the syndrome below the floor.
+Thresholds set on prompt tokens do not transfer to generated tokens; a calibration set of a few hundred generations fixes it.
+The seal does not detect prompt injection, small adversarial nudges, or an adversary who holds the key.
+It is a seal on the channel between the model's own computations, not a judgment about what the model computed.
+\end{abstract}
+
+\section{Introduction}
+Interpretability-by-design borrows the \emph{source coding} half of information
+theory: make representations legible by making them sparse or discrete. This paper
+uses the \emph{channel coding} half for a narrower and more operational purpose ---
+integrity. A message authentication code (MAC) binds a piece of data to a key so
+that any change is detectable; we show that a two-layer head, trained after the fact
+on a frozen model, turns activation and KV-cache integrity into a cheap, calibrated
+runtime check. The head predicts a keyed hash of the token prefix from a tapped
+vector; the number of wrong bits is the syndrome; a swapped, replayed, transplanted
+or transported-in-error vector fails the check. Everything is 3 seeds with error bars,
+AUROC and FPR@95\%TPR, a Mahalanobis baseline on the same activations and an
+untrained-head control in every table.
+
+Section~\ref{sec:lessons} compresses the design lessons that led here (a designed
+code on an MNIST encoder: what a syndrome can and cannot see); Section~\ref{sec:mac}
+gives the MAC construction and its three threat models; Sections~\ref{sec:armf}--\ref{sec:armg}
+are the headline: the retrofit on frozen GPT-2, what training-time cooperation
+would add (nothing), and the KV cache; Sections~\ref{sec:armj}--\ref{sec:armh} stress the
+instrument (fusion, the two-sided statistic, adaptive attackers, generation-time
+calibration, a scale ladder to 6.9B); Section~\ref{sec:deploy} is the deployment
+recipe. The codes-and-optimisation questions --- where SGD spends Hamming distance,
+when a decoder matters, and whether a model trained against its own alarm can
+smuggle bits through the checked code --- are the subject of a companion paper in this program that publishes after this one, and are not relied on here.
+
+\section{Design lessons from a designed code}\label{sec:lessons}
+\paragraph{Conventions (used throughout).} A representation $z\in\mathbb{R}^{128}$
+is binarised as $s=\mathrm{sign}(z)$ through a straight-through estimator; bits are
+$b=(1-s)/2$, so $s{=}+1\mapsto0$ and even parity over a check $\Leftrightarrow$ the
+product of its signs is $+1$. The code is a rate-1/2 LDPC code with $n{=}128$,
+$m{=}64$ checks, regular column weight 3 / row weight 6, built by a
+progressive-edge-growth-style greedy construction with girth $\ge6$, seed 0, saved as
+$H$. The hard syndrome of a vector is $H\,\mathrm{bits}(\mathrm{sign}\,z)$ over GF(2)
+and its weight $w=\|H\,\mathrm{bits}\|_0$ counts violated checks. A \emph{systematic}
+encoder emits 64 information logits and sets the 64 parity signs to the XOR (product
+of STE signs) over the information set of the same $H$, obtained by GF(2) row
+reduction; codewords are then valid by construction. Unit tests cover the sign/bit
+map, a hand-computed check, agreement of hard syndrome and soft parity on random
+codewords, and the min-sum decoder.
+
+\paragraph{What the MNIST rungs taught.} We first tried to make a two-conv MNIST
+encoder's binarised code lie on $H$ by a soft-parity loss (Nachmani-style products
+$\prod\tanh(z_i/2)$ over each check, log-barrier form, annealed weight
+$\lambda\in[0.3,30]$, two-sided margin with a box on $|z|$). Accuracy is never the
+problem; parity is: every $\lambda$ plateaus at 92--95\% of checks satisfied. The
+plateau is structural. On the trained models 90\% of test points sit at hard
+syndrome weight 2--4, and hard-decision min-sum converges on only 10\% of them; with
+girth $\ge6$ a weight-2 syndrome is at Hamming distance $\ge4$ from every codeword, so
+these are trapping-set-like local minima of the syndrome-weight landscape. Minimising
+syndrome weight is not minimising distance to the code, and gradient descent on the
+product loss is a local search in that landscape (the lattice test of this
+hypothesis is taken up by the later companion paper). The systematic encoder is on the code at 100\% of
+checks with baseline accuracy (99.02\% vs 98.94\%; the sweep is in the repository).
+
+The syndrome as a detector (Table~\ref{tab:r3}) then behaves as its construction
+dictates. (i) For corruption of the \emph{representation channel} --- Gaussian noise
+on $z$, a 50/50 coordinate splice --- the hard syndrome is a near-perfect detector
+(0.95--1.00), competitive with Mahalanobis and better than max-softmax/energy, for the
+price of 64 XORs and with designed semantics. (ii) For \emph{input-space} corruption
+(FGSM/PGD, out-of-distribution digits) the systematic model's syndrome is exactly
+0.5: every input maps to a valid codeword by construction. (iii) Whole-vector
+patching --- replacing $z$ by another input's clean $z$ --- is 0.5 for \emph{every}
+detector including the baselines: the swapped-in vector is a clean valid state. That
+blind spot, shared by all three of the input-space failures, is what the MAC fixes:
+the code certified $z$'s internal consistency, not that $z$ belongs to \emph{this}
+input.
+
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{l rrr rr | rr}
+\toprule
+& \multicolumn{3}{c}{baselines ($\lambda=0$ model)} & \multicolumn{2}{c|}{systematic} & \multicolumn{2}{c}{soft-parity $\lambda=10$}\\
+corruption & MSP & energy & Mahal. & syn.\ hard & syn.\ soft & syn.\ hard & syn.\ soft\\
+\midrule
+gauss $\sigma{=}0.5$ & 0.732 & 0.690 & 1.000 & 0.946 & 0.584 & 0.960 & 0.972\\
+gauss $\sigma{=}1$ & 0.967 & 0.952 & 1.000 & 1.000 & 0.731 & 0.999 & 0.997\\
+gauss $\sigma{=}2$ & 0.992 & 0.998 & 1.000 & 1.000 & 0.839 & 0.999 & 0.999\\
+patch swap & 0.500 & 0.500 & 0.500 & 0.500 & 0.500 & 0.500 & 0.500\\
+patch mix 50/50 & 0.943 & 0.943 & 1.000 & 0.957 & 0.838 & 0.949 & 0.948\\
+FGSM 0.1 & 0.630 & 0.603 & 0.522 & 0.500 & 0.886 & 0.665 & 0.986\\
+PGD 0.1 & 0.709 & 0.664 & 0.648 & 0.500 & 0.923 & 0.931 & 0.987\\
+FGSM 0.3 & 0.873 & 0.808 & 0.705 & 0.500 & 0.989 & 0.946 & 0.998\\
+PGD 0.3 & 0.443 & 0.349 & 0.736 & 0.500 & 0.579 & 0.784 & 0.209\\
+FashionMNIST & 0.911 & 0.893 & 0.879 & 0.500 & 0.987 & 0.962 & 0.994\\
+KMNIST & 0.917 & 0.874 & 0.946 & 0.500 & 0.975 & 0.961 & 0.992\\
+\bottomrule
+\end{tabular}
+\caption{The syndrome as a detector on MNIST (single seed; AUROC corrupt vs.\ clean
+test set). Systematic encoder: clean syndrome is identically 0, channel corruption is
+caught, input-space change is invisible. Whole-vector patch swap is 0.500 for every
+detector.}
+\label{tab:r3}
+\end{table*}
+
+\section{The MAC: input-bound parity}\label{sec:mac}
+We keep the systematic encoder and make the parity half key-dependent. A frozen,
+randomly initialised 2-conv net (seed-fixed, weights never trained) yields 64
+features, binarised at per-feature medians over the training set so key bits are
+balanced: $k(x)\in\{0,1\}^{64}$; $f$ is a fixed permutation plus mask. A parity head
+$p(z_{\rm info})$ (2-layer MLP, 256 hidden, trained with BCE against $f(k(x))$, weight
+$\beta{=}3$; gradient reaches the encoder) sets the emitted parity to
+$A\,u\oplus\mathrm{sign}(p)$. The check is
+\[
+\mathrm{syndrome}_{\rm MAC}(z,x)=H\,\mathrm{bits}(\mathrm{sign}\,z)\;\oplus\;H_{\rm par}\,f(k(x)),
+\]
+i.e.\ $z$ must lie in the coset $\mathcal{C}+[0\,|\,f(k(x))]$; it equals $H_{\rm par}$
+applied to the head's key-prediction error and is zero iff that prediction is exact
+(unit-tested by hand). Accuracy $98.96\pm0.05$\% ($-0.13$\%), 3 seeds.
+
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{l rrr r r r}
+\toprule
+corruption & MSP & energy & Mahal.\ & LDPC syn.\ (Table~\ref{tab:r3}) & \textbf{MAC syn.} & MAC, head untrained\\
+\midrule
+gauss $\sigma{=}0.5$ & .719$\pm$.009 & .718$\pm$.024 & 1.000 & .948$\pm$.002 & \textbf{.881$\pm$.004} & .520$\pm$.015\\
+gauss $\sigma{=}1$ & .965$\pm$.002 & .969$\pm$.012 & 1.000 & 1.000 & \textbf{.944$\pm$.003} & .524$\pm$.017\\
+gauss $\sigma{=}2$ & .993$\pm$.001 & .998$\pm$.000 & 1.000 & 1.000 & \textbf{.968$\pm$.002} & .527$\pm$.012\\
+patch swap & .500 & .500 & .500 & .500 & \textbf{.942$\pm$.003} & .519$\pm$.008\\
+patch mix & .944$\pm$.001 & .945$\pm$.001 & 1.000 & .958$\pm$.001 & \textbf{.963$\pm$.002} & .520$\pm$.013\\
+FGSM 0.1 & .605$\pm$.018 & .595$\pm$.007 & .509$\pm$.010 & .500 & \textbf{.711$\pm$.011} & .500$\pm$.006\\
+PGD 0.1 & .656$\pm$.037 & .639$\pm$.020 & .596$\pm$.038 & .500 & \textbf{.695$\pm$.006} & .499$\pm$.003\\
+FGSM 0.3 & .844$\pm$.059 & .820$\pm$.059 & .678$\pm$.019 & .500 & \textbf{.883$\pm$.013} & .525$\pm$.028\\
+PGD 0.3 & .436$\pm$.007 & .411$\pm$.047 & .696$\pm$.030 & .500 & \textbf{.884$\pm$.003} & .496$\pm$.038\\
+FashionMNIST & .923$\pm$.017 & .929$\pm$.026 & .866$\pm$.016 & .500 & \textbf{.726$\pm$.035} & .455$\pm$.057\\
+KMNIST & .906$\pm$.015 & .903$\pm$.026 & .946$\pm$.002 & .500 & \textbf{.753$\pm$.017} & .527$\pm$.017\\
+\bottomrule
+\end{tabular}
+\caption{The MAC on MNIST. AUROC (corrupt vs.\ clean), 3 seeds. Whole-vector patch swap moves
+off 0.500 for the first time; the untrained-head ablation shows the effect is learned
+binding, not merely input-dependent bits.}
+\label{tab:mac}
+\end{table*}
+
+\begin{figure*}[t]
+\centering\includegraphics[width=0.9\textwidth]{p4_fig1_mac}
+\caption{The MAC on MNIST. Left: MAC syndrome vs.\ baselines. Right: three threat models
+against the MAC at $\varepsilon{=}0.3$.}
+\label{fig:mac}
+\end{figure*}
+
+Table~\ref{tab:mac} and Fig.~\ref{fig:mac}. Whole-vector patch swap --- invisible to
+every detector in Table~\ref{tab:r3} including the baselines --- is detected at
+$0.942\pm0.003$ (kill criterion was $\le0.7$). Non-adaptive input attacks and OOD,
+structurally $0.500$ before, are now $0.70$--$0.88$ and $0.73$--$0.75$. The three
+threat models, which we report for every instrument below: an attacker that ignores
+the MAC still succeeds 97\% of the time but is flagged (AUROC $0.927$); a fully
+adaptive \emph{key-public} attacker that adds the MAC hinge to its loss cuts detection
+to $0.593$ (its own targeted success drops to 79\% because $f(k(x))$ is a moving target
+under PGD); with the \emph{key secret} --- attacker optimising against its own random
+key net --- detection is $0.970$. Limitation: the clean syndrome floor is
+$15.3\pm0.2$ of 64 (head capacity and epochs do not move it; $\sim$5 key bits sit at
+their thresholds and are unpredictable), so this is a statistical, not exact,
+certificate.
+
+\paragraph{Sidebar: an imperfect code that shifts is the better detector.} Replacing
+the binary code by an E8 lattice (16 blocks of 8, exact nearest-point projection,
+loss $\|z/s-Q(z/s)\|^2$; full treatment in the later companion paper) gives a code the network
+sits \emph{near} but not on, and distance-to-lattice is the best all-round detector
+in either setting: $0.98$--$0.99$ on FGSM/PGD, FashionMNIST and KMNIST (Mahalanobis
+$0.51$--$0.95$, MSP $0.44$--$0.92$), $0.94$--$0.99$ on Gaussian $z$-noise, $0.925$ on
+patch mix, and $0.500$ on patch swap. The fraction of examples within the decoding
+radius grows monotonically with the loss weight (all blocks $<0.5\rho$: $0.126\to0.890$;
+$<\rho$: $0.489\to0.977$ from $\lambda{=}0.1$ to $100$), with no plateau. ``Near the
+code'' is what a good detector wants; ``on the code'' is what a MAC needs, and the
+systematic construction gives it for free.
+
+\section{Setup for frozen transformers}\label{sec:setup}
+Part of the design was fixed by the MNIST results: statistical certificates are the
+product (the cooperative MAC floor was 15.3/64 and never lower), learned binding is
+the mechanism, three threat models are standard reporting. The rest of the paper asks
+the only version of the idea the real world can buy: attach a head to a \emph{frozen}
+pretrained LM, train only the head, and detect interventions on the residual stream
+(Section~\ref{sec:armf}); measure what training-time cooperation would add with a
+from-scratch control (Section~\ref{sec:arme}); and check the one place in a
+transformer where memory corruption is literal, the KV cache (Section~\ref{sec:armg}).
+All numbers are mean $\pm$ std over 3 seeds (seed = head initialisation + key net; the
+LM is fixed), reported as AUROC and FPR@95\%TPR, with a Mahalanobis baseline on the
+same activations and an untrained-head control in every table.
+
+\paragraph{Shared machinery.} The key is a frozen random causal encoder: a random
+token embedding into a frozen random GRU, per-feature median-binarised on the
+head-training corpus (balanced bits), followed by a fixed permutation and mask; $k_t$
+depends only on tokens $\le t$ (unit-tested, incremental $=$ offline), so it is
+computable during generation. The head is a 2-layer MLP (256 hidden) reading the
+tapped vector at one layer, trained with BCE to predict $f(k(x_{\le t}))$; the per-token
+syndrome is the number of wrong bits. There is no code to decode to on a frozen model:
+this is detection only, and the ``syndrome'' is exactly the key-prediction error.
+Model: GPT-2 small (124M) frozen; head-training corpus 2M TinyStories tokens in
+128-token windows, evaluation 200k disjoint tokens, OOD $=$ Python source. Corruptions
+are injected by forward hooks at layer $m$ on positions $t\ge32$; clean and corrupted
+tokens at those positions are the two classes. Sections~\ref{sec:armf}--\ref{sec:deploy}
+were run on Apple MPS in fp32; Sections~\ref{sec:armj}--\ref{sec:armh} on one RTX~3090\,Ti,
+where the Section~\ref{sec:armf} table reproduces to within 0.005 AUROC and 0.1 bit
+of floor.
+
+\section{A post-trained MAC head on frozen GPT-2}\label{sec:armf}
+\emph{Census-side, in the sense that matters commercially: \textbf{we did not touch the
+model.} This is a small head trained on activations read out of a frozen language model
+--- not a LoRA, not a fine-tune, not an adapter inside the forward pass. No LM gradients
+are taken at any point, the weights are byte-identical before and after, and the head can
+be attached to and detached from a deployed model without changing a single thing it
+computes. That is the whole story of this section, and every number below should be read
+against it.}
+
+\begin{figure*}[t]
+\centering\includegraphics[width=\textwidth]{p4_fig2_armf}
+\caption{Frozen GPT-2. Left: AUROC per corruption for heads at layers 3/6/9 (patch at the same
+layer), Mahalanobis and untrained-head controls. Middle: layer bracketing --- a head at
+$\ell$ fires iff the patch is at $m\le\ell$. Right: clean floor vs.\ head capacity and
+head-training tokens, against the cooperative floor.}
+\label{fig:armf}
+\end{figure*}
+
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{l ccc c c}
+\toprule
+corruption (at $m{=}\ell$) & MAC @L3 & MAC @L6 & MAC @L9 & Mahal.\ @L6 & untrained\\
+& AUROC / FPR95 & AUROC / FPR95 & AUROC / FPR95 & AUROC & AUROC\\
+\midrule
+resid swap & \textbf{.978} / .09 & \textbf{.973} / .11 & \textbf{.964} / .14 & .500 & .503\\
+splice 50/50 & .895 / .42 & .878 / .48 & .860 / .53 & .958 & .503\\
+gauss $\sigma{=}0.5/1/2$ & .56/.68/.84 & .55/.65/.82 & .54/.64/.81 & .73/.99/1.00 & .50\\
+steer random $\times1/3/10$ & .66/.90/.97 & .66/.90/.97 & .65/.88/.95 & .99/1.00/1.00 & .51\\
+steer probe dir.\ $\times1/3$ & .67/.91 & .63/.89 & .65/.91 & 1.00/1.00 & .50\\
+ablate head 0 & .514 & .502 & .500 & .494 & .500\\
+OOD (code) & .855 / .57 & .881 / .46 & .846 / .55 & .997 & .465\\
+\midrule
+clean floor (bits/64) & 15.2$\pm$.2 & 15.8$\pm$.2 & 16.6$\pm$.2 & & \\
+\bottomrule
+\end{tabular}
+\caption{Frozen GPT-2, 3 seeds (stds $\le0.02$). Head 213k params, 0.003 ms/token; the LM
+forward is 0.044 ms/token (MPS, batch 1$\times$128).}
+\label{tab:armf}
+\end{table*}
+
+Table~\ref{tab:armf}, Fig.~\ref{fig:armf}. \textbf{The retrofit works.} A 213k-parameter
+head, four epochs on 2M tokens, no LM gradients, detects a swapped residual --- the
+activation-patching operation --- at AUROC $0.964$--$0.978$ with FPR@95\%TPR
+$0.09$--$0.14$, at every layer tried; the kill criterion was $0.7$. Overhead is 7--11\%
+of the LM forward on MPS (1\% and falling on a GPU, Section~\ref{sec:armh}). The
+untrained head is $0.50$ everywhere.
+
+\textbf{The frozen floor equals the cooperative floor.} $15.2$--$16.6$ bits vs.\ the
+$15.3$ of a model trained with the head from scratch (Section~\ref{sec:mac}). GPT-2's
+residual stream already carries $\sim$80\% of a random causal hash of the prefix per
+bit; per-bit error is uniform ($0.16$--$0.24$ at hidden 1024, no unlearnable bits).
+Capacity lowers the floor ($18.2\to12.5$ from hidden 64 to 4096); corpus size barely
+does ($17.6\to15.6$ from 50k to 2M tokens). This was the number the design called
+central, and it is essentially free.
+
+\textbf{Localization is exact.} Layer bracketing gives a clean step matrix: heads at
+$\ell\in\{3,6,9\}$ against swaps at $m\in\{3,6,9\}$ read $[.98,.50,.50;\,.97,.97,.50;\,
+.96,.96,.96]$ --- a head fires iff the intervention is at or below its layer. Temporally,
+a single swapped token raises the syndrome by $16.1$ at $t^*$ and by $0.0$ afterwards
+(single-token AUROC $0.974\pm0.001$; argmax hits $t^*$ 40\% of the time, the miss being
+clean-floor variance across 127 other positions).
+
+\textbf{Complementary, not dominant.} Mahalanobis on the same residuals is $0.500$ on
+swap (a swapped activation is a perfectly typical activation) and $0.99$--$1.00$ on
+Gaussian noise, steering and OOD, where the MAC is $0.55$--$0.97$. Ablating one attention
+head is invisible to both. \textbf{Generation-time} the floor is stable
+($15.4$--$16.0$ on prompt tokens, $16.7$--$17.2$ on greedy-generated ones).
+
+\begin{figure*}[t]
+\centering\includegraphics[width=\textwidth]{p4_fig3_localization}
+\caption{Frozen GPT-2. Left: temporal localization of a single-token swap. Middle: syndrome
+vs.\ position during greedy generation. Right: activation-space adaptive attacks at
+three budgets --- small nudges pass; the key-public attacker wins at every budget.}
+\label{fig:loc}
+\end{figure*}
+
+\textbf{Adaptive attacks in activation space} (Fig.~\ref{fig:loc}, right; $L_\infty$
+budget in median-$|h|$ units, 40 PGD steps, objective: flip the next-token argmax,
+success $\ge94\%$ in every cell): at $\varepsilon{=}0.5$ the MAC sees nothing
+($0.532\pm0.001$); at $\varepsilon{=}2$, $0.70$; at $\varepsilon{=}5$, $0.87$
+(key-secret $0.83$/$0.95$). The key-public attacker drives the syndrome \emph{below}
+the clean floor ($0.35$--$0.39$). The MAC is a seal against swap-scale interventions,
+not a detector of small adversarial nudges; Section~\ref{sec:armj} returns to the
+below-floor attacker with a two-sided statistic.
+
+\section{The cooperative control}\label{sec:arme}
+Would a model trained \emph{with} the head from the start detect more? A 4-block
+decoder-only transformer ($d{=}256$) on a 256-state DFA-tracking task, with the
+systematic$+$MAC bottleneck after block 3 and block 4 reading only the codes (the
+task, the recurrent-code recipe and the correction-side results belong to the later companion paper).
+Table~\ref{tab:ef}: \textbf{the E$-$F delta is $\approx0$ where it matters.} Swap
+$0.944$ vs.\ $0.973$; the cooperative model's advantage on Gaussian noise
+($+0.13$--$+0.28$) is because the bottleneck signs \emph{are} the noised object.
+Cooperation buys nothing for detection that the frozen residual does not already
+give.
+
+\begin{figure}[t]
+\centering\includegraphics[width=\linewidth]{p4_fig4_arme}
+\caption{Cooperative model (E) vs.\ frozen retrofit (F) on the shared suite (left); the
+middle/right panels (bit flips, correction with the decoder in the read path) belong to the
+correction story, which belongs to the later companion paper.}
+\label{fig:arme}
+\end{figure}
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{l cc r}
+\toprule
+corruption & cooperative (bottleneck) & frozen GPT-2 (@L6) & E$-$F\\
+\midrule
+swap & .944$\pm$.004 & .973 & $-.03$\\
+splice & .946$\pm$.002 & .878 & $+.07$\\
+gauss $\sigma{=}0.5/1/2$ & .69/.93/.95 & .55/.65/.82 & $+.14/+.28/+.13$\\
+flip 1/4/8 bits & .60/.74/.84 & --- & \\
+\bottomrule
+\end{tabular}
+\caption{Cooperative model (E) vs.\ frozen retrofit (F): MAC AUROC, 3 seeds; untrained heads 0.50 throughout.}
+\label{tab:ef}
+\end{table}
+
+\section{KV-cache integrity}\label{sec:armg}
+Same frozen GPT-2; heads on the flattened K, V, or [K$|$V] of one layer, with fixed
+sinusoidal \emph{slot} features appended and inputs standardised, target
+$f(k(x_{\le t}))$. Two designs that XOR a random per-slot mask into the target (with or
+without slot features) are unlearnable for a shallow head --- floor $=$ chance, both
+nulls kept --- and unnecessary: prefix binding alone makes any moved entry fail at its
+new slot. Corruptions act on the cache tensors, positions $\ge32$.
+
+\begin{figure*}[t]
+\centering\includegraphics[width=\textwidth]{p4_fig5_armg}
+\caption{KV cache. Left: corruptions vs.\ MAC heads on K, V, [K$|$V] and
+Mahalanobis. Right: clean floor by layer for K, V, [K$|$V].}
+\label{fig:armg}
+\end{figure*}
+
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{l l c ccccccc}
+\toprule
+layer & on & floor & pos swap & transplant & gauss K & gauss V & delete-shift & dup-shift & stale replay\\
+\midrule
+3 & K & 17.0 & .958/.18 & .962/.15 & .864 & .500 & .890/.40 & .841/.49 & .961/.15\\
+3 & V & 16.4 & .964/.14 & .967/.12 & .500 & .659 & .901/.36 & .853/.48 & .966/.12\\
+3 & [K$|$V] & 16.0 & \textbf{.968}/.13 & \textbf{.971}/.11 & .747 & .600 & .908/.36 & .862/.47 & \textbf{.970}/.11\\
+6 & [K$|$V] & 16.4 & .963/.16 & .967/.13 & .607 & .573 & .878/.43 & .843/.50 & .965/.13\\
+9 & [K$|$V] & 16.9 & .959/.17 & .963/.15 & .571 & .560 & .879/.43 & .835/.50 & .961/.15\\
+\bottomrule
+\end{tabular}
+\caption{KV cache, AUROC / FPR95, 3 seeds (stds $\le0.003$). Mahalanobis on [K$|$V] is
+$0.500$ on transplant; untrained heads $0.50$. [K$|$V] head: 426k params, 0.006 ms per
+cached token.}
+\label{tab:armg}
+\end{table*}
+
+Table~\ref{tab:armg}, Fig.~\ref{fig:armg}. \textbf{The cache is checkable.} Cross-prompt
+transplant $0.95$--$0.97$ (kill criterion $0.7$), stale replay $0.95$--$0.97$, position
+swap $0.95$--$0.97$, delete/duplicate-shift $0.81$--$0.91$; Gaussian noise on K or V is
+weak ($0.5$--$0.86$) as with the residual head. K and V are equally checkable (V a
+shade better), [K$|$V] best; floors $16.0$--$18.0$. Because a cache entry is read many
+times, the per-token cost amortises.
+
+\section{The fused instrument and the two-sided statistic}\label{sec:armj}
+Per token at GPT-2 layer 6 we compute the MAC syndrome (one-sided $s$ and two-sided
+$|z|=|s-\mu_{\rm clean}|/\sigma_{\rm clean}$) and the Mahalanobis $z$, standardised on
+clean windows of the first half of the evaluation sequences; a logistic regression on
+$\{|z_{\rm MAC}|, z_{\rm Mahal}\}$ (pre-registered) is fit on that half against a
+balanced mixture of the residual suite and evaluated on the other half; the max-rule
+$\max(|z_{\rm MAC}|, z_{\rm Mahal})$ needs no fit. Windows are non-overlapping means
+over positions $\ge 32$, $W\in\{1,8,32\}$. Out-of-fit conditions: head ablation and the
+three activation-space attackers at $\varepsilon\in\{0.5,2,5\}$ (all flip the
+next-token argmax 94--99\% of the time). Two post-hoc variants are reported and
+labelled as such: $\max(z_{\rm MAC}, z_{\rm Mahal})$ (the companion of
+Section~\ref{sec:deploy}) and a 3-feature logistic $\{z_{\rm MAC}, |z_{\rm MAC}|,
+z_{\rm Mahal}\}$. Kill criterion: fused FPR95 worse than the best single detector on
+more than half the suite.
+
+\begin{table*}[t]\centering\small
+\begin{tabular}{llcccccc}
+\toprule
+corruption & $W$ & MAC $s$ & MAC $|z|$ & Mahal & logistic $\{|z|,z_M\}$ & logistic$_3$ [post-hoc] & $\max(z,z_M)$ [post-hoc]\\
+\midrule
+resid swap & 1 & .973/.107 & .956/.192 & .500/.950 & .830/.485 & .856/.382 & .954/.167\\
+resid swap & 8 & 1.000/.000 & .999/.006 & .500/.950 & .991/.033 & .992/.031 & .999/.003\\
+gauss $\sigma{=}0.5$ & 8 & .587/.931 & .513/.950 & .870/.457 & .838/.459 & .841/.444 & .819/.623\\
+key-public $\varepsilon{=}0.5$ & 8 & .239/.978 & .625/.917 & .742/.757 & .816/.452 & .804/.452 & .648/.866\\
+key-public $\varepsilon{=}0.5$ & 32 & .139/.993 & .770/.772 & .841/.585 & .933/.166 & .957/.136 & .781/.728\\
+key-public $\varepsilon{=}2$ & 32 & .102/.991 & .835/.571 & 1.000/.000 & 1.000/.000 & 1.000/.000 & 1.000/.000\\
+ablate head 0 & any & .50 & .50 & .50 & .50 & .50 & .50\\
+\midrule
+KV transplant & 1 & .967/.133 & .946/.238 & .500/.950 & .940/.240 & .960/.137 & .943/.210\\
+KV delete-shift & 8 & .989/.050 & .958/.126 & .499/.950 & .956/.142 & .985/.060 & .974/.103\\
+KV gauss K & 8 & .697/.880 & .579/.934 & 1.000/.000 & 1.000/.000 & 1.000/.000 & 1.000/.000\\
+\bottomrule
+\end{tabular}
+\caption{Fusion, AUROC / FPR@95\%TPR, 3 seeds (stds $\le 0.01$). Fusion fit on half the eval
+sequences; adaptive attackers and ablation are out-of-fit. Full panel (63 residual + 21 KV rows)
+in \texttt{fuse\_resid.json}, \texttt{fuse\_kv.json}.}\label{tab:fuse}
+\end{table*}
+
+Table~\ref{tab:fuse}, Fig.~\ref{fig:fuse}. \textbf{The two-sided term does what it was built
+for.} The key-public attacker drives the syndrome below the floor (mean 12.2--13.2 vs 15.7
+clean), so the one-sided MAC has AUROC 0.10--0.35; $|z|$ recovers 0.72--0.84 at $W{=}32$. But
+Mahalanobis alone already sees $\varepsilon\ge2$ (1.000), so the two-sided term earns its keep
+only at $\varepsilon{=}0.5$, where it lifts the fused instrument from 0.84 to 0.93--0.96
+(FPR95 0.59 to 0.14--0.17). \textbf{Fusion is not killed on the residual suite} (15/63 rows
+worse than the best single, mostly at $W{=}1$ where the logistic inherits $|z|$'s cost on
+swap: 0.956 vs 0.973), \textbf{but is killed on the KV suite} (13/21): taking $|z|$ discards
+the one-sidedness that carries every movement and replay corruption. The post-hoc 3-feature
+logistic fixes this (4/21) and tracks the best single detector almost everywhere; we report it
+as post-hoc. Head ablation is invisible to all instruments. The recommendation
+therefore stands as two instruments --- one-sided MAC for replacement-type corruptions,
+Mahalanobis for off-manifold ones, max-combined ---
+with $|z_{\rm MAC}|$ added as a third feature only for the below-floor attacker.
+
+\begin{figure*}[t]\centering
+\includegraphics[width=0.95\textwidth]{p4_fig6_fuse.png}
+\caption{Fusion. Left: FPR@95 per detector and fusion at $W{=}1$ and $W{=}8$ (hatched: post-hoc
+variants). Top right: key-public attacker vs budget, one-sided MAC below 0.5, $|z|$ above.
+Bottom right: FPR on greedy-generated windows at a prompt-calibrated threshold.}\label{fig:fuse}
+\end{figure*}
+
+\paragraph{Generation-time calibration.} At a threshold set on prompt tokens,
+Mahalanobis fires on 37/63/72\% of greedy-generated windows at $W{=}1/8/32$ and every
+fusion inherits its drift. We therefore rebuilt the calibration on generated traffic:
+500 held-out prompts (32 tokens) $\times$ 64 greedy tokens through frozen GPT-2
+(residual tap at layer 6; the KV $[K|V]$ head on the same generations), split half/half
+into a calibration and an evaluation set; the corruptions and the adaptive attackers
+applied to the \emph{generated} positions; every detector scored at the prompt-calibrated
+95\% threshold and at a generation-calibrated one, with the fusion and standardisation
+fit either on prompt tokens or on the generated calibration half. Drift: the MAC
+syndrome mean moves 15.7$\to$16.6 from prompt to generated tokens, Mahalanobis
+784$\to$1286. Table~\ref{tab:gencal}. At the prompt-set threshold, held-out \emph{clean}
+generated windows fire Mahalanobis 29/52/62\% of the time at $W{=}1/8/32$ (KV:
+28/47/57\%), the pre-registered fusion 18/44/60\%, MAC one-sided 5/8/17\%, MAC $|z|$
+3/2/7\%; at the generation-set threshold every detector sits at 3--5\%. Detection on
+generated traffic is otherwise the picture above (MAC 1.000 on swap and KV
+transplant/replay, Mahalanobis 1.000 on gauss/steer $\ge\sigma$, neither on gauss
+$\sigma{=}0.5$), with two changes worth recording: standardising on prompt tokens lets
+the inflated Mahalanobis term swamp the two-instrument max-rule on generated traffic
+(swap 0.893, transplant 0.874, delete-shift 0.724 at $W{=}8$), which re-standardising on
+generated windows restores (0.999 / 0.999 / 0.983); and the key-public attacker at
+$\varepsilon{=}0.5$ is caught \emph{better} under generation calibration
+($\max(|z|,z_M)$ 0.64$\to$0.78 at $W{=}8$, 0.66$\to$0.88 at $W{=}32$; $\varepsilon{=}2$
+unchanged at 0.97--0.99), at a cost of 0.01--0.03 AUROC on gauss $\sigma{=}1$ / steer
+$1\sigma$. Operational rule: one calibration set of $\approx$250 generated sequences per
+(model, decoding); prompt-token calibration does not transfer for anything containing
+Mahalanobis, and MAC one-sided needs it at $W\ge8$ too.
+
+\begin{table*}[t]\centering\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{6}{c}{FPR of held-out generated clean windows, prompt-set 95\% threshold $\to$ generation-set}\\
+$W$ & MAC one & MAC $|z|$ & Mahal & $\max(|z|,z_M)$ & logistic & logistic3\\
+\midrule
+1 & .05$\to$.05 & .03$\to$.05 & .29$\to$.05 & .19$\to$.05 & .18$\to$.04 & .17$\to$.04\\
+8 & .08$\to$.04 & .02$\to$.04 & \textbf{.52$\to$.04} & .43$\to$.04 & .44$\to$.04 & .44$\to$.04\\
+32 & .17$\to$.04 & .07$\to$.04 & \textbf{.62$\to$.04} & .56$\to$.04 & .60$\to$.04 & .61$\to$.04\\
+KV 8 & .06$\to$.04 & .01$\to$.04 & .47$\to$.03 & .37$\to$.03 & .04$\to$.04 & .09$\to$.04\\
+\midrule
+& \multicolumn{6}{c}{AUROC on generated traffic at $W{=}8$: prompt-fit $\to$ generation-fit standardisation}\\
+swap & 1.000 & 1.000 & .500 & .893$\to$\textbf{.999} & .903$\to$.976 & .909$\to$.979\\
+splice & .990 & .988 & .931 & .931$\to$.981 & .971$\to$.979 & .971$\to$.980\\
+gauss $\sigma{=}1$ & .786 & .696 & .974 & .974$\to$.957 & .965$\to$.955 & .964$\to$.954\\
+key-public $\varepsilon{=}0.5$ & .139 & .705 & .626 & .639$\to$\textbf{.784} & .676$\to$.747 & .662$\to$.664\\
+key-public $\varepsilon{=}2$ & .092 & .763 & .981 & .981$\to$.968 & .979$\to$.981 & .977$\to$.968\\
+KV transplant & 1.000 & 1.000 & .499 & .874$\to$.999 & .999 & .999\\
+KV delete-shift & .992 & .991 & .509 & .724$\to$.983 & .984$\to$.985 & .987\\
+\bottomrule
+\end{tabular}}
+\caption{Generation-time calibration, 3 seeds (stds $\le$0.01). Top: false-alarm rate on held-out
+generated clean windows when the 95\% threshold is set on prompt tokens vs on generated tokens.
+Bottom: AUROC generated-clean vs generated-corrupt; single detectors are threshold-free, the
+fused/max detectors depend on where the standardisation and fit were done.}\label{tab:gencal}
+\end{table*}
+
+\section{The scale ladder}\label{sec:armh}
+Frozen, forward-only GPT-2 (anchor) and Pythia 160m, 410m, 1.4b, 2.8b, 6.9b (fp16 from 410m),
+taps at $\mathrm{round}(0.25/0.5/0.75\cdot L)$ (GPT-2: layers 3/6/9 as above), heads of
+hidden 256/1024/4096 $\times$ 3 seeds, corruptions post-hoc on the cached residuals (identical
+to injecting at $m{=}\ell$), layer bracketing by re-forward for the rungs $\le$1.4b. Head-training
+corpus: 2M TinyStories tokens up to 410m, 1M TinyStories + 0.5M WikiText for 1.4b/2.8b, and
+0.45M for 6.9b --- a disk-budget compromise whose effect is measured below.
+
+\begin{table*}[t]\centering\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrcccccccc}
+\toprule
+rung & params & $d$ & tokens & floor h256 25/50/75\% & h4096 mid & swap 25/50/75\% & $|z|$ mid & splice & gauss2 & OOD & per-bit err\\
+\midrule
+gpt2 & 124M & 768 & 2M & 15.2 / 15.7 / 16.6 & 12.7 & .978 / .973 / .964 & .958 & .878 & .821 & .857 & .20--.25\\
+pythia-160m & 162M & 768 & 2M & 15.8 / 16.7 / 17.6 & 13.2 & .971 / .962 / .952 & .939 & .845 & .793 & .910 & .19--.26\\
+pythia-410m & 405M & 1024 & 2M & 15.6 / 16.5 / 17.6 & 13.1 & .973 / .965 / .952 & .943 & .843 & .779 & .920 & .19--.25\\
+pythia-1.4b & 1.4B & 2048 & 1.5M & 15.7 / 16.4 / 17.4 & 13.8 & .972 / .967 / .955 & .947 & .824 & .742 & .920 & .20--.26\\
+pythia-2.8b & 2.8B & 2560 & 1.5M & 15.5 / 16.2 / 17.6 & 14.0 & .974 / .968 / .953 & .949 & .825 & .738 & .921 & .19--.26\\
+pythia-6.9b & 6.9B & 4096 & 0.45M & 16.1 / 17.6 / 19.1 & 16.0 & .971 / .956 / .937 & .923 & .779 & .687 & .906 & .22--.28\\
+\bottomrule
+\end{tabular}}
+\caption{Scale ladder, 3 seeds (stds $\le0.2$ bit, $\le0.005$ AUROC). Mid-depth hidden-256 head unless
+noted. Mahalanobis is 0.500 on swap and 0.996--0.999 on OOD at every rung; untrained heads
+0.50; layer bracketing is a clean step ($m\le\ell$ fires, $m>\ell$ 0.50) on every rung tested.}
+\label{tab:scale}
+\end{table*}
+
+Table~\ref{tab:scale}, Fig.~\ref{fig:scale}. \textbf{There is no wall.} From 124M to 2.8B
+parameters at matched depth fractions the clean floor is flat at 15.2--16.6 bits (hidden 256)
+and 12.7--14.0 (hidden 4096); swap AUROC is 0.96--0.97 at every rung and depth; per-bit error
+stays uniform (0.19--0.26 over the 64 bits, no unlearnable bit); Mahalanobis stays 0.500 on swap;
+bracketing stays exact. Two mild trends are real: the floor rises with depth fraction at every
+rung (25\%$\to$75\%: $+1.4$ to $+3$ bits), and off-manifold detection weakens with $d$ (splice
+0.88$\to$0.78, gauss $\sigma{=}2$ 0.82$\to$0.69, both in median-$|h|$ units) --- exactly the
+corruptions the Mahalanobis companion owns (0.999--1.000). The kill criterion (floor $\to$ 32
+or swap $\le0.8$ by 2.8B) is not approached. \textbf{Overhead:} re-timed on the idle GPU at
+$1\times128$ (fp16 for Pythia $\ge$410M), the LM forward costs 0.022 (GPT-2) / 0.024 / 0.037 /
+0.063 / 0.115 / 0.240 (6.9B) ms/token and the hidden-256 head 1.0 / 0.9 / 1.2 / 0.4 / 0.24 /
+0.14\% of it (hidden 4096: 2.9 $\to$ 0.8\%): the head is a fixed $\approx$0.2--0.4\,$\mu$s/token
+and its share shrinks with model size (the 7--11\% of Section~\ref{sec:armf} was MPS-specific).
+
+\paragraph{The 6.9B corpus control.} The 6.9B rung is 1--2 bits higher and 0.01--0.02 lower on
+swap. A symmetric control --- every lower rung re-dumped and re-headed on exactly the 6.9B corpus
+(0.3M TinyStories + 0.15M WikiText training tokens, 100k eval, 100k code; 3 seeds $\times$ hidden
+$\{256,1024,4096\}$) --- gives mid-depth hidden-256 floors of GPT-2 17.9, 160M 19.4, 410M 19.1,
+1.4B 17.7, 2.8B 17.4, \textbf{6.9B 17.6}; swap 0.953 / 0.929 / 0.934 / 0.953 / 0.956 /
+\textbf{0.956}; splice 0.80 / 0.74 / 0.74 / 0.78 / 0.78 / \textbf{0.78} (open circles in
+Fig.~\ref{fig:scale}). The 6.9B rung is inside the small-corpus band, at its good end and
+indistinguishable from 2.8B, so the gap was corpus size, not scale. Two side findings: the
+corpus penalty shrinks with model size ($+2.2/+2.7/+2.6$ bits at $\le$410M vs $+1.2$ at 1.4B/2.8B
+for $4\times$ fewer tokens) --- the head on a larger model's residual stream is more
+sample-efficient --- and the ``splice weakens with $d$'' trend was partly corpus at the top rung
+(0.78 at 1.4B, 2.8B and 6.9B alike on matched data).
+
+
+
+\paragraph{Is the floor a property of the stream or of our reader?} It is a fair
+objection to the flat-floor claim, and it is stated here rather than in a trailing
+limitation because the answer changes what the row means. Head capacity moves the floor
+substantially while corpus size barely does, and per-bit error is uniform --- the
+signature of a global capacity constraint rather than of intrinsically hard bits. If
+the head were the binding constraint, ``flat from 124M to 6.9B'' would be a fact about
+our 213k-parameter reader, not about the models. The discriminating test is to compare
+\emph{asymptotes} in reader capacity rather than fixed-capacity floors, and it needs
+matched corpora or the corpus confound returns through the back door. Both conditions
+are already satisfied by the control above: every rung was re-headed at hidden
+256/1024/4096 on the same 0.45M-token corpus. At the largest reader the mid-depth floor
+is \textbf{15.3--16.3 bits at every scale with no monotone trend} (Spearman $+0.09$
+against $\log$ parameters), and sensitivity to reader capacity \emph{falls} with model
+size (0.63 bits per capacity doubling at GPT-2 to 0.40 at 6.9B; Spearman $-0.77$).
+Larger models need \emph{less} reader capacity to reach their floor --- the opposite of
+the failure mode the objection describes --- so the scale claim stands as written. We
+do not fit a saturating extrapolation: three capacity points are too few, and two of
+six rungs return non-physical asymptotes when one is attempted. The largest-reader
+floor is the proxy and the slope is the trend.
+
+\begin{figure*}[t]\centering
+\includegraphics[width=\textwidth]{p4_fig7_scale.png}\\
+\includegraphics[width=0.7\textwidth]{p4_fig8_scale_bits.png}
+\caption{Scale ladder. Top: clean floor (open circles: the 0.45M-token corpus control), detection AUROC and head overhead vs parameters. Bottom:
+per-bit error range and floor vs $d_{\rm model}$.}\label{fig:scale}
+\end{figure*}
+
+\section{Deployment: a windowed integrity monitor}
+\label{sec:deploy}
+The per-token operating point in Table~\ref{tab:armf} --- FPR $0.09$--$0.14$ at 95\%
+recall --- is too noisy to alarm on: a serving stack emits millions of tokens per hour
+and one false alarm in eight is an alarm nobody reads. But the failures this instrument
+is for are not single tokens. A swapped cache, a replayed prefix, a patched activation
+or a vector corrupted in transit between servers touches a run of tokens, and the clean
+floor's spread ($16\pm5$ bits) averages away over a window while the corrupted mean
+($\sim$32) does not. Table~\ref{tab:window} measures this: the syndrome is averaged over
+$W$ consecutive tokens (non-overlapping windows on positions $\ge32$), and we report
+per-window AUROC, FPR at 95\% and at 99\% recall, for the MAC head, for windowed
+Mahalanobis on the same activations, and for the companion score
+$\max(z_{\rm MAC}, z_{\rm Mahal})$ with each $z$-scored on clean windows.
+
+\begin{table*}[t]
+\centering\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ll ccc ccc ccc}
+\toprule
+& & \multicolumn{3}{c}{MAC head} & \multicolumn{3}{c}{Mahalanobis} & \multicolumn{3}{c}{companion $\max(z,z)$}\\
+corruption & $W$ & AUROC & FPR@95 & FPR@99 & AUROC & FPR@95 & FPR@99 & AUROC & FPR@95 & FPR@99\\
+\midrule
+resid swap (L6) & 1 & .973 & .107 & .274 & .500 & .950 & .990 & .954 & .166 & .368\\
+ & 8 & .9999 & \textbf{.000} & .0002 & .500 & .950 & .990 & .999 & .003 & .006\\
+ & 32 & 1.000 & \textbf{.000} & \textbf{.000} & .500 & .950 & .990 & 1.000 & .000 & .000\\
+resid splice & 1 / 8 / 32 & .88/.985/.9998 & .48/.045/.0003 & .76/.44/.003 & .96/.999/1.0 & .17/.003/.000 & .41/.007/.000 & .95/.999/1.0 & .18/.003/.000 & .39/.007/.000\\
+steer $\times3$ & 1 / 8 / 32 & .89/.98/.9998 & .42/.05/.0002 & .70/.57/.005 & 1.0/1.0/1.0 & .000 & .000 & 1.0/1.0/1.0 & .000 & .000\\
+gauss $\sigma{=}2$ & 1 / 8 / 32 & .82/.96/.994 & .63/.18/.015 & .90/.90/.18 & 1.0/1.0/1.0 & .000 & .000 & 1.0/1.0/1.0 & .000 & .000\\
+OOD (code) & 1 / 8 / 32 & .88/.985/.9999 & .46/.08/.0001 & .68/.26/.002 & .997/1.0/1.0 & .005/.000/.000 & .065/.000/.000 & .996/1.0/1.0 & .006/.000/.000 & .11/.000/.000\\
+\midrule
+KV transplant (L6) & 1 / 8 / 32 & .967/.9999/1.0 & .135/\textbf{.000}/\textbf{.000} & .31/.0004/.000 & .500 & .950 & .990 & .943/.999/1.0 & .21/.003/.000 & .42/.008/.0002\\
+KV stale replay & 1 / 8 / 32 & .967/.9999/1.0 & .135/.000/.000 & .31/.0004/.000 & .500 & .950 & .990 & .943/.999/1.0 & .21/.003/.000 & .42/.008/.0002\\
+KV position swap & 1 / 8 / 32 & .963/1.0/1.0 & .163/.000/.000 & .37/.0004/.000 & .500 & .950 & .990 & .939/.999/1.0 & .21/.004/.000 & .48/.008/.0002\\
+KV delete-shift & 1 / 8 / 32 & .878/.990/1.0 & .43/.04/.0001 & .73/.23/.0008 & .500 & .950 & .990 & .835/.975/.999 & .51/.09/.005 & .76/.33/.012\\
+\bottomrule
+\end{tabular}}
+\caption{Windowed monitor, 3 seeds (stds $\le0.005$ at $W\ge8$). Windows are
+non-overlapping means of $W$ per-token scores over the corrupted span. Mahalanobis is
+$0.500$ on every replacement-type corruption at any $W$; the MAC is $0.500$ on nothing
+but is weakest on off-manifold noise at small $W$; the companion covers both.}
+\label{tab:window}
+\end{table*}
+
+The answer is unambiguous. At $W{=}8$ the MAC head's false-positive rate on residual swap
+and on every KV move/replay corruption is $0.000$ at 95\% recall ($0.0002$--$0.0004$ at
+99\%); at $W{=}32$ it is $0.000$ at both recall levels for every corruption in the table
+except Gaussian noise ($0.015$/$0.18$), which the Mahalanobis companion catches at
+$0.000$ from $W{=}1$. The companion score is at or below $0.005$ FPR@95 on everything
+from $W{=}8$ and at $0.000$ on everything but KV delete-shift ($0.005$) at $W{=}32$.
+
+\paragraph{The product.} What these numbers support is \textbf{a windowed integrity
+monitor with a calibrated level and a Mahalanobis companion for catching a swapped
+cache, a replayed cache, a patched activation, or a corrupted vector in transit between
+servers at an alarm level that gives one false alarm at whatever the on-call team
+accepts.} Concretely: a MAC head per monitored layer (213k parameters, 3\,$\mu$s per
+token on a laptop GPU, $\le$1\% of the LM forward on a server GPU) and one for the KV cache (426k,
+6\,$\mu$s per cached token, amortised over reads); the per-token syndrome averaged over
+a window of 8--32 tokens; a threshold set once on the deployment's own clean traffic
+to the false-alarm budget the on-call team accepts (the floor is model- and
+domain-specific --- $15.5$ on TinyStories, $\sim$17 on greedy generations, higher on
+code --- and must be calibrated per model \emph{and per decoding setting}, one pass over
+a few hundred generated sequences, Section~\ref{sec:armj}); a Mahalanobis score on the
+same activations, $\max$-combined after $z$-scoring, for the off-manifold corruptions the
+MAC is weak on; and the per-token trace kept for forensics, because when the window
+alarm fires the head localizes the layer and the token (Section~\ref{sec:armf}).
+
+\section{Why it works}\label{sec:why}
+A 213k-parameter head, reading a frozen residual stream through no gradients of its
+own, predicts roughly 75--80\% of the bits of a random causal function of the prefix.
+That was the original surprise of this instrument, and earlier drafts explained it by
+calling the whole thing ``the syndrome.'' \textbf{Two distinct mechanisms are doing
+two distinct jobs, and conflating them hides both the reason it works and the two
+different ways it can fail.}
+
+\paragraph{Reading is despreading.} We use \emph{channel}, \emph{sender} and \emph{reader} in the
+senses defined in \citep{paper1} and do not redefine them here. The companion census measures, on
+the same object this seal reads, that a single feature's signal-to-interference ratio
+along its own direction is $-28$ to $-30$\,dB --- far below anything a coordinate-wise
+reader could pick up --- while correlating against the \emph{full} direction recovers
+the feature's presence at AUROC 0.993--0.995, against 0.89--0.92 for the best single
+coordinate. The residual stream is a spread code: information about the prefix is
+smeared across many coordinates at low per-coordinate amplitude, so a reader that
+correlates across a whole direction collects a processing gain that no single
+coordinate offers. Our head does exactly this, 64 times in parallel, once per bit.
+
+Two consequences follow, and the second corrects the framing this paper used to carry.
+First, the floor should move with \emph{reader capacity} rather than with the
+difficulty of any particular bit --- which is what Section~\ref{sec:armh} measures
+(capacity moves the floor by ${\approx}2.5$ bits from hidden 256 to 4096; per-bit
+error is uniform, with no unlearnable bit). Second: \textbf{``the stream carries a
+hash'' was always the wrong framing.} The key is not cryptographic. It is the sign
+pattern of a frozen random \emph{smooth} function of the prefix, and random smooth
+functions of linearly-encoded prefix statistics are shallow-decodable in a way a real
+hash would not be. The right statement is that \emph{the stream carries prefix
+information redundantly enough that random projections of it survive} --- which is a
+claim about the stream, and is the one the census supports.
+
+\paragraph{Catching is authentication.} A swapped residual state is not an anomalous
+state. It is a perfectly valid state --- for a \emph{different} prefix. Nothing about
+it is out of distribution, and this is measurable rather than rhetorical: Mahalanobis
+distance sits at 0.500 on swap at every rung of the scale ladder, exactly chance, while
+the head detects it at 0.96--0.98. The head is not noticing that the state is strange.
+It is noticing that the bits despread out of the state disagree with the key computed
+from \emph{this} input. That is authentication, in the ordinary sense: a message
+authentication code fails not because the message is malformed but because it does not
+match the context it is presented in. It is also the cleanest available statement of
+what the instrument certifies --- \emph{this activation belongs to this prefix} --- and
+of what it does not.
+
+\paragraph{They fail in different ways, which is the practical reason to keep them
+apart.} Despreading degrades with reader capacity: a smaller head collects less
+processing gain, the floor rises, and detection of small perturbations goes first.
+Authentication degrades when an adversary can compute the key: the state is still
+being read perfectly, and the check is still being computed correctly, but the
+comparison has stopped being informative. Section~\ref{sec:limits}'s adaptive-attack
+results are an authentication failure, not a despreading failure, and no amount of
+extra head capacity would address them.
+
+\section{Limitations}\label{sec:limits}
+\paragraph{Census results and intervention results, kept apart.} Sections~\ref{sec:armf}
+through \ref{sec:armh} and the monitor are \emph{measurements on frozen models}: forward
+passes, cached activations, and a small head trained outside the model. They cost one
+activation dump per model and they are expected to replicate at any scale --- which is
+why the scale ladder could be run at all. Section~\ref{sec:lessons}'s design lessons come
+from \emph{small systems trained from scratch}, and they are not evidence about language
+models; they are where the construction came from. The distinction is not a hedge in a
+limitations list: it determines which rows of this paper a reader may quote about a
+frontier model.
+
+\paragraph{Per-model datasheets do not transfer.} Every calibrated constant here --- the
+clean floor, the detection thresholds, the windowed monitor's level, the Mahalanobis
+companion's operating point --- was measured on a specific model with a specific
+head-training corpus. Cross-domain covariance distance on this class of stream is
+0.73--0.87 against a null of 0.05 \citep{paper1}, so channel statistics do not carry
+across corpora, let alone across models. Every deployment needs its own calibration pass;
+none of the numbers in this paper are defaults.
+
+
+It does not detect prompt injection or any attack that lives in the input
+text --- those produce valid states --- nor small adversarial perturbations of the
+activations, nor an adversary who holds the key. It is a seal on the channel between
+the model's own computations, not a judgment about what the model computed. Beyond
+that paragraph: every corruption here is synthetic, applied to cached activations or
+cache tensors; the monitor has not been run on a served model under KV-cache eviction,
+quantisation or speculative decoding, so the base rate at which its calibrated level
+holds in production is unmeasured. The certificate is statistical (a floor of 15--17
+wrong bits, not zero), and the key must stay secret: with the key public an adaptive
+attacker in activation space drives the syndrome below the floor at every budget, and
+the two-sided statistic recovers only part of it (0.72--0.84 at $W{=}32$). Whether a
+model fine-tuned against the head can carry information through a checked code is the
+subject of a companion paper that publishes after this one: on a small recurrent testbed it can,
+through spare code capacity the seal does not see.
+
+\paragraph{Reproducibility.} All numbers are regenerated by \texttt{uv sync \&\& uv run
+pytest} and then, in order: \texttt{uv run python -m ecc\_repr.eval lam0 systematic}
+and \texttt{uv run python -m ecc\_repr.eval lam0 lam10 3b} (Table~\ref{tab:r3});
+\texttt{uv run python -m ecc\_repr.arm\_b} and \texttt{uv run python -m ecc\_repr.arm\_a}
+(Table~\ref{tab:mac}, sidebar); \texttt{uv run python -m ecc\_repr.arm\_f cache \&\& uv run
+python -m ecc\_repr.arm\_f} and \texttt{uv run python -m ecc\_repr.arm\_f\_extras}
+(Table~\ref{tab:armf}, Fig.~\ref{fig:loc}); \texttt{uv run python -m ecc\_repr.arm\_e}
+(Table~\ref{tab:ef}); \texttt{uv run python -m ecc\_repr.kv\_mac} (Table~\ref{tab:armg});
+\texttt{uv run python -m ecc\_repr.windowed} (Table~\ref{tab:window}); \texttt{uv run
+python -m ecc\_repr.fuse resid kv} and \texttt{uv run python -m ecc\_repr.gencal}
+(Tables~\ref{tab:fuse}, \ref{tab:gencal}); \texttt{uv run python -m ecc\_repr.scale rung
+--rung <r>} for each rung, \texttt{uv run python -m ecc\_repr.scale rung --rung <r>
+--corpus small} for the corpus control, then \texttt{uv run python -m ecc\_repr.scale
+time \&\& uv run python -m ecc\_repr.scale agg \&\& uv run python -m ecc\_repr.scale
+corpus} (Table~\ref{tab:scale}); figures by \texttt{uv run python -m
+ecc\_repr.plots\_papers --paper 1}. Results are JSON files under
+\texttt{artifacts/results/}, listed in \texttt{paper1/paper1\_manifest.json}; a test
+(\texttt{tests/test\_paper\_manifests.py}) checks that every number in this document
+appears in one of them. Seeds $\{0,1,2\}$ everywhere except Table~\ref{tab:r3} (seed 0;
+its 3-seed replication is in the repository); error bars are one standard deviation
+over seeds.
+
+\begin{thebibliography}{2}\small
+\bibitem{paper1} I.~Amies. Attention as a Multiple-Access Channel. Companion paper,
+this program, published before this one. Supplies the despreading measurement used in
+Section~\ref{sec:why} and the wire datasheet whose constants Section~\ref{sec:limits}
+warns do not transfer.
+\end{thebibliography}
+
+\end{document}

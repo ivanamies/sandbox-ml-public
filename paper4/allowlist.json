@@ -1,0 +1,7 @@
+[
+ {"number": "-0.13", "reason": "derived: MAC encoder accuracy 98.96 minus systematic baseline 99.09 (both backed by arm_b.json / v1 multiseed)"},
+ {"number": "3090", "reason": "hardware model name (RTX 3090 Ti), not a result"},
+ {"number": "1024", "reason": "head hidden size (design constant > 300)"},
+ {"number": "4096", "reason": "head hidden size (design constant > 300)"},
+ {"number": "-.03", "reason": "derived: E minus F swap AUROC, .944 - .973 (both backed by arm_e.json / arm_f_agg.json)"}
+]

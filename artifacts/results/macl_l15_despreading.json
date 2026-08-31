@@ -1,0 +1,3704 @@
+{
+ "taps": {
+  "3": {
+   "per_seed": [
+    {
+     "seed": 0,
+     "n": 55,
+     "snr_db_median": -28.375537813475486,
+     "snr_db_p90": -17.479451866219406,
+     "auroc_correlate_median": 0.9933604390322064,
+     "auroc_best_single_median": 0.9337609523125538,
+     "despread_gain_median": 0.053102161737586306,
+     "frac_despread_positive": 0.9636363636363636,
+     "rows": [
+      {
+       "feature": 368,
+       "snr_db": -37.51705173220235,
+       "auroc_correlate": 0.9993844259772238,
+       "auroc_best_single_coord": 0.927670052323792,
+       "despread_gain": 0.0717143736534318
+      },
+      {
+       "feature": 1263,
+       "snr_db": -21.41762148836285,
+       "auroc_correlate": 0.9987890551698255,
+       "auroc_best_single_coord": 0.8976561033965097,
+       "despread_gain": 0.10113295177331583
+      },
+      {
+       "feature": 1750,
+       "snr_db": -27.956936693469515,
+       "auroc_correlate": 0.9951059688581315,
+       "auroc_best_single_coord": 0.9211267301038062,
+       "despread_gain": 0.07397923875432533
+      },
+      {
+       "feature": 2148,
+       "snr_db": -37.28051998828906,
+       "auroc_correlate": 0.9986850756081526,
+       "auroc_best_single_coord": 0.9340894148586456,
+       "despread_gain": 0.06459566074950696
+      },
+      {
+       "feature": 3200,
+       "snr_db": -32.2461222653323,
+       "auroc_correlate": 0.9992077863286555,
+       "auroc_best_single_coord": 0.8756224535989136,
+       "despread_gain": 0.12358533272974193
+      },
+      {
+       "feature": 3381,
+       "snr_db": -41.60730479008063,
+       "auroc_correlate": 0.9108317580340265,
+       "auroc_best_single_coord": 0.8210396975425331,
+       "despread_gain": 0.08979206049149335
+      },
+      {
+       "feature": 3464,
+       "snr_db": -22.68096832345155,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9980747380381265,
+       "despread_gain": 0.0019252619618734812
+      },
+      {
+       "feature": 4531,
+       "snr_db": -23.897778853651385,
+       "auroc_correlate": 0.9955831037649219,
+       "auroc_best_single_coord": 0.8145270890725436,
+       "despread_gain": 0.1810560146923783
+      },
+      {
+       "feature": 5539,
+       "snr_db": -35.06891050005762,
+       "auroc_correlate": 0.9983212809917356,
+       "auroc_best_single_coord": 0.9682621671258035,
+       "despread_gain": 0.030059113865932074
+      },
+      {
+       "feature": 5668,
+       "snr_db": -32.346910987420216,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9848484848484849,
+       "despread_gain": 0.015151515151515138
+      },
+      {
+       "feature": 5880,
+       "snr_db": -33.61962857312002,
+       "auroc_correlate": 0.9967236930941359,
+       "auroc_best_single_coord": 0.9711250964506173,
+       "despread_gain": 0.0255985966435186
+      },
+      {
+       "feature": 5931,
+       "snr_db": -21.208273724896557,
+       "auroc_correlate": 0.9929364979169297,
+       "auroc_best_single_coord": 0.9906287084964019,
+       "despread_gain": 0.002307789420527784
+      },
+      {
+       "feature": 6672,
+       "snr_db": -30.975485868488605,
+       "auroc_correlate": 0.9772042078567361,
+       "auroc_best_single_coord": 0.7619170850370064,
+       "despread_gain": 0.21528712281972973
+      },
+      {
+       "feature": 7470,
+       "snr_db": -19.34790376027379,
+       "auroc_correlate": 0.9933604390322064,
+       "auroc_best_single_coord": 0.8329093895209101,
+       "despread_gain": 0.1604510495112963
+      },
+      {
+       "feature": 8372,
+       "snr_db": -28.375537813475486,
+       "auroc_correlate": 0.9961465657111953,
+       "auroc_best_single_coord": 0.9902312060573283,
+       "despread_gain": 0.005915359653867025
+      },
+      {
+       "feature": 8610,
+       "snr_db": -31.07056285183782,
+       "auroc_correlate": 0.9057994461059572,
+       "auroc_best_single_coord": 0.8194192886352539,
+       "despread_gain": 0.08638015747070327
+      },
+      {
+       "feature": 9071,
+       "snr_db": -28.797080783288873,
+       "auroc_correlate": 0.9994341330918968,
+       "auroc_best_single_coord": 0.9632469443186963,
+       "despread_gain": 0.036187188773200485
+      },
+      {
+       "feature": 9178,
+       "snr_db": -30.233620285916764,
+       "auroc_correlate": 0.9957019109964953,
+       "auroc_best_single_coord": 0.8949943794220724,
+       "despread_gain": 0.10070753157442291
+      },
+      {
+       "feature": 10889,
+       "snr_db": -19.785943859407094,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9973970122227253,
+       "despread_gain": 0.0026029877772747456
+      },
+      {
+       "feature": 10921,
+       "snr_db": -31.30060594040637,
+       "auroc_correlate": 0.9771707124389544,
+       "auroc_best_single_coord": 0.9337609523125538,
+       "despread_gain": 0.04340976012640052
+      },
+      {
+       "feature": 10945,
+       "snr_db": -28.38868913025744,
+       "auroc_correlate": 0.9975976685570258,
+       "auroc_best_single_coord": 0.8452662255828607,
+       "despread_gain": 0.15233144297416512
+      },
+      {
+       "feature": 11336,
+       "snr_db": -22.547516005248006,
+       "auroc_correlate": 0.9994115363148827,
+       "auroc_best_single_coord": 0.9989868717998496,
+       "despread_gain": 0.00042466451503309077
+      },
+      {
+       "feature": 13218,
+       "snr_db": -29.962323195556447,
+       "auroc_correlate": 0.9973650147928994,
+       "auroc_best_single_coord": 0.9651442307692307,
+       "despread_gain": 0.03222078402366868
+      },
+      {
+       "feature": 13392,
+       "snr_db": -43.52009018251592,
+       "auroc_correlate": 0.96798619818275,
+       "auroc_best_single_coord": 0.9381190592072819,
+       "despread_gain": 0.02986713897546811
+      },
+      {
+       "feature": 13955,
+       "snr_db": -15.542752767721232,
+       "auroc_correlate": 0.9998979591836735,
+       "auroc_best_single_coord": 0.9945918367346939,
+       "despread_gain": 0.0053061224489796555
+      },
+      {
+       "feature": 14351,
+       "snr_db": -23.40232246587049,
+       "auroc_correlate": 0.9959319526627219,
+       "auroc_best_single_coord": 0.9972879684418146,
+       "despread_gain": -0.001356015779092612
+      },
+      {
+       "feature": 14745,
+       "snr_db": -13.488192245651371,
+       "auroc_correlate": 0.997229916897507,
+       "auroc_best_single_coord": 0.907202216066482,
+       "despread_gain": 0.09002770083102496
+      },
+      {
+       "feature": 15064,
+       "snr_db": -31.935608250285966,
+       "auroc_correlate": 0.9990234375,
+       "auroc_best_single_coord": 0.95361328125,
+       "despread_gain": 0.04541015625
+      },
+      {
+       "feature": 15125,
+       "snr_db": -30.271284161710973,
+       "auroc_correlate": 0.9726549396879068,
+       "auroc_best_single_coord": 0.8827872371828416,
+       "despread_gain": 0.08986770250506526
+      },
+      {
+       "feature": 15667,
+       "snr_db": -23.313104947887958,
+       "auroc_correlate": 0.9685041002922047,
+       "auroc_best_single_coord": 0.6885031576962956,
+       "despread_gain": 0.28000094259590913
+      },
+      {
+       "feature": 15853,
+       "snr_db": -38.243137429313606,
+       "auroc_correlate": 0.9865816326530612,
+       "auroc_best_single_coord": 0.9066836734693877,
+       "despread_gain": 0.07989795918367348
+      },
+      {
+       "feature": 16097,
+       "snr_db": -44.37461108368899,
+       "auroc_correlate": 0.9595355383532724,
+       "auroc_best_single_coord": 0.8199240457181683,
+       "despread_gain": 0.13961149263510408
+      },
+      {
+       "feature": 16122,
+       "snr_db": -28.30991303009106,
+       "auroc_correlate": 0.9810671494313234,
+       "auroc_best_single_coord": 0.9294993159298517,
+       "despread_gain": 0.05156783350147176
+      },
+      {
+       "feature": 16382,
+       "snr_db": -23.107474265927802,
+       "auroc_correlate": 0.9819420415224913,
+       "auroc_best_single_coord": 0.916955017301038,
+       "despread_gain": 0.0649870242214533
+      },
+      {
+       "feature": 16505,
+       "snr_db": -27.174882579642393,
+       "auroc_correlate": 0.9897556831063057,
+       "auroc_best_single_coord": 0.9592256059190328,
+       "despread_gain": 0.030530077187272853
+      },
+      {
+       "feature": 16604,
+       "snr_db": -28.29029918032748,
+       "auroc_correlate": 0.9943555555555557,
+       "auroc_best_single_coord": 0.8155111111111111,
+       "despread_gain": 0.17884444444444458
+      },
+      {
+       "feature": 16989,
+       "snr_db": -30.465984608196024,
+       "auroc_correlate": 0.9846212648268873,
+       "auroc_best_single_coord": 0.8212071727348468,
+       "despread_gain": 0.1634140920920405
+      },
+      {
+       "feature": 17122,
+       "snr_db": -41.30836952294095,
+       "auroc_correlate": 0.99609375,
+       "auroc_best_single_coord": 0.9446855709876543,
+       "despread_gain": 0.051408179012345734
+      },
+      {
+       "feature": 17125,
+       "snr_db": -27.921784935573093,
+       "auroc_correlate": 0.9925632017512888,
+       "auroc_best_single_coord": 0.9419731127745216,
+       "despread_gain": 0.0505900889767672
+      },
+      {
+       "feature": 17808,
+       "snr_db": -45.459601440779664,
+       "auroc_correlate": 0.9705119321254733,
+       "auroc_best_single_coord": 0.941351321660357,
+       "despread_gain": 0.02916061046511631
+      },
+      {
+       "feature": 17867,
+       "snr_db": -13.134312684045328,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9887543252595156,
+       "despread_gain": 0.011245674740484435
+      },
+      {
+       "feature": 17986,
+       "snr_db": -29.321399642932953,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9701052295918368,
+       "despread_gain": 0.02989477040816324
+      },
+      {
+       "feature": 18667,
+       "snr_db": -10.09500251687561,
+       "auroc_correlate": 0.9987450515242057,
+       "auroc_best_single_coord": 0.9907048731538619,
+       "despread_gain": 0.008040178370343765
+      },
+      {
+       "feature": 19108,
+       "snr_db": -23.972341484367746,
+       "auroc_correlate": 0.9667804444444446,
+       "auroc_best_single_coord": 0.784,
+       "despread_gain": 0.18278044444444452
+      },
+      {
+       "feature": 19158,
+       "snr_db": -26.712050433200794,
+       "auroc_correlate": 0.9809408395950217,
+       "auroc_best_single_coord": 0.7907950168874823,
+       "despread_gain": 0.19014582270753932
+      },
+      {
+       "feature": 19631,
+       "snr_db": -20.70178571260748,
+       "auroc_correlate": 0.988114825049032,
+       "auroc_best_single_coord": 0.8829102657275186,
+       "despread_gain": 0.1052045593215134
+      },
+      {
+       "feature": 20158,
+       "snr_db": -11.703282171953074,
+       "auroc_correlate": 0.993575138504155,
+       "auroc_best_single_coord": 0.965417243767313,
+       "despread_gain": 0.02815789473684205
+      },
+      {
+       "feature": 20485,
+       "snr_db": -23.834954201384477,
+       "auroc_correlate": 0.9927611245816543,
+       "auroc_best_single_coord": 0.939658962844068,
+       "despread_gain": 0.053102161737586306
+      },
+      {
+       "feature": 20765,
+       "snr_db": -25.729829506548803,
+       "auroc_correlate": 0.9914683827972116,
+       "auroc_best_single_coord": 0.9403384240095952,
+       "despread_gain": 0.05112995878761639
+      },
+      {
+       "feature": 21044,
+       "snr_db": -30.19179244384449,
+       "auroc_correlate": 0.9874614197530864,
+       "auroc_best_single_coord": 0.8140432098765432,
+       "despread_gain": 0.17341820987654322
+      },
+      {
+       "feature": 21278,
+       "snr_db": -16.233817270183156,
+       "auroc_correlate": 0.9731805293005672,
+       "auroc_best_single_coord": 0.974952741020794,
+       "despread_gain": -0.0017722117202267906
+      },
+      {
+       "feature": 23180,
+       "snr_db": -39.36736701636466,
+       "auroc_correlate": 0.9914127066115703,
+       "auroc_best_single_coord": 0.9238442665289256,
+       "despread_gain": 0.06756844008264473
+      },
+      {
+       "feature": 24031,
+       "snr_db": -23.572010934505087,
+       "auroc_correlate": 0.975178385743483,
+       "auroc_best_single_coord": 0.7440478324787551,
+       "despread_gain": 0.23113055326472798
+      },
+      {
+       "feature": 24395,
+       "snr_db": -38.22565426185974,
+       "auroc_correlate": 0.975206611570248,
+       "auroc_best_single_coord": 0.8379247015610652,
+       "despread_gain": 0.13728191000918277
+      },
+      {
+       "feature": 24406,
+       "snr_db": -44.18721652611243,
+       "auroc_correlate": 0.9907922136713445,
+       "auroc_best_single_coord": 0.9709959257582617,
+       "despread_gain": 0.019796287913082855
+      }
+     ]
+    },
+    {
+     "seed": 1,
+     "n": 64,
+     "snr_db_median": -27.082467350646603,
+     "snr_db_p90": -15.859368204095787,
+     "auroc_correlate_median": 0.9948316445359541,
+     "auroc_best_single_median": 0.9353592797581036,
+     "despread_gain_median": 0.05900775673895281,
+     "frac_despread_positive": 0.984375,
+     "rows": [
+      {
+       "feature": 108,
+       "snr_db": -32.63031181406436,
+       "auroc_correlate": 0.9981921487603306,
+       "auroc_best_single_coord": 0.996771694214876,
+       "despread_gain": 0.0014204545454545858
+      },
+      {
+       "feature": 495,
+       "snr_db": -26.19876464594487,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.953798185941043,
+       "despread_gain": 0.04620181405895696
+      },
+      {
+       "feature": 696,
+       "snr_db": -42.222024259440275,
+       "auroc_correlate": 0.9844045368620038,
+       "auroc_best_single_coord": 0.969281663516068,
+       "despread_gain": 0.015122873345935761
+      },
+      {
+       "feature": 1403,
+       "snr_db": -11.439443072210626,
+       "auroc_correlate": 0.9842827626918537,
+       "auroc_best_single_coord": 0.969429920728622,
+       "despread_gain": 0.014852841963231667
+      },
+      {
+       "feature": 1488,
+       "snr_db": -25.185914051946384,
+       "auroc_correlate": 0.9354257455316913,
+       "auroc_best_single_coord": 0.8184907135446614,
+       "despread_gain": 0.11693503198702992
+      },
+      {
+       "feature": 1731,
+       "snr_db": -26.917781479056263,
+       "auroc_correlate": 0.996732654792523,
+       "auroc_best_single_coord": 0.9888004216673945,
+       "despread_gain": 0.007932233125128585
+      },
+      {
+       "feature": 3288,
+       "snr_db": -36.627600088982376,
+       "auroc_correlate": 0.9992638663541855,
+       "auroc_best_single_coord": 0.9103569497025419,
+       "despread_gain": 0.08890691665164363
+      },
+      {
+       "feature": 3816,
+       "snr_db": -39.14307662726693,
+       "auroc_correlate": 0.9963,
+       "auroc_best_single_coord": 0.9957,
+       "despread_gain": 0.0005999999999999339
+      },
+      {
+       "feature": 4709,
+       "snr_db": -26.263885958883556,
+       "auroc_correlate": 0.9750096116878124,
+       "auroc_best_single_coord": 0.8912918108419838,
+       "despread_gain": 0.08371780084582858
+      },
+      {
+       "feature": 5057,
+       "snr_db": -31.86472321576398,
+       "auroc_correlate": 0.9981148045552477,
+       "auroc_best_single_coord": 0.942020621729763,
+       "despread_gain": 0.05609418282548473
+      },
+      {
+       "feature": 5154,
+       "snr_db": -34.74061433071228,
+       "auroc_correlate": 0.9958648393194707,
+       "auroc_best_single_coord": 0.9030009451795842,
+       "despread_gain": 0.0928638941398865
+      },
+      {
+       "feature": 5336,
+       "snr_db": -25.99020305458245,
+       "auroc_correlate": 0.9665422490814691,
+       "auroc_best_single_coord": 0.8943818852267801,
+       "despread_gain": 0.07216036385468905
+      },
+      {
+       "feature": 5485,
+       "snr_db": -34.18627629996127,
+       "auroc_correlate": 0.9934925305568131,
+       "auroc_best_single_coord": 0.9001810774105931,
+       "despread_gain": 0.09331145314622002
+      },
+      {
+       "feature": 5841,
+       "snr_db": -24.927845248119716,
+       "auroc_correlate": 0.9967901234567901,
+       "auroc_best_single_coord": 0.9522222222222222,
+       "despread_gain": 0.044567901234567886
+      },
+      {
+       "feature": 5880,
+       "snr_db": -33.61962857312002,
+       "auroc_correlate": 0.9967236930941359,
+       "auroc_best_single_coord": 0.9711250964506173,
+       "despread_gain": 0.0255985966435186
+      },
+      {
+       "feature": 6212,
+       "snr_db": -36.629818058893875,
+       "auroc_correlate": 0.9523012329931974,
+       "auroc_best_single_coord": 0.8250513747165533,
+       "despread_gain": 0.12724985827664403
+      },
+      {
+       "feature": 6282,
+       "snr_db": -34.61108250094259,
+       "auroc_correlate": 0.998070987654321,
+       "auroc_best_single_coord": 0.8981963734567902,
+       "despread_gain": 0.09987461419753085
+      },
+      {
+       "feature": 7336,
+       "snr_db": -47.94771892389434,
+       "auroc_correlate": 0.9827710463492636,
+       "auroc_best_single_coord": 0.9822980946804198,
+       "despread_gain": 0.0004729516688437574
+      },
+      {
+       "feature": 7394,
+       "snr_db": -15.858064211612284,
+       "auroc_correlate": 0.9934823303922474,
+       "auroc_best_single_coord": 0.9665663993317296,
+       "despread_gain": 0.026915931060517817
+      },
+      {
+       "feature": 7950,
+       "snr_db": -29.327517557221057,
+       "auroc_correlate": 0.9839415143015089,
+       "auroc_best_single_coord": 0.8164631150058352,
+       "despread_gain": 0.16747839929567365
+      },
+      {
+       "feature": 7978,
+       "snr_db": -19.300964075273917,
+       "auroc_correlate": 0.9856709069622646,
+       "auroc_best_single_coord": 0.8440743848385657,
+       "despread_gain": 0.1415965221236989
+      },
+      {
+       "feature": 8750,
+       "snr_db": -29.909421830672432,
+       "auroc_correlate": 0.9947597078046906,
+       "auroc_best_single_coord": 0.8854940407535563,
+       "despread_gain": 0.10926566705113427
+      },
+      {
+       "feature": 9081,
+       "snr_db": -29.402936216033126,
+       "auroc_correlate": 0.9942233091583741,
+       "auroc_best_single_coord": 0.8133749367515601,
+       "despread_gain": 0.18084837240681395
+      },
+      {
+       "feature": 9090,
+       "snr_db": -35.56930451365774,
+       "auroc_correlate": 0.9987470080166159,
+       "auroc_best_single_coord": 0.9997253390914502,
+       "despread_gain": -0.0009783310748343599
+      },
+      {
+       "feature": 9374,
+       "snr_db": -26.452105492090524,
+       "auroc_correlate": 0.999267578125,
+       "auroc_best_single_coord": 0.94970703125,
+       "despread_gain": 0.049560546875
+      },
+      {
+       "feature": 10268,
+       "snr_db": -22.13443733956561,
+       "auroc_correlate": 0.9087893198243142,
+       "auroc_best_single_coord": 0.6891307280225074,
+       "despread_gain": 0.2196585918018068
+      },
+      {
+       "feature": 10511,
+       "snr_db": -15.356808147087882,
+       "auroc_correlate": 0.9842630665470768,
+       "auroc_best_single_coord": 0.7701975270533146,
+       "despread_gain": 0.21406553949376228
+      },
+      {
+       "feature": 11039,
+       "snr_db": -17.934777614025744,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.991216,
+       "despread_gain": 0.008784000000000014
+      },
+      {
+       "feature": 11440,
+       "snr_db": -16.71609690961705,
+       "auroc_correlate": 0.9995903825636336,
+       "auroc_best_single_coord": 0.903416018899558,
+       "despread_gain": 0.09617436366407561
+      },
+      {
+       "feature": 12450,
+       "snr_db": -25.536299101520058,
+       "auroc_correlate": 0.9945104752192371,
+       "auroc_best_single_coord": 0.8535270146131029,
+       "despread_gain": 0.1409834606061342
+      },
+      {
+       "feature": 12490,
+       "snr_db": -35.040522629388846,
+       "auroc_correlate": 0.9975036982248521,
+       "auroc_best_single_coord": 0.9442030325443787,
+       "despread_gain": 0.053300665680473425
+      },
+      {
+       "feature": 12674,
+       "snr_db": -32.376338291088324,
+       "auroc_correlate": 0.9995748299319728,
+       "auroc_best_single_coord": 0.9549319727891157,
+       "despread_gain": 0.044642857142857095
+      },
+      {
+       "feature": 12922,
+       "snr_db": -30.503076419952336,
+       "auroc_correlate": 0.9999524375743163,
+       "auroc_best_single_coord": 0.9666825208085612,
+       "despread_gain": 0.03326991676575508
+      },
+      {
+       "feature": 12951,
+       "snr_db": -15.311674161005826,
+       "auroc_correlate": 0.999966406879871,
+       "auroc_best_single_coord": 0.9890150497178178,
+       "despread_gain": 0.010951357162053199
+      },
+      {
+       "feature": 13210,
+       "snr_db": -11.19033239726548,
+       "auroc_correlate": 0.9999728732638888,
+       "auroc_best_single_coord": 0.9945068359375,
+       "despread_gain": 0.0054660373263888395
+      },
+      {
+       "feature": 13639,
+       "snr_db": -24.891254336730807,
+       "auroc_correlate": 0.995233399079553,
+       "auroc_best_single_coord": 0.9423076923076923,
+       "despread_gain": 0.0529257067718607
+      },
+      {
+       "feature": 13994,
+       "snr_db": -37.00011408316949,
+       "auroc_correlate": 0.9909374999999999,
+       "auroc_best_single_coord": 0.94828125,
+       "despread_gain": 0.04265624999999995
+      },
+      {
+       "feature": 14013,
+       "snr_db": -27.247153222236943,
+       "auroc_correlate": 0.9592889627854663,
+       "auroc_best_single_coord": 0.9442760037165632,
+       "despread_gain": 0.015012959068903098
+      },
+      {
+       "feature": 14378,
+       "snr_db": -35.30328950750674,
+       "auroc_correlate": 0.8927151418144216,
+       "auroc_best_single_coord": 0.8054263233308306,
+       "despread_gain": 0.08728881848359094
+      },
+      {
+       "feature": 14864,
+       "snr_db": -24.741558964853873,
+       "auroc_correlate": 0.9703945839519174,
+       "auroc_best_single_coord": 0.8042194272477331,
+       "despread_gain": 0.16617515670418426
+      },
+      {
+       "feature": 15214,
+       "snr_db": -29.03725503188705,
+       "auroc_correlate": 0.9716796875,
+       "auroc_best_single_coord": 0.8938802083333334,
+       "despread_gain": 0.07779947916666663
+      },
+      {
+       "feature": 15445,
+       "snr_db": -13.325664421651243,
+       "auroc_correlate": 0.9988465899464348,
+       "auroc_best_single_coord": 0.951097368661132,
+       "despread_gain": 0.04774922128530279
+      },
+      {
+       "feature": 16036,
+       "snr_db": -21.380368547339547,
+       "auroc_correlate": 0.99948740746117,
+       "auroc_best_single_coord": 0.9145603498330672,
+       "despread_gain": 0.08492705762810282
+      },
+      {
+       "feature": 16531,
+       "snr_db": -30.554956839623312,
+       "auroc_correlate": 0.942028810835629,
+       "auroc_best_single_coord": 0.708553145087236,
+       "despread_gain": 0.23347566574839296
+      },
+      {
+       "feature": 16750,
+       "snr_db": -49.627975558963044,
+       "auroc_correlate": 0.9901380670611439,
+       "auroc_best_single_coord": 0.9367192636423406,
+       "despread_gain": 0.05341880341880334
+      },
+      {
+       "feature": 16956,
+       "snr_db": -27.699877161835985,
+       "auroc_correlate": 0.9949035812672176,
+       "auroc_best_single_coord": 0.9881726354453627,
+       "despread_gain": 0.00673094582185485
+      },
+      {
+       "feature": 17223,
+       "snr_db": -23.26173626843872,
+       "auroc_correlate": 0.998018763475322,
+       "auroc_best_single_coord": 0.9883310995862712,
+       "despread_gain": 0.009687663889050846
+      },
+      {
+       "feature": 17958,
+       "snr_db": -40.46291205119999,
+       "auroc_correlate": 0.9169951350470589,
+       "auroc_best_single_coord": 0.7755720393230965,
+       "despread_gain": 0.1414230957239624
+      },
+      {
+       "feature": 18183,
+       "snr_db": -21.956335700421317,
+       "auroc_correlate": 0.9997142857142857,
+       "auroc_best_single_coord": 0.9840979591836735,
+       "despread_gain": 0.015616326530612179
+      },
+      {
+       "feature": 18328,
+       "snr_db": -25.444567908744368,
+       "auroc_correlate": 0.9748453878333674,
+       "auroc_best_single_coord": 0.809259171518474,
+       "despread_gain": 0.16558621631489334
+      },
+      {
+       "feature": 18766,
+       "snr_db": -21.344859746225197,
+       "auroc_correlate": 0.9982331629656672,
+       "auroc_best_single_coord": 0.9765608879224139,
+       "despread_gain": 0.02167227504325331
+      },
+      {
+       "feature": 18916,
+       "snr_db": -34.20598473187003,
+       "auroc_correlate": 0.9868453679825431,
+       "auroc_best_single_coord": 0.9057602658202738,
+       "despread_gain": 0.08108510216226927
+      },
+      {
+       "feature": 19043,
+       "snr_db": -35.7145302113401,
+       "auroc_correlate": 0.9663361769249708,
+       "auroc_best_single_coord": 0.8708163443839291,
+       "despread_gain": 0.09551983254104168
+      },
+      {
+       "feature": 19415,
+       "snr_db": -23.639965355082715,
+       "auroc_correlate": 0.9985586234854286,
+       "auroc_best_single_coord": 0.9074703842169272,
+       "despread_gain": 0.0910882392685014
+      },
+      {
+       "feature": 19579,
+       "snr_db": -43.00733895805611,
+       "auroc_correlate": 0.9711057175490458,
+       "auroc_best_single_coord": 0.7861084049986563,
+       "despread_gain": 0.18499731255038954
+      },
+      {
+       "feature": 19775,
+       "snr_db": -32.074177931380206,
+       "auroc_correlate": 0.9808551189070669,
+       "auroc_best_single_coord": 0.8122820037105751,
+       "despread_gain": 0.16857311519649176
+      },
+      {
+       "feature": 21531,
+       "snr_db": -19.25809135420019,
+       "auroc_correlate": 0.997195753847348,
+       "auroc_best_single_coord": 0.9049176192047197,
+       "despread_gain": 0.09227813464262835
+      },
+      {
+       "feature": 22246,
+       "snr_db": -12.885537040363486,
+       "auroc_correlate": 0.9963053335330401,
+       "auroc_best_single_coord": 0.9343840028806192,
+       "despread_gain": 0.06192133065242089
+      },
+      {
+       "feature": 22260,
+       "snr_db": -15.86241085322396,
+       "auroc_correlate": 0.9992412316523629,
+       "auroc_best_single_coord": 0.9896548570191869,
+       "despread_gain": 0.00958637463317602
+      },
+      {
+       "feature": 22340,
+       "snr_db": -22.88930133511991,
+       "auroc_correlate": 0.9981619206397696,
+       "auroc_best_single_coord": 0.954528846798906,
+       "despread_gain": 0.04363307384086357
+      },
+      {
+       "feature": 22574,
+       "snr_db": -43.03090352738365,
+       "auroc_correlate": 0.9692893275143821,
+       "auroc_best_single_coord": 0.9363345566355882,
+       "despread_gain": 0.03295477087879395
+      },
+      {
+       "feature": 23313,
+       "snr_db": -28.335451079845036,
+       "auroc_correlate": 0.9837408949011446,
+       "auroc_best_single_coord": 0.7997528616024974,
+       "despread_gain": 0.1839880332986472
+      },
+      {
+       "feature": 24005,
+       "snr_db": -17.572470517976168,
+       "auroc_correlate": 0.9995763013068253,
+       "auroc_best_single_coord": 0.9875827288066474,
+       "despread_gain": 0.011993572500177851
+      },
+      {
+       "feature": 24086,
+       "snr_db": -26.901239934373905,
+       "auroc_correlate": 0.9922170172514752,
+       "auroc_best_single_coord": 0.8526534840772938,
+       "despread_gain": 0.13956353317418135
+      }
+     ]
+    },
+    {
+     "seed": 2,
+     "n": 56,
+     "snr_db_median": -27.451835082396038,
+     "snr_db_p90": -16.8948911918972,
+     "auroc_correlate_median": 0.9933414023985843,
+     "auroc_best_single_median": 0.8943256578947368,
+     "despread_gain_median": 0.08917119242096988,
+     "frac_despread_positive": 0.9821428571428571,
+     "rows": [
+      {
+       "feature": 37,
+       "snr_db": -32.84810845638725,
+       "auroc_correlate": 0.9022104760648488,
+       "auroc_best_single_coord": 0.7972226933247907,
+       "despread_gain": 0.10498778274005816
+      },
+      {
+       "feature": 433,
+       "snr_db": -20.65608696205193,
+       "auroc_correlate": 0.9983934750370737,
+       "auroc_best_single_coord": 0.9579478850363675,
+       "despread_gain": 0.04044559000070613
+      },
+      {
+       "feature": 720,
+       "snr_db": -40.11867626063562,
+       "auroc_correlate": 0.9644687012697706,
+       "auroc_best_single_coord": 0.8787034974381822,
+       "despread_gain": 0.08576520383158837
+      },
+      {
+       "feature": 941,
+       "snr_db": -22.097588153058155,
+       "auroc_correlate": 0.9586767654265984,
+       "auroc_best_single_coord": 0.9347293383827133,
+       "despread_gain": 0.023947427043885083
+      },
+      {
+       "feature": 2419,
+       "snr_db": -23.127262125004965,
+       "auroc_correlate": 0.9939910638811738,
+       "auroc_best_single_coord": 0.9642724308658375,
+       "despread_gain": 0.029718633015336282
+      },
+      {
+       "feature": 2426,
+       "snr_db": -33.228344316047654,
+       "auroc_correlate": 0.9840223524305555,
+       "auroc_best_single_coord": 0.8084038628472222,
+       "despread_gain": 0.17561848958333326
+      },
+      {
+       "feature": 2971,
+       "snr_db": -25.74611111733113,
+       "auroc_correlate": 0.9934099978996009,
+       "auroc_best_single_coord": 0.8615968283973955,
+       "despread_gain": 0.13181316950220545
+      },
+      {
+       "feature": 3002,
+       "snr_db": -23.180280225747975,
+       "auroc_correlate": 0.954483695652174,
+       "auroc_best_single_coord": 0.833796077504726,
+       "despread_gain": 0.120687618147448
+      },
+      {
+       "feature": 3067,
+       "snr_db": -25.3582520353907,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 1.0,
+       "despread_gain": 0.0
+      },
+      {
+       "feature": 3363,
+       "snr_db": -19.357298270672736,
+       "auroc_correlate": 0.9932728068975676,
+       "auroc_best_single_coord": 0.9676623916337008,
+       "despread_gain": 0.02561041526386676
+      },
+      {
+       "feature": 3757,
+       "snr_db": -29.498744135552467,
+       "auroc_correlate": 0.9533558970056732,
+       "auroc_best_single_coord": 0.8878300071592413,
+       "despread_gain": 0.06552588984643193
+      },
+      {
+       "feature": 4782,
+       "snr_db": -37.688634351274224,
+       "auroc_correlate": 0.9808618772301309,
+       "auroc_best_single_coord": 0.8292909850711242,
+       "despread_gain": 0.15157089215900665
+      },
+      {
+       "feature": 4830,
+       "snr_db": -30.597566075373116,
+       "auroc_correlate": 0.9952913198573128,
+       "auroc_best_single_coord": 0.873448275862069,
+       "despread_gain": 0.12184304399524382
+      },
+      {
+       "feature": 4874,
+       "snr_db": -42.96916483381169,
+       "auroc_correlate": 0.9948060941828255,
+       "auroc_best_single_coord": 0.9544667590027701,
+       "despread_gain": 0.04033933518005539
+      },
+      {
+       "feature": 5228,
+       "snr_db": -29.342662342724427,
+       "auroc_correlate": 0.9991617528037924,
+       "auroc_best_single_coord": 0.9793328708521216,
+       "despread_gain": 0.019828881951670763
+      },
+      {
+       "feature": 5232,
+       "snr_db": -14.894595343955832,
+       "auroc_correlate": 0.999964600420438,
+       "auroc_best_single_coord": 0.991348887363984,
+       "despread_gain": 0.008615713056454033
+      },
+      {
+       "feature": 5331,
+       "snr_db": -30.088474041131033,
+       "auroc_correlate": 0.9947916666666666,
+       "auroc_best_single_coord": 0.8121811224489796,
+       "despread_gain": 0.18261054421768708
+      },
+      {
+       "feature": 5457,
+       "snr_db": -26.865919666419433,
+       "auroc_correlate": 0.9993552812071331,
+       "auroc_best_single_coord": 0.9407544581618655,
+       "despread_gain": 0.05860082304526759
+      },
+      {
+       "feature": 6282,
+       "snr_db": -34.61108250094259,
+       "auroc_correlate": 0.998070987654321,
+       "auroc_best_single_coord": 0.8981963734567902,
+       "despread_gain": 0.09987461419753085
+      },
+      {
+       "feature": 7351,
+       "snr_db": -24.228518987317646,
+       "auroc_correlate": 0.9946329639889196,
+       "auroc_best_single_coord": 0.9258569944598338,
+       "despread_gain": 0.06877596952908582
+      },
+      {
+       "feature": 8553,
+       "snr_db": -38.040560197939456,
+       "auroc_correlate": 0.9734354475511353,
+       "auroc_best_single_coord": 0.8880183899418277,
+       "despread_gain": 0.08541705760930762
+      },
+      {
+       "feature": 10394,
+       "snr_db": -37.5825373170057,
+       "auroc_correlate": 0.997991234477721,
+       "auroc_best_single_coord": 0.9848429510591673,
+       "despread_gain": 0.013148283418553675
+      },
+      {
+       "feature": 10735,
+       "snr_db": -36.245777100526354,
+       "auroc_correlate": 0.9647222222222221,
+       "auroc_best_single_coord": 0.8655555555555555,
+       "despread_gain": 0.09916666666666663
+      },
+      {
+       "feature": 10940,
+       "snr_db": -31.12347526387156,
+       "auroc_correlate": 0.9994797086368367,
+       "auroc_best_single_coord": 0.9205905306971904,
+       "despread_gain": 0.07888917793964623
+      },
+      {
+       "feature": 11012,
+       "snr_db": -19.451787592550396,
+       "auroc_correlate": 0.9819717942613565,
+       "auroc_best_single_coord": 0.7664609053497943,
+       "despread_gain": 0.21551088891156223
+      },
+      {
+       "feature": 11041,
+       "snr_db": -19.574112179649994,
+       "auroc_correlate": 0.9563550036523011,
+       "auroc_best_single_coord": 0.9470416362308254,
+       "despread_gain": 0.009313367421475705
+      },
+      {
+       "feature": 11749,
+       "snr_db": -16.279034707246726,
+       "auroc_correlate": 0.9140937711733889,
+       "auroc_best_single_coord": 0.6728708049135104,
+       "despread_gain": 0.2412229662598785
+      },
+      {
+       "feature": 11891,
+       "snr_db": -25.14002824848681,
+       "auroc_correlate": 0.996425626897786,
+       "auroc_best_single_coord": 0.8900591204327455,
+       "despread_gain": 0.10636650646504053
+      },
+      {
+       "feature": 12003,
+       "snr_db": -29.11549648543835,
+       "auroc_correlate": 0.9745983379501385,
+       "auroc_best_single_coord": 0.7900831024930748,
+       "despread_gain": 0.18451523545706372
+      },
+      {
+       "feature": 12164,
+       "snr_db": -29.80953879266306,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9957309454394002,
+       "despread_gain": 0.004269054560599783
+      },
+      {
+       "feature": 12165,
+       "snr_db": -34.85796766805295,
+       "auroc_correlate": 0.9983775013520821,
+       "auroc_best_single_coord": 0.9250946457544619,
+       "despread_gain": 0.07328285559762027
+      },
+      {
+       "feature": 12414,
+       "snr_db": -23.665934996040722,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9885734072022161,
+       "despread_gain": 0.011426592797783908
+      },
+      {
+       "feature": 12815,
+       "snr_db": -20.561040234739707,
+       "auroc_correlate": 0.9636572477585298,
+       "auroc_best_single_coord": 0.7691260294535275,
+       "despread_gain": 0.1945312183050023
+      },
+      {
+       "feature": 12901,
+       "snr_db": -24.631534279265644,
+       "auroc_correlate": 0.9249895460637493,
+       "auroc_best_single_coord": 0.7896356622574442,
+       "despread_gain": 0.1353538838063051
+      },
+      {
+       "feature": 13260,
+       "snr_db": -30.985282612495453,
+       "auroc_correlate": 0.9794589710884354,
+       "auroc_best_single_coord": 0.7370145975056689,
+       "despread_gain": 0.2424443735827665
+      },
+      {
+       "feature": 13312,
+       "snr_db": -16.780664140933595,
+       "auroc_correlate": 0.9895758159611117,
+       "auroc_best_single_coord": 0.8348648915455944,
+       "despread_gain": 0.15471092441551726
+      },
+      {
+       "feature": 13567,
+       "snr_db": -36.88238224579112,
+       "auroc_correlate": 0.9961062528577961,
+       "auroc_best_single_coord": 0.9810051821368694,
+       "despread_gain": 0.015101070720926701
+      },
+      {
+       "feature": 13573,
+       "snr_db": -24.785412187015755,
+       "auroc_correlate": 0.9949900686208162,
+       "auroc_best_single_coord": 0.9767038312041446,
+       "despread_gain": 0.01828623741667157
+      },
+      {
+       "feature": 13615,
+       "snr_db": -27.245822536958716,
+       "auroc_correlate": 0.9524822116192173,
+       "auroc_best_single_coord": 0.9138537419748661,
+       "despread_gain": 0.03862846964435118
+      },
+      {
+       "feature": 13725,
+       "snr_db": -30.903702336095975,
+       "auroc_correlate": 0.9735802469135802,
+       "auroc_best_single_coord": 0.7887654320987654,
+       "despread_gain": 0.18481481481481488
+      },
+      {
+       "feature": 15927,
+       "snr_db": -35.243330800547355,
+       "auroc_correlate": 0.9367473934532915,
+       "auroc_best_single_coord": 0.8486987460431241,
+       "despread_gain": 0.08804864741016738
+      },
+      {
+       "feature": 16293,
+       "snr_db": -28.285507456019428,
+       "auroc_correlate": 0.9794921875,
+       "auroc_best_single_coord": 0.9508056640625,
+       "despread_gain": 0.0286865234375
+      },
+      {
+       "feature": 16661,
+       "snr_db": -29.62180567570052,
+       "auroc_correlate": 0.997432,
+       "auroc_best_single_coord": 0.947724,
+       "despread_gain": 0.049707999999999974
+      },
+      {
+       "feature": 16821,
+       "snr_db": -33.99075894774743,
+       "auroc_correlate": 0.9923743224572218,
+       "auroc_best_single_coord": 0.8803804867679881,
+       "despread_gain": 0.11199383568923371
+      },
+      {
+       "feature": 17116,
+       "snr_db": -12.894689750262607,
+       "auroc_correlate": 0.9970965368945224,
+       "auroc_best_single_coord": 0.9901674966047985,
+       "despread_gain": 0.0069290402897238534
+      },
+      {
+       "feature": 19745,
+       "snr_db": -16.64928604714911,
+       "auroc_correlate": 0.990519723693288,
+       "auroc_best_single_coord": 0.8706599251278305,
+       "despread_gain": 0.11985979856545748
+      },
+      {
+       "feature": 20327,
+       "snr_db": -39.60916723265343,
+       "auroc_correlate": 0.9885204081632653,
+       "auroc_best_single_coord": 0.8116496598639455,
+       "despread_gain": 0.1768707482993197
+      },
+      {
+       "feature": 20972,
+       "snr_db": -25.95625988374031,
+       "auroc_correlate": 0.9946060743704641,
+       "auroc_best_single_coord": 0.8702906021292449,
+       "despread_gain": 0.1243154722412192
+      },
+      {
+       "feature": 22330,
+       "snr_db": -17.009118242860808,
+       "auroc_correlate": 0.9961286164973838,
+       "auroc_best_single_coord": 0.8916637811634349,
+       "despread_gain": 0.1044648353339489
+      },
+      {
+       "feature": 22486,
+       "snr_db": -21.61032720415173,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9954427083333334,
+       "despread_gain": 0.00455729166666663
+      },
+      {
+       "feature": 22646,
+       "snr_db": -27.657847627833362,
+       "auroc_correlate": 0.9920461074403906,
+       "auroc_best_single_coord": 0.9017523700086182,
+       "despread_gain": 0.09029373743177238
+      },
+      {
+       "feature": 22775,
+       "snr_db": -21.5626207510164,
+       "auroc_correlate": 0.9609176171175416,
+       "auroc_best_single_coord": 0.7219636629277029,
+       "despread_gain": 0.23895395418983878
+      },
+      {
+       "feature": 22959,
+       "snr_db": -11.87457703043001,
+       "auroc_correlate": 0.9954848783694936,
+       "auroc_best_single_coord": 0.9527629848783695,
+       "despread_gain": 0.0427218934911241
+      },
+      {
+       "feature": 23132,
+       "snr_db": -31.23504006468183,
+       "auroc_correlate": 0.9975670415224913,
+       "auroc_best_single_coord": 0.9018166089965398,
+       "despread_gain": 0.0957504325259515
+      },
+      {
+       "feature": 23560,
+       "snr_db": -28.90964370246122,
+       "auroc_correlate": 0.986541551882461,
+       "auroc_best_single_coord": 0.8306072084481175,
+       "despread_gain": 0.15593434343434343
+      },
+      {
+       "feature": 24203,
+       "snr_db": -25.689164058951903,
+       "auroc_correlate": 0.9979224376731302,
+       "auroc_best_single_coord": 0.8969875346260388,
+       "despread_gain": 0.1009349030470914
+      }
+     ]
+    }
+   ],
+   "snr_db_median": {
+    "mean": -27.636613415506037,
+    "std": 0.5438229367176471,
+    "n": 3,
+    "vals": [
+     -28.375537813475486,
+     -27.082467350646603,
+     -27.451835082396038
+    ]
+   },
+   "auroc_correlate_median": {
+    "mean": 0.9938444953222483,
+    "std": 0.0006980631661700101,
+    "n": 3,
+    "vals": [
+     0.9933604390322064,
+     0.9948316445359541,
+     0.9933414023985843
+    ]
+   },
+   "auroc_best_single_median": {
+    "mean": 0.9211486299884647,
+    "std": 0.018977926416611484,
+    "n": 3,
+    "vals": [
+     0.9337609523125538,
+     0.9353592797581036,
+     0.8943256578947368
+    ]
+   },
+   "despread_gain_median": {
+    "mean": 0.067093703632503,
+    "std": 0.015796215717352513,
+    "n": 3,
+    "vals": [
+     0.053102161737586306,
+     0.05900775673895281,
+     0.08917119242096988
+    ]
+   },
+   "frac_despread_positive": {
+    "mean": 0.9767180735930735,
+    "std": 0.009294943678412354,
+    "n": 3,
+    "vals": [
+     0.9636363636363636,
+     0.984375,
+     0.9821428571428571
+    ]
+   }
+  },
+  "6": {
+   "per_seed": [
+    {
+     "seed": 0,
+     "n": 47,
+     "snr_db_median": -28.70277646339423,
+     "snr_db_p90": -17.351557544118247,
+     "auroc_correlate_median": 0.9946145124716553,
+     "auroc_best_single_median": 0.877274125336409,
+     "despread_gain_median": 0.12005382545174936,
+     "frac_despread_positive": 1.0,
+     "rows": [
+      {
+       "feature": 1512,
+       "snr_db": -31.493264229277056,
+       "auroc_correlate": 0.9949333833739914,
+       "auroc_best_single_coord": 0.9588571964721336,
+       "despread_gain": 0.036076186901857765
+      },
+      {
+       "feature": 2802,
+       "snr_db": -16.800798520624785,
+       "auroc_correlate": 0.9535480551246867,
+       "auroc_best_single_coord": 0.7364553855395415,
+       "despread_gain": 0.21709266958514517
+      },
+      {
+       "feature": 3180,
+       "snr_db": -9.484010972353026,
+       "auroc_correlate": 0.9943771626297577,
+       "auroc_best_single_coord": 0.920751633986928,
+       "despread_gain": 0.07362552864282967
+      },
+      {
+       "feature": 3373,
+       "snr_db": -31.502159638433625,
+       "auroc_correlate": 0.9997637051039697,
+       "auroc_best_single_coord": 0.9703449905482041,
+       "despread_gain": 0.029418714555765613
+      },
+      {
+       "feature": 3449,
+       "snr_db": -38.958155931752444,
+       "auroc_correlate": 0.969307372175981,
+       "auroc_best_single_coord": 0.801501189060642,
+       "despread_gain": 0.1678061831153389
+      },
+      {
+       "feature": 4335,
+       "snr_db": -48.16277543292856,
+       "auroc_correlate": 0.9992825255102041,
+       "auroc_best_single_coord": 0.9831792091836735,
+       "despread_gain": 0.016103316326530615
+      },
+      {
+       "feature": 4380,
+       "snr_db": -33.4515175548522,
+       "auroc_correlate": 0.9946145124716553,
+       "auroc_best_single_coord": 0.8122165532879818,
+       "despread_gain": 0.18239795918367352
+      },
+      {
+       "feature": 5333,
+       "snr_db": -35.814994058756746,
+       "auroc_correlate": 0.9991560888488813,
+       "auroc_best_single_coord": 0.9972839228342008,
+       "despread_gain": 0.001872166014680543
+      },
+      {
+       "feature": 5467,
+       "snr_db": -29.20966979710891,
+       "auroc_correlate": 0.99125,
+       "auroc_best_single_coord": 0.90921875,
+       "despread_gain": 0.08203125
+      },
+      {
+       "feature": 5714,
+       "snr_db": -37.63519099519028,
+       "auroc_correlate": 0.9964293215710985,
+       "auroc_best_single_coord": 0.8621088006721277,
+       "despread_gain": 0.13432052089897084
+      },
+      {
+       "feature": 8197,
+       "snr_db": -44.725452546720206,
+       "auroc_correlate": 0.9997959183673469,
+       "auroc_best_single_coord": 0.9895918367346939,
+       "despread_gain": 0.010204081632653073
+      },
+      {
+       "feature": 8730,
+       "snr_db": -19.4324590590845,
+       "auroc_correlate": 0.9977777777777778,
+       "auroc_best_single_coord": 0.9517876543209877,
+       "despread_gain": 0.0459901234567901
+      },
+      {
+       "feature": 10692,
+       "snr_db": -33.87959745305824,
+       "auroc_correlate": 0.9969163156041714,
+       "auroc_best_single_coord": 0.8294807512535056,
+       "despread_gain": 0.16743556435066576
+      },
+      {
+       "feature": 10769,
+       "snr_db": -26.919533793174214,
+       "auroc_correlate": 0.9857254603206631,
+       "auroc_best_single_coord": 0.8595664061978425,
+       "despread_gain": 0.12615905412282058
+      },
+      {
+       "feature": 10919,
+       "snr_db": -31.98006939959523,
+       "auroc_correlate": 0.9950176977531549,
+       "auroc_best_single_coord": 0.9445021545090797,
+       "despread_gain": 0.050515543244075145
+      },
+      {
+       "feature": 11019,
+       "snr_db": -34.31108901603012,
+       "auroc_correlate": 0.9703993055555555,
+       "auroc_best_single_coord": 0.8830555555555556,
+       "despread_gain": 0.08734374999999994
+      },
+      {
+       "feature": 11579,
+       "snr_db": -28.286006953589848,
+       "auroc_correlate": 0.9733628795201972,
+       "auroc_best_single_coord": 0.7656939573132849,
+       "despread_gain": 0.20766892220691224
+      },
+      {
+       "feature": 11710,
+       "snr_db": -32.74154449676887,
+       "auroc_correlate": 0.9991015624999999,
+       "auroc_best_single_coord": 0.8769140625,
+       "despread_gain": 0.1221874999999999
+      },
+      {
+       "feature": 11937,
+       "snr_db": -27.833299770337803,
+       "auroc_correlate": 0.9958333333333333,
+       "auroc_best_single_coord": 0.9722222222222222,
+       "despread_gain": 0.023611111111111138
+      },
+      {
+       "feature": 12307,
+       "snr_db": -42.19908306255678,
+       "auroc_correlate": 0.9784970574920778,
+       "auroc_best_single_coord": 0.8335219556360344,
+       "despread_gain": 0.14497510185604345
+      },
+      {
+       "feature": 12746,
+       "snr_db": -27.358429050194253,
+       "auroc_correlate": 0.9811168163460515,
+       "auroc_best_single_coord": 0.859708789456903,
+       "despread_gain": 0.12140802688914853
+      },
+      {
+       "feature": 12940,
+       "snr_db": -37.24815396339484,
+       "auroc_correlate": 0.978614215793703,
+       "auroc_best_single_coord": 0.8340273212068083,
+       "despread_gain": 0.14458689458689467
+      },
+      {
+       "feature": 13816,
+       "snr_db": -24.63196836076138,
+       "auroc_correlate": 0.9939732394896307,
+       "auroc_best_single_coord": 0.8893647201625955,
+       "despread_gain": 0.10460851932703519
+      },
+      {
+       "feature": 14411,
+       "snr_db": -16.05480930436827,
+       "auroc_correlate": 0.9973279507881584,
+       "auroc_best_single_coord": 0.877274125336409,
+       "despread_gain": 0.12005382545174936
+      },
+      {
+       "feature": 14856,
+       "snr_db": -26.34741799284351,
+       "auroc_correlate": 0.9641198354732272,
+       "auroc_best_single_coord": 0.7916847106051319,
+       "despread_gain": 0.1724351248680953
+      },
+      {
+       "feature": 15217,
+       "snr_db": -31.668870660310013,
+       "auroc_correlate": 0.9871428571428571,
+       "auroc_best_single_coord": 0.9771428571428571,
+       "despread_gain": 0.010000000000000009
+      },
+      {
+       "feature": 16018,
+       "snr_db": -22.49774654761426,
+       "auroc_correlate": 0.9967403628117915,
+       "auroc_best_single_coord": 0.9478458049886621,
+       "despread_gain": 0.04889455782312935
+      },
+      {
+       "feature": 16273,
+       "snr_db": -30.4234268915858,
+       "auroc_correlate": 0.9930769230769231,
+       "auroc_best_single_coord": 0.8557396449704142,
+       "despread_gain": 0.13733727810650886
+      },
+      {
+       "feature": 16578,
+       "snr_db": -27.136461300442075,
+       "auroc_correlate": 0.9995978245273232,
+       "auroc_best_single_coord": 0.9900428803214093,
+       "despread_gain": 0.009554944205913851
+      },
+      {
+       "feature": 16643,
+       "snr_db": -16.42683950667801,
+       "auroc_correlate": 0.994675833246494,
+       "auroc_best_single_coord": 0.9037053211502284,
+       "despread_gain": 0.09097051209626561
+      },
+      {
+       "feature": 17856,
+       "snr_db": -18.066770442164973,
+       "auroc_correlate": 0.9946911919298808,
+       "auroc_best_single_coord": 0.9104368703921583,
+       "despread_gain": 0.0842543215377225
+      },
+      {
+       "feature": 17910,
+       "snr_db": -28.940860737706977,
+       "auroc_correlate": 0.9875,
+       "auroc_best_single_coord": 0.9317857142857143,
+       "despread_gain": 0.055714285714285716
+      },
+      {
+       "feature": 17950,
+       "snr_db": -25.736590574491366,
+       "auroc_correlate": 0.978356494876273,
+       "auroc_best_single_coord": 0.7861100443986196,
+       "despread_gain": 0.19224645047765332
+      },
+      {
+       "feature": 18077,
+       "snr_db": -37.37408203193547,
+       "auroc_correlate": 0.996826171875,
+       "auroc_best_single_coord": 0.8617078993055556,
+       "despread_gain": 0.13511827256944442
+      },
+      {
+       "feature": 18224,
+       "snr_db": -27.7179157807152,
+       "auroc_correlate": 0.9985949457908163,
+       "auroc_best_single_coord": 0.8135612643494898,
+       "despread_gain": 0.18503368144132648
+      },
+      {
+       "feature": 18280,
+       "snr_db": -27.011335445177554,
+       "auroc_correlate": 0.9065604479191267,
+       "auroc_best_single_coord": 0.7006636588649894,
+       "despread_gain": 0.20589678905413733
+      },
+      {
+       "feature": 18682,
+       "snr_db": -16.27946114828649,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9889987244897959,
+       "despread_gain": 0.011001275510204134
+      },
+      {
+       "feature": 18693,
+       "snr_db": -29.15825357906179,
+       "auroc_correlate": 0.9291992215199123,
+       "auroc_best_single_coord": 0.7894796314437882,
+       "despread_gain": 0.1397195900761241
+      },
+      {
+       "feature": 18769,
+       "snr_db": -28.70277646339423,
+       "auroc_correlate": 0.9982759429536499,
+       "auroc_best_single_coord": 0.8040204541189717,
+       "despread_gain": 0.19425548883467814
+      },
+      {
+       "feature": 19222,
+       "snr_db": -35.54222241564263,
+       "auroc_correlate": 0.9844132653061225,
+       "auroc_best_single_coord": 0.8433322704081633,
+       "despread_gain": 0.14108099489795922
+      },
+      {
+       "feature": 19375,
+       "snr_db": -27.475152292764534,
+       "auroc_correlate": 0.9873059190255833,
+       "auroc_best_single_coord": 0.8262599420262802,
+       "despread_gain": 0.16104597699930312
+      },
+      {
+       "feature": 20101,
+       "snr_db": -17.71873022644722,
+       "auroc_correlate": 0.9615395153739345,
+       "auroc_best_single_coord": 0.737514447034012,
+       "despread_gain": 0.22402506833992242
+      },
+      {
+       "feature": 20441,
+       "snr_db": -31.06853765353989,
+       "auroc_correlate": 0.9967700532941207,
+       "auroc_best_single_coord": 0.9374707817321014,
+       "despread_gain": 0.05929927156201931
+      },
+      {
+       "feature": 20843,
+       "snr_db": -44.536527026154246,
+       "auroc_correlate": 0.98046875,
+       "auroc_best_single_coord": 0.89892578125,
+       "despread_gain": 0.08154296875
+      },
+      {
+       "feature": 21374,
+       "snr_db": -18.264033737517703,
+       "auroc_correlate": 0.9997106481481481,
+       "auroc_best_single_coord": 0.9610084983710563,
+       "despread_gain": 0.038702149777091854
+      },
+      {
+       "feature": 22250,
+       "snr_db": -20.969774338601688,
+       "auroc_correlate": 0.9997732908537906,
+       "auroc_best_single_coord": 0.9115232447094511,
+       "despread_gain": 0.08825004614433951
+      },
+      {
+       "feature": 24416,
+       "snr_db": -20.813977105906766,
+       "auroc_correlate": 0.9866170910744739,
+       "auroc_best_single_coord": 0.7771507013545641,
+       "despread_gain": 0.20946638971990983
+      }
+     ]
+    },
+    {
+     "seed": 1,
+     "n": 54,
+     "snr_db_median": -32.795311510298944,
+     "snr_db_p90": -20.493760077500063,
+     "auroc_correlate_median": 0.9941758982981533,
+     "auroc_best_single_median": 0.9160452153802185,
+     "despread_gain_median": 0.07749117968772345,
+     "frac_despread_positive": 0.9814814814814815,
+     "rows": [
+      {
+       "feature": 62,
+       "snr_db": -24.05479225393872,
+       "auroc_correlate": 0.9868888977905963,
+       "auroc_best_single_coord": 0.7698597090922039,
+       "despread_gain": 0.21702918869839238
+      },
+      {
+       "feature": 654,
+       "snr_db": -38.27351088726812,
+       "auroc_correlate": 0.9829089905860098,
+       "auroc_best_single_coord": 0.7889340570244583,
+       "despread_gain": 0.1939749335615515
+      },
+      {
+       "feature": 764,
+       "snr_db": -28.73932141351448,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9651404786680541,
+       "despread_gain": 0.03485952133194592
+      },
+      {
+       "feature": 1450,
+       "snr_db": -21.405816101534736,
+       "auroc_correlate": 0.989795918367347,
+       "auroc_best_single_coord": 0.9220521541950113,
+       "despread_gain": 0.06774376417233574
+      },
+      {
+       "feature": 1570,
+       "snr_db": -27.33681799893342,
+       "auroc_correlate": 0.9940230224321134,
+       "auroc_best_single_coord": 0.8532425366840951,
+       "despread_gain": 0.14078048574801827
+      },
+      {
+       "feature": 2233,
+       "snr_db": -20.362720174207336,
+       "auroc_correlate": 0.9969763972507859,
+       "auroc_best_single_coord": 0.965914539932868,
+       "despread_gain": 0.031061857317917885
+      },
+      {
+       "feature": 3714,
+       "snr_db": -30.3608736851518,
+       "auroc_correlate": 0.9958341598889109,
+       "auroc_best_single_coord": 0.7894886927196985,
+       "despread_gain": 0.20634546716921243
+      },
+      {
+       "feature": 3798,
+       "snr_db": -39.24420902254559,
+       "auroc_correlate": 0.9541710767579493,
+       "auroc_best_single_coord": 0.8256659858976462,
+       "despread_gain": 0.12850509086030315
+      },
+      {
+       "feature": 4587,
+       "snr_db": -15.953757170045982,
+       "auroc_correlate": 0.9963849304996324,
+       "auroc_best_single_coord": 0.9437957354434369,
+       "despread_gain": 0.052589195056195526
+      },
+      {
+       "feature": 5158,
+       "snr_db": -26.40942047310765,
+       "auroc_correlate": 0.996,
+       "auroc_best_single_coord": 0.9541,
+       "despread_gain": 0.04190000000000005
+      },
+      {
+       "feature": 5292,
+       "snr_db": -30.993844933801185,
+       "auroc_correlate": 0.9914933837429112,
+       "auroc_best_single_coord": 0.9213137996219282,
+       "despread_gain": 0.07017958412098302
+      },
+      {
+       "feature": 5631,
+       "snr_db": -20.799519851849762,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.998291015625,
+       "despread_gain": 0.001708984375
+      },
+      {
+       "feature": 5652,
+       "snr_db": -35.35429383573325,
+       "auroc_correlate": 0.969671201814059,
+       "auroc_best_single_coord": 0.8000726332199547,
+       "despread_gain": 0.16959856859410427
+      },
+      {
+       "feature": 6080,
+       "snr_db": -22.525050686593254,
+       "auroc_correlate": 0.999814209274673,
+       "auroc_best_single_coord": 0.9458048454221165,
+       "despread_gain": 0.0540093638525565
+      },
+      {
+       "feature": 7281,
+       "snr_db": -42.641527460818516,
+       "auroc_correlate": 0.9990960743801653,
+       "auroc_best_single_coord": 0.9204545454545454,
+       "despread_gain": 0.07864152892561993
+      },
+      {
+       "feature": 7689,
+       "snr_db": -35.327371335406504,
+       "auroc_correlate": 0.9792315461661476,
+       "auroc_best_single_coord": 0.8385236932918104,
+       "despread_gain": 0.14070785287433718
+      },
+      {
+       "feature": 7895,
+       "snr_db": -47.97009202220082,
+       "auroc_correlate": 0.9455636034404709,
+       "auroc_best_single_coord": 0.7874603893164328,
+       "despread_gain": 0.15810321412403805
+      },
+      {
+       "feature": 8705,
+       "snr_db": -22.315806813612156,
+       "auroc_correlate": 0.9898295265154522,
+       "auroc_best_single_coord": 0.8633553435659751,
+       "despread_gain": 0.1264741829494771
+      },
+      {
+       "feature": 9006,
+       "snr_db": -54.236430614326295,
+       "auroc_correlate": 0.9815585960737656,
+       "auroc_best_single_coord": 0.9208804283164783,
+       "despread_gain": 0.060678167757287294
+      },
+      {
+       "feature": 9254,
+       "snr_db": -24.52468306992496,
+       "auroc_correlate": 0.9888459768784852,
+       "auroc_best_single_coord": 0.7210543680707091,
+       "despread_gain": 0.2677916088077761
+      },
+      {
+       "feature": 10233,
+       "snr_db": -38.938983986961986,
+       "auroc_correlate": 0.9737300087987164,
+       "auroc_best_single_coord": 0.7687587340199783,
+       "despread_gain": 0.2049712747787381
+      },
+      {
+       "feature": 11088,
+       "snr_db": -41.52240600317312,
+       "auroc_correlate": 0.99984375,
+       "auroc_best_single_coord": 0.8790625,
+       "despread_gain": 0.12078125000000006
+      },
+      {
+       "feature": 11427,
+       "snr_db": -32.5181044621544,
+       "auroc_correlate": 0.9544390320233324,
+       "auroc_best_single_coord": 0.7905884850954404,
+       "despread_gain": 0.16385054692789192
+      },
+      {
+       "feature": 11967,
+       "snr_db": -42.827045329405955,
+       "auroc_correlate": 0.967529296875,
+       "auroc_best_single_coord": 0.8814019097222222,
+       "despread_gain": 0.08612738715277779
+      },
+      {
+       "feature": 12431,
+       "snr_db": -37.5054722122081,
+       "auroc_correlate": 0.9974190103239587,
+       "auroc_best_single_coord": 0.8945354218583126,
+       "despread_gain": 0.10288358846564616
+      },
+      {
+       "feature": 12741,
+       "snr_db": -36.19313794975632,
+       "auroc_correlate": 0.9861373203658006,
+       "auroc_best_single_coord": 0.9123239947742778,
+       "despread_gain": 0.07381332559152276
+      },
+      {
+       "feature": 12973,
+       "snr_db": -34.11605683809106,
+       "auroc_correlate": 0.9972711071508131,
+       "auroc_best_single_coord": 0.9782802405881043,
+       "despread_gain": 0.018990866562708875
+      },
+      {
+       "feature": 13340,
+       "snr_db": -40.812852294768646,
+       "auroc_correlate": 0.9967111111111111,
+       "auroc_best_single_coord": 0.9652444444444445,
+       "despread_gain": 0.03146666666666664
+      },
+      {
+       "feature": 14075,
+       "snr_db": -35.13707616577493,
+       "auroc_correlate": 0.9203135172526042,
+       "auroc_best_single_coord": 0.95867919921875,
+       "despread_gain": -0.03836568196614576
+      },
+      {
+       "feature": 14239,
+       "snr_db": -48.96379830300427,
+       "auroc_correlate": 0.9993749999999999,
+       "auroc_best_single_coord": 0.92328125,
+       "despread_gain": 0.07609374999999985
+      },
+      {
+       "feature": 14960,
+       "snr_db": -28.056306626255562,
+       "auroc_correlate": 0.9961072664359861,
+       "auroc_best_single_coord": 0.9197664359861591,
+       "despread_gain": 0.07634083044982698
+      },
+      {
+       "feature": 15003,
+       "snr_db": -21.799232361713656,
+       "auroc_correlate": 0.9999021066645783,
+       "auroc_best_single_coord": 0.9829665596366199,
+       "despread_gain": 0.01693554702795841
+      },
+      {
+       "feature": 15939,
+       "snr_db": -33.3287228956988,
+       "auroc_correlate": 0.9790070056915283,
+       "auroc_best_single_coord": 0.8288111686706543,
+       "despread_gain": 0.15019583702087402
+      },
+      {
+       "feature": 16658,
+       "snr_db": -27.3139447836185,
+       "auroc_correlate": 0.9989656779907932,
+       "auroc_best_single_coord": 0.8931734747392344,
+       "despread_gain": 0.1057922032515588
+      },
+      {
+       "feature": 16888,
+       "snr_db": -28.07527225617008,
+       "auroc_correlate": 0.9649907108423853,
+       "auroc_best_single_coord": 0.7535103491981866,
+       "despread_gain": 0.2114803616441987
+      },
+      {
+       "feature": 17070,
+       "snr_db": -29.789715191933148,
+       "auroc_correlate": 0.9986773223435064,
+       "auroc_best_single_coord": 0.9607930496769882,
+       "despread_gain": 0.03788427266651817
+      },
+      {
+       "feature": 18009,
+       "snr_db": -33.072518558443484,
+       "auroc_correlate": 0.99865,
+       "auroc_best_single_coord": 0.9269499999999999,
+       "despread_gain": 0.0717000000000001
+      },
+      {
+       "feature": 18121,
+       "snr_db": -40.4242331609202,
+       "auroc_correlate": 0.9920993381076388,
+       "auroc_best_single_coord": 0.9634195963541666,
+       "despread_gain": 0.02867974175347221
+      },
+      {
+       "feature": 18216,
+       "snr_db": -42.92662866329308,
+       "auroc_correlate": 0.9990593926363881,
+       "auroc_best_single_coord": 0.8987503359312012,
+       "despread_gain": 0.10030905670518686
+      },
+      {
+       "feature": 18857,
+       "snr_db": -39.59787080424664,
+       "auroc_correlate": 0.9979766446988092,
+       "auroc_best_single_coord": 0.9839865880448607,
+       "despread_gain": 0.01399005665394848
+      },
+      {
+       "feature": 18960,
+       "snr_db": -40.719538678505394,
+       "auroc_correlate": 0.991256404544442,
+       "auroc_best_single_coord": 0.83125417687681,
+       "despread_gain": 0.16000222766763195
+      },
+      {
+       "feature": 19028,
+       "snr_db": -36.05417213028854,
+       "auroc_correlate": 0.9960217132659132,
+       "auroc_best_single_coord": 0.9558670434265318,
+       "despread_gain": 0.04015466983938132
+      },
+      {
+       "feature": 19526,
+       "snr_db": -42.991086944276525,
+       "auroc_correlate": 0.9763267429760666,
+       "auroc_best_single_coord": 0.881633714880333,
+       "despread_gain": 0.09469302809573354
+      },
+      {
+       "feature": 19737,
+       "snr_db": -17.603842111548847,
+       "auroc_correlate": 0.9931394326438058,
+       "auroc_best_single_coord": 0.9380582164838724,
+       "despread_gain": 0.05508121615993333
+      },
+      {
+       "feature": 19961,
+       "snr_db": -16.954175847549998,
+       "auroc_correlate": 0.9876509478878116,
+       "auroc_best_single_coord": 0.9082978055747922,
+       "despread_gain": 0.07935314231301938
+      },
+      {
+       "feature": 20797,
+       "snr_db": -16.930487875726598,
+       "auroc_correlate": 0.9979844127922601,
+       "auroc_best_single_coord": 0.9944907282988444,
+       "despread_gain": 0.003493684493415694
+      },
+      {
+       "feature": 20947,
+       "snr_db": -29.073033445477062,
+       "auroc_correlate": 0.9998513674197385,
+       "auroc_best_single_coord": 0.9374256837098692,
+       "despread_gain": 0.06242568370986923
+      },
+      {
+       "feature": 21651,
+       "snr_db": -44.313208841997124,
+       "auroc_correlate": 0.9980948026215516,
+       "auroc_best_single_coord": 0.9399100746837372,
+       "despread_gain": 0.05818472793781437
+      },
+      {
+       "feature": 21779,
+       "snr_db": -29.945526466143747,
+       "auroc_correlate": 0.9918879056047198,
+       "auroc_best_single_coord": 0.8866590962487274,
+       "despread_gain": 0.10522880935599244
+      },
+      {
+       "feature": 21951,
+       "snr_db": -37.00011422633181,
+       "auroc_correlate": 0.978896823729842,
+       "auroc_best_single_coord": 0.8538501481948236,
+       "despread_gain": 0.12504667553501836
+      },
+      {
+       "feature": 22376,
+       "snr_db": -25.266993296553736,
+       "auroc_correlate": 0.9803590010405827,
+       "auroc_best_single_coord": 0.8052646982310093,
+       "despread_gain": 0.1750943028095734
+      },
+      {
+       "feature": 23436,
+       "snr_db": -20.17621871729674,
+       "auroc_correlate": 0.9988430046279815,
+       "auroc_best_single_coord": 0.9814880740477038,
+       "despread_gain": 0.017354930580277705
+      },
+      {
+       "feature": 24100,
+       "snr_db": -39.83415793065584,
+       "auroc_correlate": 0.9957777777777778,
+       "auroc_best_single_coord": 0.9230222222222222,
+       "despread_gain": 0.07275555555555557
+      },
+      {
+       "feature": 24239,
+       "snr_db": -23.50943197607652,
+       "auroc_correlate": 0.9943287741641933,
+       "auroc_best_single_coord": 0.8448320171216357,
+       "despread_gain": 0.1494967570425576
+      }
+     ]
+    },
+    {
+     "seed": 2,
+     "n": 63,
+     "snr_db_median": -29.297315784267965,
+     "snr_db_p90": -19.81641337221009,
+     "auroc_correlate_median": 0.9961094922189844,
+     "auroc_best_single_median": 0.9097222222222222,
+     "despread_gain_median": 0.08397025708388062,
+     "frac_despread_positive": 1.0,
+     "rows": [
+      {
+       "feature": 24,
+       "snr_db": -36.01119621960544,
+       "auroc_correlate": 0.9827213253139178,
+       "auroc_best_single_coord": 0.7630944554021477,
+       "despread_gain": 0.21962686991177005
+      },
+      {
+       "feature": 360,
+       "snr_db": -24.99147655806337,
+       "auroc_correlate": 0.9920486767485823,
+       "auroc_best_single_coord": 0.9652540170132325,
+       "despread_gain": 0.02679465973534978
+      },
+      {
+       "feature": 495,
+       "snr_db": -30.57048578231487,
+       "auroc_correlate": 0.9950281132861307,
+       "auroc_best_single_coord": 0.8183764577259476,
+       "despread_gain": 0.17665165556018314
+      },
+      {
+       "feature": 674,
+       "snr_db": -36.328160324130806,
+       "auroc_correlate": 0.997471743010113,
+       "auroc_best_single_coord": 0.879535990481856,
+       "despread_gain": 0.11793575252825694
+      },
+      {
+       "feature": 876,
+       "snr_db": -30.49243901782325,
+       "auroc_correlate": 0.9884841329413482,
+       "auroc_best_single_coord": 0.8251365692958863,
+       "despread_gain": 0.16334756364546188
+      },
+      {
+       "feature": 1085,
+       "snr_db": -26.6449862112919,
+       "auroc_correlate": 0.9964569160997732,
+       "auroc_best_single_coord": 0.8841411564625851,
+       "despread_gain": 0.1123157596371881
+      },
+      {
+       "feature": 2217,
+       "snr_db": -19.770666907483356,
+       "auroc_correlate": 0.9914864343139185,
+       "auroc_best_single_coord": 0.8626928492482854,
+       "despread_gain": 0.1287935850656331
+      },
+      {
+       "feature": 2411,
+       "snr_db": -23.185468420342282,
+       "auroc_correlate": 0.9988606770833334,
+       "auroc_best_single_coord": 0.9601508246527778,
+       "despread_gain": 0.03870985243055558
+      },
+      {
+       "feature": 2656,
+       "snr_db": -31.226933347223742,
+       "auroc_correlate": 0.9940108396299696,
+       "auroc_best_single_coord": 0.9401392910105218,
+       "despread_gain": 0.05387154861944776
+      },
+      {
+       "feature": 2933,
+       "snr_db": -24.87568878469576,
+       "auroc_correlate": 0.9890369909926815,
+       "auroc_best_single_coord": 0.9050667339088009,
+       "despread_gain": 0.08397025708388062
+      },
+      {
+       "feature": 3355,
+       "snr_db": -36.57012812769287,
+       "auroc_correlate": 0.9919261822376009,
+       "auroc_best_single_coord": 0.856401384083045,
+       "despread_gain": 0.13552479815455587
+      },
+      {
+       "feature": 3869,
+       "snr_db": -24.33499138200895,
+       "auroc_correlate": 0.9961094922189844,
+       "auroc_best_single_coord": 0.8596627193254387,
+       "despread_gain": 0.13644677289354568
+      },
+      {
+       "feature": 4220,
+       "snr_db": -28.777110219983495,
+       "auroc_correlate": 0.9977041283327963,
+       "auroc_best_single_coord": 0.9941725708770003,
+       "despread_gain": 0.0035315574557960305
+      },
+      {
+       "feature": 4469,
+       "snr_db": -22.589656437901027,
+       "auroc_correlate": 0.9892825257690122,
+       "auroc_best_single_coord": 0.7792046100154209,
+       "despread_gain": 0.21007791575359136
+      },
+      {
+       "feature": 4702,
+       "snr_db": -34.79594802243736,
+       "auroc_correlate": 0.9690970617611544,
+       "auroc_best_single_coord": 0.7376753477139577,
+       "despread_gain": 0.2314217140471967
+      },
+      {
+       "feature": 5045,
+       "snr_db": -30.741505997727963,
+       "auroc_correlate": 0.9877777777777779,
+       "auroc_best_single_coord": 0.9686111111111111,
+       "despread_gain": 0.019166666666666776
+      },
+      {
+       "feature": 5070,
+       "snr_db": -22.91048446373211,
+       "auroc_correlate": 0.9997265625,
+       "auroc_best_single_coord": 0.97453125,
+       "despread_gain": 0.025195312500000067
+      },
+      {
+       "feature": 5158,
+       "snr_db": -26.40942047310765,
+       "auroc_correlate": 0.996,
+       "auroc_best_single_coord": 0.9541,
+       "despread_gain": 0.04190000000000005
+      },
+      {
+       "feature": 5665,
+       "snr_db": -29.713484605581346,
+       "auroc_correlate": 0.9981011284722222,
+       "auroc_best_single_coord": 0.9097222222222222,
+       "despread_gain": 0.08837890625
+      },
+      {
+       "feature": 5747,
+       "snr_db": -22.01099612720682,
+       "auroc_correlate": 0.9899261262020289,
+       "auroc_best_single_coord": 0.8465462371850598,
+       "despread_gain": 0.14337988901696908
+      },
+      {
+       "feature": 6181,
+       "snr_db": -12.89602423757418,
+       "auroc_correlate": 0.9999333333333333,
+       "auroc_best_single_coord": 0.9900888888888889,
+       "despread_gain": 0.009844444444444433
+      },
+      {
+       "feature": 8521,
+       "snr_db": -26.30158128865795,
+       "auroc_correlate": 0.9994331065759637,
+       "auroc_best_single_coord": 0.9386337868480725,
+       "despread_gain": 0.06079931972789121
+      },
+      {
+       "feature": 9304,
+       "snr_db": -22.45860360166011,
+       "auroc_correlate": 0.9284888459489197,
+       "auroc_best_single_coord": 0.7737865042840473,
+       "despread_gain": 0.1547023416648724
+      },
+      {
+       "feature": 10457,
+       "snr_db": -24.837750283856884,
+       "auroc_correlate": 0.9982253086419753,
+       "auroc_best_single_coord": 0.9461651234567902,
+       "despread_gain": 0.05206018518518518
+      },
+      {
+       "feature": 10806,
+       "snr_db": -13.565654169322677,
+       "auroc_correlate": 0.9990617376618502,
+       "auroc_best_single_coord": 0.9469881778945393,
+       "despread_gain": 0.052073559767310984
+      },
+      {
+       "feature": 10888,
+       "snr_db": -28.70042783534068,
+       "auroc_correlate": 0.999198853094957,
+       "auroc_best_single_coord": 0.9891845167819194,
+       "despread_gain": 0.010014336313037608
+      },
+      {
+       "feature": 10912,
+       "snr_db": -29.297315784267965,
+       "auroc_correlate": 0.992225,
+       "auroc_best_single_coord": 0.850225,
+       "despread_gain": 0.14200000000000002
+      },
+      {
+       "feature": 11000,
+       "snr_db": -31.93596256234986,
+       "auroc_correlate": 0.9924557752341311,
+       "auroc_best_single_coord": 0.9310613943808532,
+       "despread_gain": 0.06139438085327786
+      },
+      {
+       "feature": 11088,
+       "snr_db": -41.52240600317312,
+       "auroc_correlate": 0.99984375,
+       "auroc_best_single_coord": 0.8790625,
+       "despread_gain": 0.12078125000000006
+      },
+      {
+       "feature": 11089,
+       "snr_db": -54.54797968843635,
+       "auroc_correlate": 0.9986111111111111,
+       "auroc_best_single_coord": 0.8813888888888889,
+       "despread_gain": 0.11722222222222223
+      },
+      {
+       "feature": 11339,
+       "snr_db": -44.275064498610675,
+       "auroc_correlate": 0.9803476946334089,
+       "auroc_best_single_coord": 0.8221214411690602,
+       "despread_gain": 0.1582262534643487
+      },
+      {
+       "feature": 11785,
+       "snr_db": -29.38503117149584,
+       "auroc_correlate": 0.9826193359887125,
+       "auroc_best_single_coord": 0.7711264967723408,
+       "despread_gain": 0.21149283921637174
+      },
+      {
+       "feature": 12844,
+       "snr_db": -30.70427478529139,
+       "auroc_correlate": 0.9975584969264327,
+       "auroc_best_single_coord": 0.9654760724436513,
+       "despread_gain": 0.032082424482781424
+      },
+      {
+       "feature": 12917,
+       "snr_db": -34.647926070971934,
+       "auroc_correlate": 0.9995674740484429,
+       "auroc_best_single_coord": 0.9506920415224913,
+       "despread_gain": 0.04887543252595161
+      },
+      {
+       "feature": 12945,
+       "snr_db": -17.68419313785998,
+       "auroc_correlate": 0.9965019132653061,
+       "auroc_best_single_coord": 0.9241677295918367,
+       "despread_gain": 0.07233418367346944
+      },
+      {
+       "feature": 13363,
+       "snr_db": -38.904354833705746,
+       "auroc_correlate": 0.9528820984259369,
+       "auroc_best_single_coord": 0.8072873518006698,
+       "despread_gain": 0.14559474662526706
+      },
+      {
+       "feature": 13404,
+       "snr_db": -24.403785003848654,
+       "auroc_correlate": 0.99875,
+       "auroc_best_single_coord": 0.93421875,
+       "despread_gain": 0.06453125000000004
+      },
+      {
+       "feature": 13626,
+       "snr_db": -33.54209726368873,
+       "auroc_correlate": 0.9848646295667135,
+       "auroc_best_single_coord": 0.8931389965157802,
+       "despread_gain": 0.09172563305093329
+      },
+      {
+       "feature": 13695,
+       "snr_db": -34.89578952571447,
+       "auroc_correlate": 0.9984888888888889,
+       "auroc_best_single_coord": 0.9231111111111111,
+       "despread_gain": 0.07537777777777777
+      },
+      {
+       "feature": 13696,
+       "snr_db": -39.7671722084258,
+       "auroc_correlate": 0.9915668670229678,
+       "auroc_best_single_coord": 0.8702213508153038,
+       "despread_gain": 0.12134551620766398
+      },
+      {
+       "feature": 13833,
+       "snr_db": -34.9060468020468,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9684075967859752,
+       "despread_gain": 0.03159240321402479
+      },
+      {
+       "feature": 14495,
+       "snr_db": -26.45663754657629,
+       "auroc_correlate": 0.9996598639455783,
+       "auroc_best_single_coord": 0.9243310657596372,
+       "despread_gain": 0.07532879818594107
+      },
+      {
+       "feature": 15615,
+       "snr_db": -16.724028380948454,
+       "auroc_correlate": 0.9971349862258954,
+       "auroc_best_single_coord": 0.8994765840220386,
+       "despread_gain": 0.0976584022038568
+      },
+      {
+       "feature": 16103,
+       "snr_db": -28.230127120516283,
+       "auroc_correlate": 0.999858276643991,
+       "auroc_best_single_coord": 0.9846938775510204,
+       "despread_gain": 0.015164399092970515
+      },
+      {
+       "feature": 16183,
+       "snr_db": -42.38109311448832,
+       "auroc_correlate": 0.9805398083008903,
+       "auroc_best_single_coord": 0.8306221493674537,
+       "despread_gain": 0.14991765893343656
+      },
+      {
+       "feature": 16486,
+       "snr_db": -25.021242077865185,
+       "auroc_correlate": 0.996126719852006,
+       "auroc_best_single_coord": 0.9623944964735808,
+       "despread_gain": 0.033732223378425186
+      },
+      {
+       "feature": 16919,
+       "snr_db": -28.22304439020696,
+       "auroc_correlate": 0.9946611120012818,
+       "auroc_best_single_coord": 0.9520044864605032,
+       "despread_gain": 0.04265662554077865
+      },
+      {
+       "feature": 17186,
+       "snr_db": -30.561114677440724,
+       "auroc_correlate": 0.9661147592734746,
+       "auroc_best_single_coord": 0.715025106447444,
+       "despread_gain": 0.2510896528260306
+      },
+      {
+       "feature": 17234,
+       "snr_db": -34.47279862073919,
+       "auroc_correlate": 0.994074074074074,
+       "auroc_best_single_coord": 0.9298765432098766,
+       "despread_gain": 0.06419753086419744
+      },
+      {
+       "feature": 17959,
+       "snr_db": -35.50875693112881,
+       "auroc_correlate": 0.9737630625661514,
+       "auroc_best_single_coord": 0.8631617000342869,
+       "despread_gain": 0.11060136253186448
+      },
+      {
+       "feature": 17975,
+       "snr_db": -18.14497613991049,
+       "auroc_correlate": 0.9933777777777778,
+       "auroc_best_single_coord": 0.8251222222222222,
+       "despread_gain": 0.1682555555555556
+      },
+      {
+       "feature": 19800,
+       "snr_db": -19.999399231117017,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.994286703601108,
+       "despread_gain": 0.005713296398891954
+      },
+      {
+       "feature": 20498,
+       "snr_db": -28.4303674685326,
+       "auroc_correlate": 0.9970703125,
+       "auroc_best_single_coord": 0.93798828125,
+       "despread_gain": 0.05908203125
+      },
+      {
+       "feature": 20935,
+       "snr_db": -34.97633025128731,
+       "auroc_correlate": 0.9809420002642357,
+       "auroc_best_single_coord": 0.8285770907649623,
+       "despread_gain": 0.1523649094992734
+      },
+      {
+       "feature": 21045,
+       "snr_db": -14.382095286888523,
+       "auroc_correlate": 0.9977788880913055,
+       "auroc_best_single_coord": 0.8644876278830272,
+       "despread_gain": 0.1332912602082783
+      },
+      {
+       "feature": 21211,
+       "snr_db": -32.66954550935577,
+       "auroc_correlate": 0.9968782518210199,
+       "auroc_best_single_coord": 0.9349635796045785,
+       "despread_gain": 0.06191467221644131
+      },
+      {
+       "feature": 22285,
+       "snr_db": -30.390389555334593,
+       "auroc_correlate": 0.988548483045806,
+       "auroc_best_single_coord": 0.9013979773944081,
+       "despread_gain": 0.08715050565139792
+      },
+      {
+       "feature": 22376,
+       "snr_db": -25.266993296553736,
+       "auroc_correlate": 0.9803590010405827,
+       "auroc_best_single_coord": 0.8052646982310093,
+       "despread_gain": 0.1750943028095734
+      },
+      {
+       "feature": 22384,
+       "snr_db": -33.74379915364984,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9941860465116279,
+       "despread_gain": 0.005813953488372103
+      },
+      {
+       "feature": 22719,
+       "snr_db": -32.22482214228633,
+       "auroc_correlate": 0.9969178446168563,
+       "auroc_best_single_coord": 0.9341853544478691,
+       "despread_gain": 0.06273249016898719
+      },
+      {
+       "feature": 22893,
+       "snr_db": -32.73423038810141,
+       "auroc_correlate": 0.9973469387755103,
+       "auroc_best_single_coord": 0.8789795918367347,
+       "despread_gain": 0.1183673469387756
+      },
+      {
+       "feature": 22993,
+       "snr_db": -21.614779451978503,
+       "auroc_correlate": 0.9994665447340345,
+       "auroc_best_single_coord": 0.9769471117207743,
+       "despread_gain": 0.022519433013260204
+      },
+      {
+       "feature": 24542,
+       "snr_db": -23.988346961701833,
+       "auroc_correlate": 0.9921652605972776,
+       "auroc_best_single_coord": 0.9308833508732582,
+       "despread_gain": 0.06128190972401937
+      }
+     ]
+    }
+   ],
+   "snr_db_median": {
+    "mean": -30.265134585987045,
+    "std": 1.8054945217781861,
+    "n": 3,
+    "vals": [
+     -28.70277646339423,
+     -32.795311510298944,
+     -29.297315784267965
+    ]
+   },
+   "auroc_correlate_median": {
+    "mean": 0.9949666343295976,
+    "std": 0.0008277232688925532,
+    "n": 3,
+    "vals": [
+     0.9946145124716553,
+     0.9941758982981533,
+     0.9961094922189844
+    ]
+   },
+   "auroc_best_single_median": {
+    "mean": 0.90101385431295,
+    "std": 0.016983837601844267,
+    "n": 3,
+    "vals": [
+     0.877274125336409,
+     0.9160452153802185,
+     0.9097222222222222
+    ]
+   },
+   "despread_gain_median": {
+    "mean": 0.09383842074111781,
+    "std": 0.018724853254129047,
+    "n": 3,
+    "vals": [
+     0.12005382545174936,
+     0.07749117968772345,
+     0.08397025708388062
+    ]
+   },
+   "frac_despread_positive": {
+    "mean": 0.9938271604938271,
+    "std": 0.008729713347982055,
+    "n": 3,
+    "vals": [
+     1.0,
+     0.9814814814814815,
+     1.0
+    ]
+   }
+  },
+  "9": {
+   "per_seed": [
+    {
+     "seed": 0,
+     "n": 50,
+     "snr_db_median": -27.571583871395497,
+     "snr_db_p90": -20.502956577232784,
+     "auroc_correlate_median": 0.9928959154213404,
+     "auroc_best_single_median": 0.8740825397658639,
+     "despread_gain_median": 0.0983171374103961,
+     "frac_despread_positive": 1.0,
+     "rows": [
+      {
+       "feature": 53,
+       "snr_db": -31.060738769599745,
+       "auroc_correlate": 0.9922688463140358,
+       "auroc_best_single_coord": 0.8714337775926697,
+       "despread_gain": 0.12083506872136607
+      },
+      {
+       "feature": 716,
+       "snr_db": -25.76195813901847,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.92523193359375,
+       "despread_gain": 0.07476806640625
+      },
+      {
+       "feature": 828,
+       "snr_db": -27.70688098554878,
+       "auroc_correlate": 0.9919494459833795,
+       "auroc_best_single_coord": 0.8302891274238227,
+       "despread_gain": 0.16166031855955687
+      },
+      {
+       "feature": 1065,
+       "snr_db": -46.887929338688124,
+       "auroc_correlate": 0.9797830374753451,
+       "auroc_best_single_coord": 0.8652202498356345,
+       "despread_gain": 0.11456278763971062
+      },
+      {
+       "feature": 1181,
+       "snr_db": -35.49432928146919,
+       "auroc_correlate": 0.9982078853046595,
+       "auroc_best_single_coord": 0.9522488148918951,
+       "despread_gain": 0.04595907041276448
+      },
+      {
+       "feature": 2095,
+       "snr_db": -20.525851316341132,
+       "auroc_correlate": 0.9962425473040899,
+       "auroc_best_single_coord": 0.922636288532553,
+       "despread_gain": 0.07360625877153693
+      },
+      {
+       "feature": 2768,
+       "snr_db": -25.26653539392437,
+       "auroc_correlate": 0.9689352626887013,
+       "auroc_best_single_coord": 0.7699614800714351,
+       "despread_gain": 0.19897378261726628
+      },
+      {
+       "feature": 3150,
+       "snr_db": -35.42390941243747,
+       "auroc_correlate": 0.9988740851942204,
+       "auroc_best_single_coord": 0.8325201726402702,
+       "despread_gain": 0.16635391255395016
+      },
+      {
+       "feature": 3355,
+       "snr_db": -26.01551552311492,
+       "auroc_correlate": 0.9869241855183859,
+       "auroc_best_single_coord": 0.751419119573762,
+       "despread_gain": 0.23550506594462395
+      },
+      {
+       "feature": 4315,
+       "snr_db": -20.296903925257652,
+       "auroc_correlate": 0.9991076740035693,
+       "auroc_best_single_coord": 0.9619274241522903,
+       "despread_gain": 0.03718024985127899
+      },
+      {
+       "feature": 5344,
+       "snr_db": -46.521787943068546,
+       "auroc_correlate": 0.9958910034602076,
+       "auroc_best_single_coord": 0.935715830449827,
+       "despread_gain": 0.06017517301038067
+      },
+      {
+       "feature": 5892,
+       "snr_db": -28.430053927230887,
+       "auroc_correlate": 0.9854733560090703,
+       "auroc_best_single_coord": 0.7407614087301587,
+       "despread_gain": 0.24471194727891155
+      },
+      {
+       "feature": 6633,
+       "snr_db": -21.029762466531974,
+       "auroc_correlate": 0.9931711758584808,
+       "auroc_best_single_coord": 0.8353277835587929,
+       "despread_gain": 0.1578433922996879
+      },
+      {
+       "feature": 8211,
+       "snr_db": -41.90552083468475,
+       "auroc_correlate": 0.9955383700178465,
+       "auroc_best_single_coord": 0.8597932778108269,
+       "despread_gain": 0.13574509220701958
+      },
+      {
+       "feature": 8303,
+       "snr_db": -28.90703312537862,
+       "auroc_correlate": 0.9983723958333334,
+       "auroc_best_single_coord": 0.9466869212962963,
+       "despread_gain": 0.05168547453703709
+      },
+      {
+       "feature": 8563,
+       "snr_db": -21.58772920559818,
+       "auroc_correlate": 0.9980444444444445,
+       "auroc_best_single_coord": 0.9685333333333334,
+       "despread_gain": 0.029511111111111155
+      },
+      {
+       "feature": 9060,
+       "snr_db": -32.94877340041967,
+       "auroc_correlate": 0.9926206549841998,
+       "auroc_best_single_coord": 0.9573757540936513,
+       "despread_gain": 0.03524490089054855
+      },
+      {
+       "feature": 9168,
+       "snr_db": -17.152789968019498,
+       "auroc_correlate": 0.994795664115609,
+       "auroc_best_single_coord": 0.9053104852857331,
+       "despread_gain": 0.08948517882987594
+      },
+      {
+       "feature": 10667,
+       "snr_db": -24.38700007754997,
+       "auroc_correlate": 0.9951249622865728,
+       "auroc_best_single_coord": 0.8410202020823969,
+       "despread_gain": 0.15410476020417585
+      },
+      {
+       "feature": 10743,
+       "snr_db": -30.468938002774003,
+       "auroc_correlate": 0.9923407686105885,
+       "auroc_best_single_coord": 0.8786093941294156,
+       "despread_gain": 0.11373137448117288
+      },
+      {
+       "feature": 11303,
+       "snr_db": -44.57114023994612,
+       "auroc_correlate": 0.9449433259148078,
+       "auroc_best_single_coord": 0.8688732467263599,
+       "despread_gain": 0.07607007918844788
+      },
+      {
+       "feature": 11567,
+       "snr_db": -42.45269087760596,
+       "auroc_correlate": 0.9975510204081632,
+       "auroc_best_single_coord": 0.9722448979591837,
+       "despread_gain": 0.025306122448979562
+      },
+      {
+       "feature": 11688,
+       "snr_db": -39.1047509413304,
+       "auroc_correlate": 0.999267578125,
+       "auroc_best_single_coord": 0.9345703125,
+       "despread_gain": 0.064697265625
+      },
+      {
+       "feature": 12291,
+       "snr_db": -35.703672688545076,
+       "auroc_correlate": 0.9844173441734418,
+       "auroc_best_single_coord": 0.8985888029612004,
+       "despread_gain": 0.08582854121224148
+      },
+      {
+       "feature": 12890,
+       "snr_db": -24.80304904428632,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9571995464852607,
+       "despread_gain": 0.04280045351473927
+      },
+      {
+       "feature": 13308,
+       "snr_db": -29.153818386538347,
+       "auroc_correlate": 0.9859937565036421,
+       "auroc_best_single_coord": 0.8000832466181061,
+       "despread_gain": 0.18591050988553592
+      },
+      {
+       "feature": 13763,
+       "snr_db": -34.49933009656749,
+       "auroc_correlate": 0.9970987654320989,
+       "auroc_best_single_coord": 0.9230864197530865,
+       "despread_gain": 0.07401234567901238
+      },
+      {
+       "feature": 14344,
+       "snr_db": -27.43628675724221,
+       "auroc_correlate": 0.9972227732592739,
+       "auroc_best_single_coord": 0.9529855187462805,
+       "despread_gain": 0.04423725451299343
+      },
+      {
+       "feature": 15238,
+       "snr_db": -23.45215398988043,
+       "auroc_correlate": 0.9991998171010517,
+       "auroc_best_single_coord": 0.9611720774272214,
+       "despread_gain": 0.03802773967383022
+      },
+      {
+       "feature": 15944,
+       "snr_db": -26.910351840009955,
+       "auroc_correlate": 0.9905175733389344,
+       "auroc_best_single_coord": 0.7948420616583818,
+       "despread_gain": 0.19567551168055264
+      },
+      {
+       "feature": 16214,
+       "snr_db": -27.419473398963234,
+       "auroc_correlate": 0.9990610533671063,
+       "auroc_best_single_coord": 0.89191195737619,
+       "despread_gain": 0.10714909599091627
+      },
+      {
+       "feature": 16245,
+       "snr_db": -22.37385215856507,
+       "auroc_correlate": 0.9224765868886576,
+       "auroc_best_single_coord": 0.8449531737773153,
+       "despread_gain": 0.07752341311134237
+      },
+      {
+       "feature": 16587,
+       "snr_db": -21.17224625433831,
+       "auroc_correlate": 0.9934453767084087,
+       "auroc_best_single_coord": 0.8182429860809047,
+       "despread_gain": 0.17520239062750398
+      },
+      {
+       "feature": 16708,
+       "snr_db": -32.486824282952526,
+       "auroc_correlate": 0.9842476826565963,
+       "auroc_best_single_coord": 0.8297172372897226,
+       "despread_gain": 0.15453044536687377
+      },
+      {
+       "feature": 17107,
+       "snr_db": -32.46674985104474,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9650607638888888,
+       "despread_gain": 0.03493923611111116
+      },
+      {
+       "feature": 17230,
+       "snr_db": -21.66280646123017,
+       "auroc_correlate": 0.9981678092278822,
+       "auroc_best_single_coord": 0.9887721092515165,
+       "despread_gain": 0.00939569997636569
+      },
+      {
+       "feature": 17788,
+       "snr_db": -43.93429775676303,
+       "auroc_correlate": 0.984586262844781,
+       "auroc_best_single_coord": 0.9153596538669551,
+       "despread_gain": 0.06922660897782595
+      },
+      {
+       "feature": 18030,
+       "snr_db": -17.75548390532188,
+       "auroc_correlate": 0.9719988388809191,
+       "auroc_best_single_coord": 0.7448363901869361,
+       "despread_gain": 0.22716244869398294
+      },
+      {
+       "feature": 18186,
+       "snr_db": -21.93984991691938,
+       "auroc_correlate": 0.9990268166089965,
+       "auroc_best_single_coord": 0.9809147923875432,
+       "despread_gain": 0.018112024221453304
+      },
+      {
+       "feature": 18232,
+       "snr_db": -43.63867174214388,
+       "auroc_correlate": 0.9339075484764543,
+       "auroc_best_single_coord": 0.8767313019390581,
+       "despread_gain": 0.05717624653739617
+      },
+      {
+       "feature": 18642,
+       "snr_db": -27.734152906452398,
+       "auroc_correlate": 0.9893121693121693,
+       "auroc_best_single_coord": 0.8436407155454775,
+       "despread_gain": 0.14567145376669177
+      },
+      {
+       "feature": 19365,
+       "snr_db": -26.265753588932963,
+       "auroc_correlate": 0.9964055786899332,
+       "auroc_best_single_coord": 0.9146665344702227,
+       "despread_gain": 0.08173904421971045
+      },
+      {
+       "feature": 19770,
+       "snr_db": -23.67655073248594,
+       "auroc_correlate": 0.9865230149743105,
+       "auroc_best_single_coord": 0.78722028799351,
+       "despread_gain": 0.19930272698080054
+      },
+      {
+       "feature": 20074,
+       "snr_db": -24.003531032719472,
+       "auroc_correlate": 0.9647744082840236,
+       "auroc_best_single_coord": 0.8340421597633136,
+       "despread_gain": 0.13073224852070997
+      },
+      {
+       "feature": 20180,
+       "snr_db": -27.35162655385048,
+       "auroc_correlate": 0.981701960120783,
+       "auroc_best_single_coord": 0.818293484485631,
+       "despread_gain": 0.16340847563515204
+      },
+      {
+       "feature": 20405,
+       "snr_db": -42.55003172349439,
+       "auroc_correlate": 0.9822522189349113,
+       "auroc_best_single_coord": 0.8538609467455621,
+       "despread_gain": 0.1283912721893492
+      },
+      {
+       "feature": 20593,
+       "snr_db": -19.497281281588418,
+       "auroc_correlate": 0.9513008608241538,
+       "auroc_best_single_coord": 0.7743405085856719,
+       "despread_gain": 0.17696035223848183
+      },
+      {
+       "feature": 21353,
+       "snr_db": -31.305229466545633,
+       "auroc_correlate": 0.9903353596065843,
+       "auroc_best_single_coord": 0.8548980602417867,
+       "despread_gain": 0.13543729936479754
+      },
+      {
+       "feature": 23991,
+       "snr_db": -41.85383882181799,
+       "auroc_correlate": 0.9847645429362881,
+       "auroc_best_single_coord": 0.8128787222991689,
+       "despread_gain": 0.1718858206371192
+      },
+      {
+       "feature": 24401,
+       "snr_db": -19.4082409550803,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9947199265381084,
+       "despread_gain": 0.005280073461891632
+      }
+     ]
+    },
+    {
+     "seed": 1,
+     "n": 53,
+     "snr_db_median": -29.44346054348467,
+     "snr_db_p90": -20.423117127840865,
+     "auroc_correlate_median": 0.9925143763632758,
+     "auroc_best_single_median": 0.8944480051273834,
+     "despread_gain_median": 0.09508509286067379,
+     "frac_despread_positive": 0.9811320754716981,
+     "rows": [
+      {
+       "feature": 61,
+       "snr_db": -30.068051414251244,
+       "auroc_correlate": 0.996595096939593,
+       "auroc_best_single_coord": 0.8944480051273834,
+       "despread_gain": 0.1021470918122096
+      },
+      {
+       "feature": 117,
+       "snr_db": -20.396686997951747,
+       "auroc_correlate": 0.9919405421776352,
+       "auroc_best_single_coord": 0.8676248949389705,
+       "despread_gain": 0.12431564723866462
+      },
+      {
+       "feature": 422,
+       "snr_db": -23.38085175341126,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9695121951219512,
+       "despread_gain": 0.030487804878048808
+      },
+      {
+       "feature": 736,
+       "snr_db": -45.983812871109755,
+       "auroc_correlate": 0.97998046875,
+       "auroc_best_single_coord": 0.825927734375,
+       "despread_gain": 0.154052734375
+      },
+      {
+       "feature": 1693,
+       "snr_db": -39.50569830695345,
+       "auroc_correlate": 0.9911703601108033,
+       "auroc_best_single_coord": 0.8573407202216067,
+       "despread_gain": 0.1338296398891966
+      },
+      {
+       "feature": 3255,
+       "snr_db": -29.44346054348467,
+       "auroc_correlate": 0.9960281227173119,
+       "auroc_best_single_coord": 0.8720325054784515,
+       "despread_gain": 0.12399561723886043
+      },
+      {
+       "feature": 4249,
+       "snr_db": -32.82172860268703,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9981103552532123,
+       "despread_gain": 0.0018896447467876554
+      },
+      {
+       "feature": 4555,
+       "snr_db": -34.76300806351948,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9801038062283737,
+       "despread_gain": 0.019896193771626325
+      },
+      {
+       "feature": 4911,
+       "snr_db": -40.52375856445954,
+       "auroc_correlate": 0.9857150813098685,
+       "auroc_best_single_coord": 0.8275367565159278,
+       "despread_gain": 0.15817832479394067
+      },
+      {
+       "feature": 5154,
+       "snr_db": -35.16692864484635,
+       "auroc_correlate": 0.9802841920948522,
+       "auroc_best_single_coord": 0.8010929239325739,
+       "despread_gain": 0.17919126816227826
+      },
+      {
+       "feature": 5298,
+       "snr_db": -21.604918094915128,
+       "auroc_correlate": 0.9972451790633609,
+       "auroc_best_single_coord": 0.9807162534435262,
+       "despread_gain": 0.016528925619834656
+      },
+      {
+       "feature": 6103,
+       "snr_db": -27.434008580834718,
+       "auroc_correlate": 0.989844109233258,
+       "auroc_best_single_coord": 0.956115117780686,
+       "despread_gain": 0.03372899145257202
+      },
+      {
+       "feature": 6195,
+       "snr_db": -27.62216364488498,
+       "auroc_correlate": 0.9830561312682209,
+       "auroc_best_single_coord": 0.8970511089515913,
+       "despread_gain": 0.08600502231662954
+      },
+      {
+       "feature": 6748,
+       "snr_db": -36.313508305659326,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9231570179092045,
+       "despread_gain": 0.07684298209079554
+      },
+      {
+       "feature": 7301,
+       "snr_db": -12.746521166027907,
+       "auroc_correlate": 0.9891711556266307,
+       "auroc_best_single_coord": 0.7735447352916421,
+       "despread_gain": 0.21562642033498858
+      },
+      {
+       "feature": 7707,
+       "snr_db": -37.71013420712294,
+       "auroc_correlate": 0.9925,
+       "auroc_best_single_coord": 0.92375,
+       "despread_gain": 0.06875000000000009
+      },
+      {
+       "feature": 7890,
+       "snr_db": -26.671241073353762,
+       "auroc_correlate": 0.9925143763632758,
+       "auroc_best_single_coord": 0.8457432745059158,
+       "despread_gain": 0.14677110185735998
+      },
+      {
+       "feature": 8731,
+       "snr_db": -27.613799198512005,
+       "auroc_correlate": 0.9409302857142858,
+       "auroc_best_single_coord": 0.7807115102040816,
+       "despread_gain": 0.16021877551020425
+      },
+      {
+       "feature": 9083,
+       "snr_db": -45.5789713191477,
+       "auroc_correlate": 0.9620243757431628,
+       "auroc_best_single_coord": 0.8208234244946492,
+       "despread_gain": 0.14120095124851362
+      },
+      {
+       "feature": 10223,
+       "snr_db": -31.00575884118716,
+       "auroc_correlate": 0.9829639577609773,
+       "auroc_best_single_coord": 0.7704241626843185,
+       "despread_gain": 0.21253979507665888
+      },
+      {
+       "feature": 11061,
+       "snr_db": -47.15950127259566,
+       "auroc_correlate": 0.9971164936562861,
+       "auroc_best_single_coord": 0.9250288350634371,
+       "despread_gain": 0.07208765859284894
+      },
+      {
+       "feature": 11407,
+       "snr_db": -29.472846123336605,
+       "auroc_correlate": 0.9868791111111112,
+       "auroc_best_single_coord": 0.9196195555555555,
+       "despread_gain": 0.06725955555555563
+      },
+      {
+       "feature": 11940,
+       "snr_db": -41.825951126607556,
+       "auroc_correlate": 0.9868081729815512,
+       "auroc_best_single_coord": 0.9405375917476692,
+       "despread_gain": 0.04627058123388206
+      },
+      {
+       "feature": 12406,
+       "snr_db": -23.643072603447635,
+       "auroc_correlate": 0.9992911153119092,
+       "auroc_best_single_coord": 0.915406427221172,
+       "despread_gain": 0.08388468809073713
+      },
+      {
+       "feature": 12711,
+       "snr_db": -46.82115865427923,
+       "auroc_correlate": 0.9842249657064471,
+       "auroc_best_single_coord": 0.8029835390946503,
+       "despread_gain": 0.18124142661179687
+      },
+      {
+       "feature": 12919,
+       "snr_db": -23.708294296445555,
+       "auroc_correlate": 0.9970771121896119,
+       "auroc_best_single_coord": 0.9995501119875083,
+       "despread_gain": -0.0024729997978963913
+      },
+      {
+       "feature": 13685,
+       "snr_db": -28.41076389388769,
+       "auroc_correlate": 0.9998699271592092,
+       "auroc_best_single_coord": 0.9889438085327784,
+       "despread_gain": 0.01092611862643078
+      },
+      {
+       "feature": 14025,
+       "snr_db": -20.730798100979456,
+       "auroc_correlate": 0.9976389802396408,
+       "auroc_best_single_coord": 0.9552228402299179,
+       "despread_gain": 0.042416140009722936
+      },
+      {
+       "feature": 14477,
+       "snr_db": -38.67299024844381,
+       "auroc_correlate": 0.964162586789539,
+       "auroc_best_single_coord": 0.8538112834615219,
+       "despread_gain": 0.11035130332801713
+      },
+      {
+       "feature": 14886,
+       "snr_db": -28.864184994049367,
+       "auroc_correlate": 0.9996152662357648,
+       "auroc_best_single_coord": 0.9669513696522006,
+       "despread_gain": 0.03266389658356417
+      },
+      {
+       "feature": 15867,
+       "snr_db": -18.974278192945068,
+       "auroc_correlate": 0.9876475985455518,
+       "auroc_best_single_coord": 0.7231188712465016,
+       "despread_gain": 0.2645287272990502
+      },
+      {
+       "feature": 16742,
+       "snr_db": -26.77943633643772,
+       "auroc_correlate": 0.9959484016588648,
+       "auroc_best_single_coord": 0.9713926429371044,
+       "despread_gain": 0.024555758721760412
+      },
+      {
+       "feature": 16860,
+       "snr_db": -20.528837647397346,
+       "auroc_correlate": 0.9918591708350513,
+       "auroc_best_single_coord": 0.9365651927569942,
+       "despread_gain": 0.05529397807805703
+      },
+      {
+       "feature": 17264,
+       "snr_db": -29.627086300629863,
+       "auroc_correlate": 0.9995604454153124,
+       "auroc_best_single_coord": 0.8692924503170121,
+       "despread_gain": 0.13026799509830034
+      },
+      {
+       "feature": 17962,
+       "snr_db": -14.211197140137708,
+       "auroc_correlate": 0.9892582377703586,
+       "auroc_best_single_coord": 0.9143925097982291,
+       "despread_gain": 0.07486572797212954
+      },
+      {
+       "feature": 18168,
+       "snr_db": -49.05003207450932,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.990909090909091,
+       "despread_gain": 0.009090909090909038
+      },
+      {
+       "feature": 19008,
+       "snr_db": -34.898673264866574,
+       "auroc_correlate": 0.9783737024221454,
+       "auroc_best_single_coord": 0.8832886095614716,
+       "despread_gain": 0.09508509286067379
+      },
+      {
+       "feature": 19186,
+       "snr_db": -26.850664792548173,
+       "auroc_correlate": 0.985977598584327,
+       "auroc_best_single_coord": 0.8825938587142311,
+       "despread_gain": 0.10338373987009586
+      },
+      {
+       "feature": 19330,
+       "snr_db": -30.499263544812592,
+       "auroc_correlate": 0.993178862548768,
+       "auroc_best_single_coord": 0.7370504636673495,
+       "despread_gain": 0.2561283988814185
+      },
+      {
+       "feature": 19718,
+       "snr_db": -36.47640636415828,
+       "auroc_correlate": 0.999375015469914,
+       "auroc_best_single_coord": 0.8825462241033638,
+       "despread_gain": 0.11682879136655022
+      },
+      {
+       "feature": 20764,
+       "snr_db": -31.392923745695818,
+       "auroc_correlate": 0.9943824791883454,
+       "auroc_best_single_coord": 0.8568426443808532,
+       "despread_gain": 0.1375398348074922
+      },
+      {
+       "feature": 20932,
+       "snr_db": -26.65920978749769,
+       "auroc_correlate": 0.9946866320492694,
+       "auroc_best_single_coord": 0.9187900012075836,
+       "despread_gain": 0.07589663084168585
+      },
+      {
+       "feature": 21445,
+       "snr_db": -36.617246808712004,
+       "auroc_correlate": 0.9893730489073881,
+       "auroc_best_single_coord": 0.8258558792924038,
+       "despread_gain": 0.1635171696149843
+      },
+      {
+       "feature": 21754,
+       "snr_db": -32.59310238463512,
+       "auroc_correlate": 0.990858450443787,
+       "auroc_best_single_coord": 0.8290726701183432,
+       "despread_gain": 0.16178578032544377
+      },
+      {
+       "feature": 21923,
+       "snr_db": -28.189650924195277,
+       "auroc_correlate": 0.9963811728395062,
+       "auroc_best_single_coord": 0.8129475308641976,
+       "despread_gain": 0.18343364197530865
+      },
+      {
+       "feature": 22252,
+       "snr_db": -27.77607755321415,
+       "auroc_correlate": 0.9979671556122449,
+       "auroc_best_single_coord": 0.9203404017857143,
+       "despread_gain": 0.07762675382653061
+      },
+      {
+       "feature": 22351,
+       "snr_db": -15.272212829906227,
+       "auroc_correlate": 0.9889708374250539,
+       "auroc_best_single_coord": 0.8374794502569581,
+       "despread_gain": 0.15149138716809574
+      },
+      {
+       "feature": 22358,
+       "snr_db": -17.271147187585207,
+       "auroc_correlate": 0.9595421757674573,
+       "auroc_best_single_coord": 0.671133314565302,
+       "despread_gain": 0.28840886120215525
+      },
+      {
+       "feature": 22633,
+       "snr_db": -27.59653879004098,
+       "auroc_correlate": 0.9974963476990504,
+       "auroc_best_single_coord": 0.9445252008765522,
+       "despread_gain": 0.05297114682249815
+      },
+      {
+       "feature": 23211,
+       "snr_db": -26.392520933192444,
+       "auroc_correlate": 0.9967168820190797,
+       "auroc_best_single_coord": 0.9909733124018838,
+       "despread_gain": 0.005743569617195909
+      },
+      {
+       "feature": 23434,
+       "snr_db": -46.42451216104787,
+       "auroc_correlate": 0.9980536332179931,
+       "auroc_best_single_coord": 0.9619377162629758,
+       "despread_gain": 0.03611591695501737
+      },
+      {
+       "feature": 24094,
+       "snr_db": -23.593824440478528,
+       "auroc_correlate": 0.997097349075518,
+       "auroc_best_single_coord": 0.9051648474047672,
+       "despread_gain": 0.09193250167075073
+      },
+      {
+       "feature": 24234,
+       "snr_db": -33.408055278729165,
+       "auroc_correlate": 0.9833362188365651,
+       "auroc_best_single_coord": 0.8519520429362881,
+       "despread_gain": 0.13138417590027696
+      }
+     ]
+    },
+    {
+     "seed": 2,
+     "n": 48,
+     "snr_db_median": -31.00169823278435,
+     "snr_db_p90": -22.14818964066054,
+     "auroc_correlate_median": 0.9945701343446361,
+     "auroc_best_single_median": 0.9084442683738654,
+     "despread_gain_median": 0.07580380790002078,
+     "frac_despread_positive": 0.9583333333333334,
+     "rows": [
+      {
+       "feature": 26,
+       "snr_db": -40.312379657279614,
+       "auroc_correlate": 0.9943486020226056,
+       "auroc_best_single_coord": 0.9470553242117787,
+       "despread_gain": 0.04729327781082682
+      },
+      {
+       "feature": 353,
+       "snr_db": -38.35714622448907,
+       "auroc_correlate": 0.9707609988109394,
+       "auroc_best_single_coord": 0.796064209274673,
+       "despread_gain": 0.17469678953626633
+      },
+      {
+       "feature": 651,
+       "snr_db": -25.21758188766686,
+       "auroc_correlate": 0.9994634515843959,
+       "auroc_best_single_coord": 0.9750347178386567,
+       "despread_gain": 0.024428733745739173
+      },
+      {
+       "feature": 706,
+       "snr_db": -30.420910358116735,
+       "auroc_correlate": 0.9991375640404575,
+       "auroc_best_single_coord": 0.8764734810117292,
+       "despread_gain": 0.12266408302872833
+      },
+      {
+       "feature": 2172,
+       "snr_db": -30.844650783477945,
+       "auroc_correlate": 0.99692138671875,
+       "auroc_best_single_coord": 0.93306640625,
+       "despread_gain": 0.06385498046874993
+      },
+      {
+       "feature": 2381,
+       "snr_db": -19.505675913697747,
+       "auroc_correlate": 0.9950029599192117,
+       "auroc_best_single_coord": 0.9976976917987469,
+       "despread_gain": -0.0026947318795351727
+      },
+      {
+       "feature": 2910,
+       "snr_db": -25.201351621894943,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9971875,
+       "despread_gain": 0.0028124999999999956
+      },
+      {
+       "feature": 3337,
+       "snr_db": -30.683822410295445,
+       "auroc_correlate": 0.975951727035945,
+       "auroc_best_single_coord": 0.8631660227552788,
+       "despread_gain": 0.11278570428066625
+      },
+      {
+       "feature": 3701,
+       "snr_db": -35.57505168175597,
+       "auroc_correlate": 0.9827395112456748,
+       "auroc_best_single_coord": 0.8372756271626297,
+       "despread_gain": 0.14546388408304511
+      },
+      {
+       "feature": 3824,
+       "snr_db": -42.02323115226924,
+       "auroc_correlate": 0.9757375618862105,
+       "auroc_best_single_coord": 0.8258308984660336,
+       "despread_gain": 0.1499066634201769
+      },
+      {
+       "feature": 4440,
+       "snr_db": -31.62321412711526,
+       "auroc_correlate": 0.9965986394557823,
+       "auroc_best_single_coord": 0.9646006550768456,
+       "despread_gain": 0.03199798437893675
+      },
+      {
+       "feature": 4628,
+       "snr_db": -26.55628561922441,
+       "auroc_correlate": 0.9934132207272972,
+       "auroc_best_single_coord": 0.8609532580130724,
+       "despread_gain": 0.13245996271422478
+      },
+      {
+       "feature": 5030,
+       "snr_db": -43.96340778661232,
+       "auroc_correlate": 0.9990625,
+       "auroc_best_single_coord": 0.92953125,
+       "despread_gain": 0.06953124999999993
+      },
+      {
+       "feature": 5056,
+       "snr_db": -20.206333840296455,
+       "auroc_correlate": 0.9968455529007489,
+       "auroc_best_single_coord": 0.7293333378077264,
+       "despread_gain": 0.2675122150930226
+      },
+      {
+       "feature": 5155,
+       "snr_db": -24.307096509902244,
+       "auroc_correlate": 0.9928230406746031,
+       "auroc_best_single_coord": 0.8944382440476191,
+       "despread_gain": 0.09838479662698407
+      },
+      {
+       "feature": 5258,
+       "snr_db": -28.669544866176537,
+       "auroc_correlate": 0.999016614046892,
+       "auroc_best_single_coord": 0.9833471352414471,
+       "despread_gain": 0.015669478805444892
+      },
+      {
+       "feature": 5684,
+       "snr_db": -31.158745682090757,
+       "auroc_correlate": 0.9823191730823321,
+       "auroc_best_single_coord": 0.9451456525009648,
+       "despread_gain": 0.03717352058136725
+      },
+      {
+       "feature": 6206,
+       "snr_db": -25.010256192149598,
+       "auroc_correlate": 0.9759418636872944,
+       "auroc_best_single_coord": 0.8449283336211502,
+       "despread_gain": 0.13101353006614425
+      },
+      {
+       "feature": 7703,
+       "snr_db": -22.56197224758474,
+       "auroc_correlate": 0.9994341330918968,
+       "auroc_best_single_coord": 0.9755545495699411,
+       "despread_gain": 0.023879583521955627
+      },
+      {
+       "feature": 7795,
+       "snr_db": -35.90523836431964,
+       "auroc_correlate": 0.9947916666666667,
+       "auroc_best_single_coord": 0.7896090534979424,
+       "despread_gain": 0.20518261316872433
+      },
+      {
+       "feature": 8534,
+       "snr_db": -28.32545583293523,
+       "auroc_correlate": 0.9958045925527785,
+       "auroc_best_single_coord": 0.9557756941748701,
+       "despread_gain": 0.04002889837790846
+      },
+      {
+       "feature": 9335,
+       "snr_db": -29.619526455615496,
+       "auroc_correlate": 0.9983860891295293,
+       "auroc_best_single_coord": 0.9824291961682632,
+       "despread_gain": 0.015956892961266123
+      },
+      {
+       "feature": 10387,
+       "snr_db": -35.01907162118181,
+       "auroc_correlate": 0.9530928428497026,
+       "auroc_best_single_coord": 0.7458041172116993,
+       "despread_gain": 0.20728872563800338
+      },
+      {
+       "feature": 10864,
+       "snr_db": -48.832990514326994,
+       "auroc_correlate": 0.9339229968782519,
+       "auroc_best_single_coord": 0.9099895941727367,
+       "despread_gain": 0.02393340270551514
+      },
+      {
+       "feature": 11312,
+       "snr_db": -36.56450236980885,
+       "auroc_correlate": 0.9951611159169551,
+       "auroc_best_single_coord": 0.8512921712802768,
+       "despread_gain": 0.14386894463667832
+      },
+      {
+       "feature": 11755,
+       "snr_db": -33.948495334618784,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9089335180055401,
+       "despread_gain": 0.09106648199445988
+      },
+      {
+       "feature": 11968,
+       "snr_db": -21.46574941427227,
+       "auroc_correlate": 0.996939418489513,
+       "auroc_best_single_coord": 0.9736389199662222,
+       "despread_gain": 0.023300498523290747
+      },
+      {
+       "feature": 12140,
+       "snr_db": -37.94073017086796,
+       "auroc_correlate": 0.9929760665972944,
+       "auroc_best_single_coord": 0.9162330905306972,
+       "despread_gain": 0.07674297606659719
+      },
+      {
+       "feature": 12842,
+       "snr_db": -40.5730889105613,
+       "auroc_correlate": 0.9996296296296296,
+       "auroc_best_single_coord": 0.9750617283950618,
+       "despread_gain": 0.024567901234567868
+      },
+      {
+       "feature": 13314,
+       "snr_db": -28.312097433580284,
+       "auroc_correlate": 0.9749451930736771,
+       "auroc_best_single_coord": 0.8081904862087186,
+       "despread_gain": 0.16675470686495852
+      },
+      {
+       "feature": 13589,
+       "snr_db": -23.88134255237414,
+       "auroc_correlate": 0.9955692253467459,
+       "auroc_best_single_coord": 0.8271104823959762,
+       "despread_gain": 0.16845874295076968
+      },
+      {
+       "feature": 13645,
+       "snr_db": -23.138653111614307,
+       "auroc_correlate": 0.9871296853336095,
+       "auroc_best_single_coord": 0.770558542007629,
+       "despread_gain": 0.2165711433259805
+      },
+      {
+       "feature": 15542,
+       "snr_db": -45.913988161586666,
+       "auroc_correlate": 0.9904887881078357,
+       "auroc_best_single_coord": 0.8735827664399093,
+       "despread_gain": 0.11690602166792641
+      },
+      {
+       "feature": 16891,
+       "snr_db": -37.51019266582715,
+       "auroc_correlate": 0.9828196584756351,
+       "auroc_best_single_coord": 0.9079550187421908,
+       "despread_gain": 0.07486463973344437
+      },
+      {
+       "feature": 17147,
+       "snr_db": -36.02715499813482,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 1.0,
+       "despread_gain": 0.0
+      },
+      {
+       "feature": 17190,
+       "snr_db": -37.11451778261801,
+       "auroc_correlate": 1.0,
+       "auroc_best_single_coord": 0.9886111111111111,
+       "despread_gain": 0.011388888888888893
+      },
+      {
+       "feature": 19950,
+       "snr_db": -30.154701075175986,
+       "auroc_correlate": 0.9841214845862628,
+       "auroc_best_single_coord": 0.7474310438074635,
+       "despread_gain": 0.2366904407787993
+      },
+      {
+       "feature": 20920,
+       "snr_db": -36.65651991330448,
+       "auroc_correlate": 0.9986496913580246,
+       "auroc_best_single_coord": 0.9791666666666666,
+       "despread_gain": 0.019483024691357986
+      },
+      {
+       "feature": 21184,
+       "snr_db": -47.52118993525423,
+       "auroc_correlate": 0.9554545454545454,
+       "auroc_best_single_coord": 0.7810743801652893,
+       "despread_gain": 0.17438016528925615
+      },
+      {
+       "feature": 22368,
+       "snr_db": -29.362956425574556,
+       "auroc_correlate": 0.9887889273356402,
+       "auroc_best_single_coord": 0.9452249134948096,
+       "despread_gain": 0.04356401384083053
+      },
+      {
+       "feature": 22372,
+       "snr_db": -22.279072150214088,
+       "auroc_correlate": 0.9991280987840513,
+       "auroc_best_single_coord": 0.9623432934301065,
+       "despread_gain": 0.036784805353944794
+      },
+      {
+       "feature": 22589,
+       "snr_db": -37.997145833171814,
+       "auroc_correlate": 0.9821107618343194,
+       "auroc_best_single_coord": 0.8683995931952663,
+       "despread_gain": 0.11371116863905317
+      },
+      {
+       "feature": 22898,
+       "snr_db": -39.69821373054491,
+       "auroc_correlate": 0.9762287705037015,
+       "auroc_best_single_coord": 0.8501698359703875,
+       "despread_gain": 0.12605893453331396
+      },
+      {
+       "feature": 22985,
+       "snr_db": -10.639950542456942,
+       "auroc_correlate": 0.9820701436130008,
+       "auroc_best_single_coord": 0.8549925673973293,
+       "despread_gain": 0.1270775762156715
+      },
+      {
+       "feature": 23149,
+       "snr_db": -32.384812335425906,
+       "auroc_correlate": 0.995674740484429,
+       "auroc_best_single_coord": 0.9805363321799307,
+       "despread_gain": 0.015138408304498308
+      },
+      {
+       "feature": 23619,
+       "snr_db": -46.67872526229037,
+       "auroc_correlate": 0.9676017240119804,
+       "auroc_best_single_coord": 0.9022207611951202,
+       "despread_gain": 0.06538096281686023
+      },
+      {
+       "feature": 24157,
+       "snr_db": -25.166975076996124,
+       "auroc_correlate": 0.99921875,
+       "auroc_best_single_coord": 0.95203125,
+       "despread_gain": 0.04718750000000005
+      },
+      {
+       "feature": 24201,
+       "snr_db": -21.84279711836893,
+       "auroc_correlate": 0.9785402903640866,
+       "auroc_best_single_coord": 0.7192714532583834,
+       "despread_gain": 0.25926883710570325
+      }
+     ]
+    }
+   ],
+   "snr_db_median": {
+    "mean": -29.33891421588817,
+    "std": 1.402288268987978,
+    "n": 3,
+    "vals": [
+     -27.571583871395497,
+     -29.44346054348467,
+     -31.00169823278435
+    ]
+   },
+   "auroc_correlate_median": {
+    "mean": 0.9933268087097508,
+    "std": 0.0008928557139797978,
+    "n": 3,
+    "vals": [
+     0.9928959154213404,
+     0.9925143763632758,
+     0.9945701343446361
+    ]
+   },
+   "auroc_best_single_median": {
+    "mean": 0.8923249377557042,
+    "std": 0.014108216507435259,
+    "n": 3,
+    "vals": [
+     0.8740825397658639,
+     0.8944480051273834,
+     0.9084442683738654
+    ]
+   },
+   "despread_gain_median": {
+    "mean": 0.08973534605703022,
+    "std": 0.009939059129112943,
+    "n": 3,
+    "vals": [
+     0.0983171374103961,
+     0.09508509286067379,
+     0.07580380790002078
+    ]
+   },
+   "frac_despread_positive": {
+    "mean": 0.9798218029350104,
+    "std": 0.01703555866157756,
+    "n": 3,
+    "vals": [
+     1.0,
+     0.9811320754716981,
+     0.9583333333333334
+    ]
+   }
+  }
+ }
+}

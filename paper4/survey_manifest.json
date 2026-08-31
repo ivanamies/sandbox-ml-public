@@ -1,0 +1,92 @@
+{
+ "allowlists": [
+  "paper4/allowlist.json",
+  "paper4/survey_allowlist.json"
+ ],
+ "unchecked_sections": [
+  "preamble",
+  "References",
+  "0. Background and prior work"
+ ],
+ "sections": {
+  "Notation, units, and the cast": [],
+  "1. What this paper establishes": [],
+  "2. Design lessons from a designed code": [
+   "artifacts/results/rung1.json",
+   "artifacts/results/rung3.json",
+   "artifacts/results/rung3_lam10.json"
+  ],
+  "3. The MAC: input-bound parity": [
+   "artifacts/results/arm_b.json",
+   "artifacts/results/rung3_mac_b3_seed0.json",
+   "artifacts/results/rung3_mac_b3_seed1.json",
+   "artifacts/results/rung3_mac_b3_seed2.json",
+   "artifacts/results/rung3_mac_untrained_seed0.json",
+   "artifacts/results/rung3_mac_untrained_seed1.json",
+   "artifacts/results/rung3_mac_untrained_seed2.json",
+   "artifacts/results/adaptive_mac_mac_b3_seed0.json",
+   "artifacts/results/adaptive_mac_mac_b3_seed1.json",
+   "artifacts/results/adaptive_mac_mac_b3_seed2.json",
+   "artifacts/results/rung3.json",
+   "artifacts/results/lattice_sweep.json",
+   "artifacts/results/lattice_post.json"
+  ],
+  "4. A post-trained MAC head on frozen GPT-2": [
+   "artifacts/results/arm_f.json",
+   "artifacts/results/arm_f_agg.json",
+   "artifacts/results/arm_f_floor.json",
+   "artifacts/results/arm_f_temporal.json",
+   "artifacts/results/arm_f_generation.json",
+   "artifacts/results/arm_f_adaptive.json",
+   "artifacts/results/arm_f_adaptive_eps2.json",
+   "artifacts/results/arm_f_adaptive_eps5.json"
+  ],
+  "5. The cooperative control": [
+   "artifacts/results/arm_e.json",
+   "artifacts/results/arm_f_agg.json"
+  ],
+  "6. KV-cache integrity": [
+   "artifacts/results/arm_g.json",
+   "artifacts/results/arm_g_nopos.json",
+   "artifacts/results/arm_g_posmask.json"
+  ],
+  "7. Two instruments beat one fused score": [
+   "artifacts/results/fuse_resid.json",
+   "artifacts/results/fuse_kv.json",
+   "artifacts/results/gencal_resid.json",
+   "artifacts/results/gencal_kv.json"
+  ],
+  "8. The scale ladder": [
+   "artifacts/results/scale_agg.json",
+   "artifacts/results/scale_capacity_asymptote.json",
+   "artifacts/results/scale_corpus_control.json",
+   "artifacts/results/scale_timing.json"
+  ],
+  "9. Deployment: a windowed integrity monitor": [
+   "artifacts/results/windowed_resid.json",
+   "artifacts/results/windowed_kv.json",
+   "artifacts/results/arm_f_agg.json",
+   "artifacts/results/arm_g.json",
+   "artifacts/results/arm_f_generation.json"
+  ],
+  "10. Why it works": [
+   "artifacts/results/macl_l15_despreading.json",
+   "artifacts/results/scale_agg.json"
+  ],
+  "11. Limitations": [
+   "artifacts/results/fuse_resid.json",
+   "artifacts/results/arm_f_agg.json",
+   "artifacts/results/arm_f_adaptive.json"
+  ],
+  "Appendix A \u2014 corrected records, kept nulls, and fired kills": [
+   "artifacts/results/arm_g.json",
+   "artifacts/results/arm_g_nopos.json",
+   "artifacts/results/arm_g_posmask.json",
+   "artifacts/results/fuse_resid.json",
+   "artifacts/results/fuse_kv.json",
+   "artifacts/results/gencal_resid.json",
+   "artifacts/results/gencal_kv.json"
+  ],
+  "Appendix B \u2014 operational notes": []
+ }
+}

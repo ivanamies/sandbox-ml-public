@@ -1,0 +1,14 @@
+[
+ {
+  "number": -0.13,
+  "reason": "task-accuracy delta in percent (98.96 vs baseline), derived difference"
+ },
+ {
+  "number": 4096,
+  "reason": "head hidden-width design constant"
+ },
+ {
+  "number": 3090,
+  "reason": "RTX 3090 Ti hardware model number"
+ }
+]

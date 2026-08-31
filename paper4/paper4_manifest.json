@@ -1,0 +1,76 @@
+{
+ "paper": "A Tamper Seal for Neural Networks",
+ "allowlist": "allowlist.json",
+ "sections": {
+  "Introduction": [],
+  "Design lessons from a designed code": [
+   "artifacts/results/rung1.json",
+   "artifacts/results/rung3.json",
+   "artifacts/results/rung3_lam10.json"
+  ],
+  "The MAC: input-bound parity": [
+   "artifacts/results/arm_b.json",
+   "artifacts/results/rung3_mac_b3_seed0.json",
+   "artifacts/results/rung3_mac_b3_seed1.json",
+   "artifacts/results/rung3_mac_b3_seed2.json",
+   "artifacts/results/rung3_mac_untrained_seed0.json",
+   "artifacts/results/rung3_mac_untrained_seed1.json",
+   "artifacts/results/rung3_mac_untrained_seed2.json",
+   "artifacts/results/adaptive_mac_mac_b3_seed0.json",
+   "artifacts/results/adaptive_mac_mac_b3_seed1.json",
+   "artifacts/results/adaptive_mac_mac_b3_seed2.json",
+   "artifacts/results/rung3.json",
+   "artifacts/results/lattice_sweep.json",
+   "artifacts/results/lattice_post.json"
+  ],
+  "Setup for frozen transformers": [
+   "artifacts/results/arm_b.json"
+  ],
+  "A post-trained MAC head on frozen GPT-2": [
+   "artifacts/results/arm_f.json",
+   "artifacts/results/arm_f_agg.json",
+   "artifacts/results/arm_f_floor.json",
+   "artifacts/results/arm_f_temporal.json",
+   "artifacts/results/arm_f_generation.json",
+   "artifacts/results/arm_f_adaptive.json",
+   "artifacts/results/arm_f_adaptive_eps2.json",
+   "artifacts/results/arm_f_adaptive_eps5.json"
+  ],
+  "The cooperative control": [
+   "artifacts/results/arm_e.json",
+   "artifacts/results/arm_f_agg.json"
+  ],
+  "KV-cache integrity": [
+   "artifacts/results/arm_g.json",
+   "artifacts/results/arm_g_nopos.json",
+   "artifacts/results/arm_g_posmask.json"
+  ],
+  "The fused instrument and the two-sided statistic": [
+   "artifacts/results/fuse_resid.json",
+   "artifacts/results/fuse_kv.json",
+   "artifacts/results/gencal_resid.json",
+   "artifacts/results/gencal_kv.json"
+  ],
+  "The scale ladder": [
+   "artifacts/results/scale_agg.json",
+   "artifacts/results/scale_capacity_asymptote.json",
+   "artifacts/results/scale_corpus_control.json",
+   "artifacts/results/scale_timing.json"
+  ],
+  "Deployment: a windowed integrity monitor": [
+   "artifacts/results/windowed_resid.json",
+   "artifacts/results/windowed_kv.json",
+   "artifacts/results/arm_f_agg.json",
+   "artifacts/results/arm_g.json",
+   "artifacts/results/arm_f_generation.json"
+  ],
+  "Limitations": [
+   "artifacts/results/fuse_resid.json",
+   "artifacts/results/arm_f_agg.json"
+  ],
+  "Why it works": [
+   "artifacts/results/macl_l15_despreading.json",
+   "artifacts/results/scale_agg.json"
+  ]
+ }
+}
