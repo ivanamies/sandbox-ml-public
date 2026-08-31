@@ -25,6 +25,6 @@
 
 ## [A Portrait of the Language Model as an AM Receiver](am-receiver/SURVEY.md)
 
-**TL;DR.** Per-sender amplitude carries the message (+22% to strip it). Found inside: AGC, a learned pilot tone that readers demodulate, squelch, a free limiter, code-locked tuning, a half-fixed mixer. A tiny LM grows with the whole radio installed for 0.72 nats.
+**TL;DR.** Per-sender amplitude carries the message (+22% loss to strip it). Found inside: AGC, a learned pilot tone that readers demodulate, squelch, a free limiter, code-locked tuning, a half-fixed mixer. A tiny LM grows with the whole radio installed for 0.72 nats.
 
-*(252 characters.)*
+*(257 characters.)*
