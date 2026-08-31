@@ -11,10 +11,16 @@
 
 **TL;DR.** We took "the residual stream is a multiple-access channel" literally. Heads run deliberate CDMA (serial archs only). LayerNorm is blind AGC — hold it still and ablation damage grows 2–8×; "self-repair" is half gain compensation, half real redundancy. Steering has a duty cycle.
 
+*(277 characters.)*
+
 ## [Improving Steering Vectors with Predistortion](steering-predistortion/SURVEY.md)
 
-**TL;DR.** Steering fails like a satellite amplifier: past a measurable knee the vector arrives at full size pointing the wrong way — rotation precedes compression, for 100% of directions tested, on every model tested. Measure the distortion curve once per feature, invert it upstream: cosine 0.83→0.93 at 64×. Cacheable, because the channel is ~96% memoryless.
+**TL;DR.** Steering fails like a satellite amplifier: past a knee the vector arrives full-size, pointing wrong — rotation precedes compression, 100% of directions, every model tested. Measure the curve once per feature, invert it upstream: cosine 0.83→0.93 at 64×. Caches: ~96% memoryless.
+
+*(278 characters.)*
 
 ## [A Tamper Seal for Neural Networks](tamper-seal/SURVEY.md)
 
-**TL;DR.** A 213k-parameter head bolted onto a frozen LM — no fine-tune, no gradients into the model — makes activation and KV-cache integrity a calibrated runtime check: swapped, replayed, or transplanted state caught at 0.96–0.98 where Mahalanobis sits at chance, windowed false-alarm rate 0.000 at 8-token windows, flat from 124M to 6.9B parameters, ≤1% overhead on a server GPU. It authenticates the state; it does not judge the computation.
+**TL;DR.** A 213k-param head on a frozen LM — no fine-tune, no LM gradients — makes activation and KV-cache integrity a calibrated check: swaps, replays, transplants at 0.96–0.98; Mahalanobis: chance; FPR 0.000 at W=8; flat 124M→6.9B; ≤1% overhead. Authenticates state, not computation.
+
+*(275 characters.)*
