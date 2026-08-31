@@ -5,8 +5,6 @@
 > in the EE sense. The answer appears to be a conditional yes. Too bad too many years have passed
 > and I can no longer fully judge its work, but here it is. — ivanamies
 
-# Results: three papers
-
 ## [Serial Residual Streams Are a Multiple-Access Channel](multiple-access-channel/SURVEY.md)
 
 **TL;DR.** We took "the residual stream is a multiple-access channel" literally. Heads run deliberate CDMA (serial archs only). LayerNorm is blind AGC — hold it still and ablation damage grows 2–8×; "self-repair" is half gain compensation, half real redundancy. Steering has a duty cycle.
