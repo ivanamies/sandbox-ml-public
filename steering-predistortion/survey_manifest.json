@@ -1,7 +1,7 @@
 {
  "allowlists": [
-  "paper2/allowlist.json",
-  "paper2/survey_allowlist.json"
+  "steering-predistortion/allowlist.json",
+  "steering-predistortion/survey_allowlist.json"
  ],
  "unchecked_sections": [
   "preamble",

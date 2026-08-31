@@ -138,7 +138,7 @@ suite) but still 0.500 on swap — "near the code" is what a detector wants, "on
 MAC needs (`lattice_sweep.json`, `lattice_post.json`).
 
 **Images.** ![the MAC on MNIST and its three threat models](survey_figs/p4_fig1_mac.png)
-Reused via the figure map in `ecc_repr/figs_dist.py` (L49); regenerate `paper4/build.sh`.
+Reused via the figure map in `ecc_repr/figs_dist.py` (L49); regenerate `tamper-seal/build.sh`.
 
 **Plainly.** The fix for the checksum's blind spot is the same one banks use: don't just check
 that the message is well-formed, check that it matches a secret stamp computed from the context it
@@ -184,7 +184,7 @@ hardware). OOD evaluation: Python source (0.85–0.88).
 
 **Images.** ![frozen-GPT-2 suite, bracketing, floor](survey_figs/p4_fig2_armf.png)
 ![temporal localisation, generation, adaptive attacks](survey_figs/p4_fig3_localization.png)
-Reused via `figs_dist.py` (L49–50); regenerate `paper4/build.sh`.
+Reused via `figs_dist.py` (L49–50); regenerate `tamper-seal/build.sh`.
 
 **Plainly.** You can clip a tiny security camera onto a language model that's already deployed —
 no retraining, no surgery, the model computes exactly what it computed before. The camera learns
@@ -214,7 +214,7 @@ inherited from §4's suite on both arms.
 **Scale & generality.** One small from-scratch testbed; the conclusion is a delta, not an absolute.
 
 **Images.** ![cooperative vs frozen retrofit](survey_figs/p4_fig4_arme.png) — reused via
-`figs_dist.py` (L50); regenerate `paper4/build.sh`.
+`figs_dist.py` (L50); regenerate `tamper-seal/build.sh`.
 
 **Plainly.** Would the seal work better if the model grew up wearing it? No. The bolt-on camera
 sees essentially everything the built-in one sees. That matters commercially: nobody has to
@@ -246,7 +246,7 @@ cost amortises. Raw data: `artifacts/results/arm_g.json` (nulls: `arm_g_nopos.js
 weak class (0.5–0.86) — the Mahalanobis companion's job, as in §4.
 
 **Images.** ![KV suite and floors](survey_figs/p4_fig5_armg.png) — reused via `figs_dist.py`
-(L51); regenerate `paper4/build.sh`.
+(L51); regenerate `tamper-seal/build.sh`.
 
 **Plainly.** Serving systems keep a scratchpad of everything the model has read so far and reuse
 it between requests. If someone swaps your scratchpad for another user's, replays a stale one, or
@@ -290,7 +290,7 @@ Raw data: `artifacts/results/fuse_resid.json`, `fuse_kv.json`, `gencal_resid.jso
 residual + 21 KV rows in the JSONs.
 
 **Images.** ![fusion panel and the below-floor attacker](survey_figs/p4_fig6_fuse.png) — reused
-via `figs_dist.py` (L51); regenerate `paper4/build.sh`.
+via `figs_dist.py` (L51); regenerate `tamper-seal/build.sh`.
 
 **Plainly.** We tried to be clever and merge the two alarms into one smart score. The registered
 test said: don't — the merge blunts exactly what each alarm is best at. Ship both alarms and take
@@ -335,7 +335,7 @@ fit (three capacity points are too few, and it is said so).
 
 **Images.** ![floors, detection, overhead vs parameters](survey_figs/p4_fig7_scale.png)
 ![per-bit error and floor vs width](survey_figs/p4_fig8_scale_bits.png)
-Reused via `figs_dist.py` (L52); regenerate `paper4/build.sh`.
+Reused via `figs_dist.py` (L52); regenerate `tamper-seal/build.sh`.
 
 **Plainly.** Same camera, bigger and bigger models: nothing changes. The alarm quality holds, the
 relative cost *drops* (the camera is fixed-size while the model grows), and a careful check rules
@@ -479,7 +479,7 @@ production line — only in the lab, where it has been very hard to beat.
 ## References
 
 [1] *Serial Residual Streams Are a Multiple-Access Channel.* Companion paper, this repository
-(`paper1/SURVEY.md`). Supplies the despreading measurement of §10 and the datasheet-transfer
+(`multiple-access-channel/SURVEY.md`). Supplies the despreading measurement of §10 and the datasheet-transfer
 warning of §11.
 [10] Katz, Lindell. *Introduction to Modern Cryptography.* CRC Press (MACs: standard treatment).
 [11] Gallager. *Low-Density Parity-Check Codes.* IRE Trans. Information Theory, 1962.

@@ -104,7 +104,7 @@ the knee locations --- replicates across models (§7).
 
 \textbf{Images.} 
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p2_f1_mechanism.png}\end{center}
-\texttt{ecc\_repr/figs\_papers.py::p2\_f1\_mechanism} (L47); regenerate \texttt{paper2/build.sh}.
+\texttt{ecc\_repr/figs\_papers.py::p2\_f1\_mechanism} (L47); regenerate \texttt{steering-predistortion/build.sh}.
 
 \textbf{Plainly.} Push a steering vector harder and the model doesn't ignore you --- it does something
 else. We found out why: the stream keeps the \emph{size} of your push almost intact far past the point
@@ -158,7 +158,7 @@ fidelity metric is a proxy.
 
 \textbf{Images.} 
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p2_f2_fix.png}\end{center}
-\texttt{figs\_papers.py::p2\_f2\_fix} (L82); regenerate \texttt{paper2/build.sh}.
+\texttt{figs\_papers.py::p2\_f2\_fix} (L82); regenerate \texttt{steering-predistortion/build.sh}.
 
 \textbf{Plainly.} Satellite engineers can't repair an amplifier in orbit, so they measure how it distorts
 and send a pre-distorted signal that arrives correct. Same recipe here: measure how the model bends
@@ -181,7 +181,7 @@ fitter to confirm it detects memory when memory exists. \emph{Negative:} not app
 static fit itself serving as the no-memory reference. \emph{Loading:} same features, same residuals,
 both fits scored on the same data --- with the honest weakness that the score is raw $\Delta$R$^{2}$, with no
 held-out split and no parameter penalty; finishing this properly (a scored model-order ladder) is
-registered follow-up work in \texttt{paper2/NOTES.md}.
+registered follow-up work in \texttt{steering-predistortion/NOTES.md}.
 
 \textbf{Result.} +0.036 R$^{2}$ median for lagged terms. Raw data: \texttt{artifacts/results/dpd\_memory\_test.json}.
 
@@ -190,7 +190,7 @@ model --- where history matters, compute-once-and-cache does not hold.
 
 \textbf{Images.} 
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p2_f3_memory_gate.png}\end{center}
-\texttt{figs\_papers.py::p2\_f3\_memory} (L111); regenerate \texttt{paper2/build.sh}.
+\texttt{figs\_papers.py::p2\_f3\_memory} (L111); regenerate \texttt{steering-predistortion/build.sh}.
 
 \textbf{Plainly.} The correction is only cheap if it doesn't depend on what the model was just thinking
 about. We checked: letting the fit peek at recent history barely improves it. So one correction
@@ -244,7 +244,7 @@ The registered prediction this census was built to test --- and refuted --- is i
 
 \textbf{Images.} 
 \begin{center}\includegraphics[width=\linewidth]{survey_figs/p2_f4_amfm.png}\end{center}
-\texttt{figs\_papers.py::p2\_f4\_amfm} (L135); regenerate \texttt{paper2/build.sh}.
+\texttt{figs\_papers.py::p2\_f4\_amfm} (L135); regenerate \texttt{steering-predistortion/build.sh}.
 
 \textbf{Plainly.} Radio can carry information in loudness (AM) or in frequency (FM). FM won because
 noise jostles loudness easily. This network's normalizers erase loudness at every layer --- and when
@@ -318,7 +318,7 @@ wording, one lost --- and the loss is reported with the same volume as the wins,
 \section{References}
 
 [1] \emph{Serial Residual Streams Are a Multiple-Access Channel.} Companion paper, this repository
-(\texttt{paper1/SURVEY.md}). Supplies the wire datasheet and the two-tone linearity budget of §2.
+(\texttt{multiple-access-channel/SURVEY.md}). Supplies the wire datasheet and the two-tone linearity budget of §2.
 [2] Turner et al. \emph{Activation Addition: Steering Language Models Without Optimization.} 2023.
 [3] Zou et al. \emph{Representation Engineering.} 2023.
 [4] Bricken, Templeton, et al. \emph{Towards Monosemanticity: Decomposing Language Models with Dictionary Learning.} Anthropic, 2023.
@@ -331,8 +331,8 @@ wording, one lost --- and the loss is reported with the same volume as the wins,
 \section{Appendix B --- operational notes}
 
 \begin{itemize}\setlength\itemsep{1pt}
-\item \textbf{Provenance.} Experiments, code, and this document by Claude (Fable 5), directed by ivanamies, who set the framing, the failure criteria ("kill bars"), and the editorial policy. Predictions were registered --- committed to git in \texttt{plans\_*.md} and \texttt{paper2/NOTES.md} --- before results.
-\item \textbf{This file is the paper.} \texttt{main.tex} and \texttt{main.pdf} are generated from it by \texttt{scripts/md2tex.py} (run by \texttt{paper2/build.sh}). Both are machine-checked against manifests (\texttt{survey\_manifest.json}, \texttt{paper2\_manifest.json}) by \texttt{tests/test\_paper\_manifests.py}.
+\item \textbf{Provenance.} Experiments, code, and this document by Claude (Fable 5), directed by ivanamies, who set the framing, the failure criteria ("kill bars"), and the editorial policy. Predictions were registered --- committed to git in \texttt{plans\_*.md} and \texttt{steering-predistortion/NOTES.md} --- before results.
+\item \textbf{This file is the paper.} \texttt{main.tex} and \texttt{main.pdf} are generated from it by \texttt{scripts/md2tex.py} (run by \texttt{steering-predistortion/build.sh}). Both are machine-checked against manifests (the manifests) by \texttt{tests/test\_paper\_manifests.py}.
 \item \textbf{Code references.} \texttt{module.py::function} (LNN) pointers are for repository readers; line numbers are as of this commit. \texttt{MAP.md} is the section $\to$ JSON $\to$ module index; \texttt{REPRODUCE.md} covers reproduction.
 \item \textbf{Figures.} \texttt{survey\_figs/*.png} are committed so this page renders on GitHub --- the repository's documented exception; sources of truth are the regenerating scripts and \texttt{artifacts/figdata/}.
 \item \textbf{The repository name.} \texttt{ecc\_repr} names the program's first arc (error-correcting codes on learned representations); this paper inherits the name and contains no error correction.

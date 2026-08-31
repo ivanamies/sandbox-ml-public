@@ -1,7 +1,7 @@
 {
  "allowlists": [
-  "paper1/allowlist.json",
-  "paper1/survey_allowlist.json"
+  "multiple-access-channel/allowlist.json",
+  "multiple-access-channel/survey_allowlist.json"
  ],
  "unchecked_sections": [
   "preamble",

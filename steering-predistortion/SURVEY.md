@@ -104,7 +104,7 @@ first for 100% of features. Raw data: `artifacts/results/dpd_datasheet.json`.
 the knee locations — replicates across models (§7).
 
 **Images.** ![AM/AM and AM/PM curves with knees](survey_figs/p2_f1_mechanism.png)
-`ecc_repr/figs_papers.py::p2_f1_mechanism` (L47); regenerate `paper2/build.sh`.
+`ecc_repr/figs_papers.py::p2_f1_mechanism` (L47); regenerate `steering-predistortion/build.sh`.
 
 **Plainly.** Push a steering vector harder and the model doesn't ignore you — it does something
 else. We found out why: the stream keeps the *size* of your push almost intact far past the point
@@ -154,7 +154,7 @@ evaluation — does the model actually do the intended thing more often — is n
 fidelity metric is a proxy.
 
 **Images.** ![raw vs pre-warped fidelity with the magnitude trade](survey_figs/p2_f2_fix.png)
-`figs_papers.py::p2_f2_fix` (L82); regenerate `paper2/build.sh`.
+`figs_papers.py::p2_f2_fix` (L82); regenerate `steering-predistortion/build.sh`.
 
 **Plainly.** Satellite engineers can't repair an amplifier in orbit, so they measure how it distorts
 and send a pre-distorted signal that arrives correct. Same recipe here: measure how the model bends
@@ -177,7 +177,7 @@ fitter to confirm it detects memory when memory exists. *Negative:* not applicab
 static fit itself serving as the no-memory reference. *Loading:* same features, same residuals,
 both fits scored on the same data — with the honest weakness that the score is raw ΔR², with no
 held-out split and no parameter penalty; finishing this properly (a scored model-order ladder) is
-registered follow-up work in `paper2/NOTES.md`.
+registered follow-up work in `steering-predistortion/NOTES.md`.
 
 **Result.** +0.036 R² median for lagged terms. Raw data: `artifacts/results/dpd_memory_test.json`.
 
@@ -185,7 +185,7 @@ registered follow-up work in `paper2/NOTES.md`.
 model — where history matters, compute-once-and-cache does not hold.
 
 **Images.** ![static cubic vs lagged Volterra fit](survey_figs/p2_f3_memory_gate.png)
-`figs_papers.py::p2_f3_memory` (L111); regenerate `paper2/build.sh`.
+`figs_papers.py::p2_f3_memory` (L111); regenerate `steering-predistortion/build.sh`.
 
 **Plainly.** The correction is only cheap if it doesn't depend on what the model was just thinking
 about. We checked: letting the fit peek at recent history barely improves it. So one correction
@@ -234,7 +234,7 @@ half only. Raw data: `artifacts/results/census_amfm.json`, `census_amfm_dirs.jso
 The registered prediction this census was built to test — and refuted — is in Appendix A.
 
 **Images.** ![AM-fraction vs flakiness proxies](survey_figs/p2_f4_amfm.png)
-`figs_papers.py::p2_f4_amfm` (L135); regenerate `paper2/build.sh`.
+`figs_papers.py::p2_f4_amfm` (L135); regenerate `steering-predistortion/build.sh`.
 
 **Plainly.** Radio can carry information in loudness (AM) or in frequency (FM). FM won because
 noise jostles loudness easily. This network's normalizers erase loudness at every layer — and when
@@ -315,7 +315,7 @@ wording, one lost — and the loss is reported with the same volume as the wins,
 ## References
 
 [1] *Serial Residual Streams Are a Multiple-Access Channel.* Companion paper, this repository
-(`paper1/SURVEY.md`). Supplies the wire datasheet and the two-tone linearity budget of §2.
+(`multiple-access-channel/SURVEY.md`). Supplies the wire datasheet and the two-tone linearity budget of §2.
 [2] Turner et al. *Activation Addition: Steering Language Models Without Optimization.* 2023.
 [3] Zou et al. *Representation Engineering.* 2023.
 [4] Bricken, Templeton, et al. *Towards Monosemanticity: Decomposing Language Models with Dictionary Learning.* Anthropic, 2023.
@@ -329,10 +329,10 @@ wording, one lost — and the loss is reported with the same volume as the wins,
 
 - **Provenance.** Experiments, code, and this document by Claude (Fable 5), directed by ivanamies,
   who set the framing, the failure criteria ("kill bars"), and the editorial policy. Predictions
-  were registered — committed to git in `plans_*.md` and `paper2/NOTES.md` — before results.
+  were registered — committed to git in `plans_*.md` and `steering-predistortion/NOTES.md` — before results.
 - **This file is the paper.** `main.tex` and `main.pdf` are generated from it by
-  `scripts/md2tex.py` (run by `paper2/build.sh`). Both are machine-checked against manifests
-  (`survey_manifest.json`, `paper2_manifest.json`) by `tests/test_paper_manifests.py`.
+  `scripts/md2tex.py` (run by `steering-predistortion/build.sh`). Both are machine-checked against manifests
+  (the manifests) by `tests/test_paper_manifests.py`.
 - **Code references.** `module.py::function` (LNN) pointers are for repository readers; line
   numbers are as of this commit. `MAP.md` is the section → JSON → module index; `REPRODUCE.md`
   covers reproduction.

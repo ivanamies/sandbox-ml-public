@@ -1,7 +1,7 @@
 {
  "allowlists": [
-  "paper4/allowlist.json",
-  "paper4/survey_allowlist.json"
+  "tamper-seal/allowlist.json",
+  "tamper-seal/survey_allowlist.json"
  ],
  "unchecked_sections": [
   "preamble",

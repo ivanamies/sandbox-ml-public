@@ -101,7 +101,7 @@ Heavy tails and rotation-before-compression replicate across the 5-model/3-famil
 
 **Images.** ![datasheet](survey_figs/p1_f0_datasheet.png)
 `p1_f0_datasheet` — reused across papers via the figure map in `ecc_repr/figs_dist.py` (L44); regenerate with
-`paper1/build.sh` or `scripts/build.sh figs`. Figure CSVs land in `artifacts/figdata/`.
+`multiple-access-channel/build.sh` or `scripts/build.sh figs`. Figure CSVs land in `artifacts/figdata/`.
 
 **Plainly.** Before arguing about how 150 writers share one wire, we measured the wire: who writes
 it, how noisy it is, and how hard you can push before it stops responding proportionally — like
@@ -140,7 +140,7 @@ disjoint 100-feature draws, taps 3/6/9.
 **Images.** ![interference](survey_figs/p1_f1_interference.png)
 ![despreading](survey_figs/p1_f6_despreading.png)
 `p1_f1_interference` — reused via the figure map in `figs_dist.py` (L44); `p1_f6_despreading` —
-`ecc_repr/figs_papers.py::p1_f6_despreading` (L208). Regenerate: `paper1/build.sh`.
+`ecc_repr/figs_papers.py::p1_f6_despreading` (L208). Regenerate: `multiple-access-channel/build.sh`.
 
 **Plainly.** The stations chose overlapping frequencies on purpose — far more overlap than chance —
 and yet each broadcast stays individually readable, the way CDMA phones share one band by using
@@ -202,7 +202,7 @@ and per-run `macl_l2_{baseline,fdma,soft_fdma,cdma}_s{0,1,2}.json`.
 where imposing schemes is affordable.
 
 **Images.** ![designed sharing](survey_figs/p1_f2_l2.png)
-`p1_f2_l2` — reused via the figure map in `figs_dist.py` (L45). Regenerate: `paper1/build.sh`.
+`p1_f2_l2` — reused via the figure map in `figs_dist.py` (L45). Regenerate: `multiple-access-channel/build.sh`.
 
 **Plainly.** We built networks where the stations were forced to share politely — separate lanes,
 or assigned spreading codes. It barely cost anything, it measurably reduced crosstalk, and it made
@@ -240,7 +240,7 @@ methods warning: synthetic probes understate real-channel variability by an orde
 
 **Images.** ![diversity and fading](survey_figs/p1_f4_diversity.png)
 Fading panels inside `ecc_repr/figs_papers.py::p1_f4_diversity` (L226). Regenerate:
-`paper1/build.sh`, or directly `.venv/bin/python -m ecc_repr.figs_papers p1_f4`.
+`multiple-access-channel/build.sh`, or directly `.venv/bin/python -m ecc_repr.figs_papers p1_f4`.
 
 **Plainly.** A message sent from an early layer to a late one sometimes arrives loud and sometimes
 arrives buried, depending on what else the text is doing — like a car radio cutting out under a
@@ -290,7 +290,7 @@ damage link is graded in serial models and flat (~1.3×) in parallel ones.
 
 **Images.** ![AGC decomposition and the gain law](survey_figs/p1_f7_agc.png)
 Knockout/diversity panels: `figs_papers.py::p1_f4_diversity` (L226); the AGC decomposition and gain
-law: `figs_papers.py::p1_f7_agc`. Regenerate: `paper1/build.sh`.
+law: `figs_papers.py::p1_f7_agc`. Regenerate: `multiple-access-channel/build.sh`.
 
 **Plainly.** Cut one of the network's six backup cables and almost nothing seems to break. Half of
 that "toughness" is real redundancy — you truly need to cut all six. The other half is an illusion
@@ -338,7 +338,7 @@ dictionary — a well-posed open problem, not a quirk.
 **Images.** ![receiver ladder](survey_figs/p1_f5_receivers.png)
 ![the Cramér–Rao ceiling](survey_figs/p1_f8_crb.png)
 `figs_papers.py::p1_f5_receivers` (L291) and `figs_papers.py::p1_f8_crb`; regenerate
-`paper1/build.sh` or `.venv/bin/python -m ecc_repr.figs_papers p1_f5 p1_f8`.
+`multiple-access-channel/build.sh` or `.venv/bin/python -m ecc_repr.figs_papers p1_f5 p1_f8`.
 
 **Plainly.** In a room where dozens of people might be talking, working out how loudly any *given*
 person speaks is easy — our simple filter does it at 93–100% of the physical limit, so no
@@ -354,7 +354,7 @@ because who's talking depends on context the room's audio alone doesn't contain.
 groups datasheet/overlap/steering/healing.
 
 **Result.** Replicates (5 models, 3 families, corpus size held identical): heavy tails; and rotation-before-compression — an injected direction's *angle* degrades before its
-*magnitude* does, the companion paper's mechanism (`paper2/SURVEY.md`). Model-specific, restated as such: "MLPs lead at every depth," "the
+*magnitude* does, the companion paper's mechanism (`steering-predistortion/SURVEY.md`). Model-specific, restated as such: "MLPs lead at every depth," "the
 writer gap grows with depth." Raw data: `artifacts/results/generalize_e3.json`.
 
 **Images.** None — the replication lists above are the result.
@@ -419,9 +419,9 @@ Kept out of the main text by editorial policy; kept in the paper because the kil
   were registered — committed to git in `plans_*.md` — before the corresponding results existed;
   the git history is the proof of ordering.
 - **This file is the paper.** `main.tex` and `main.pdf` are generated from it by
-  `scripts/md2tex.py` (run by `paper1/build.sh`); the double-column LaTeX layout is retired. Both
+  `scripts/md2tex.py` (run by `multiple-access-channel/build.sh`); the double-column LaTeX layout is retired. Both
   the markdown and the generated tex are machine-checked against manifests
-  (`survey_manifest.json`, `paper1_manifest.json`) by `tests/test_paper_manifests.py`: every
+  (the manifests) by `tests/test_paper_manifests.py`: every
   number with a decimal point must appear in a committed result JSON assigned to its section, or
   carry an allowlisted reason.
 - **Code references.** `module.py::function` (LNN) pointers are for readers of the repository;
